@@ -1,12 +1,10 @@
-import { CHANGE_FOOTER_FIELD } from '../actions/actionsTypes';
+import { createReducer } from '@reduxjs/toolkit';
+import { changeSubscribeInput } from '../actions/actionsCreators';
 
 const initialState = '';
 
-export default function subscribeReduser(state = initialState, action) {
-  switch (action.type) {
-    case CHANGE_FOOTER_FIELD:
-      return action.payload.value;
-    default:
-      return state;
-  }
-}
+const subscribeReduser = createReducer(initialState, {
+  [changeSubscribeInput]: (state, action) => action.payload.value,
+});
+
+export default subscribeReduser;

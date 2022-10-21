@@ -7,14 +7,14 @@ export default function FooterForm() {
 
   const handleInputChange = (e) => {
     const { value } = e.target;
-    dispatch(changeSubscribeInput(value));
+    dispatch(changeSubscribeInput({ value }));
   };
 
   const handleSubscribe = (e) => {
     e.preventDefault();
     console.log(e);
     console.log(footerFormValue);
-    dispatch(changeSubscribeInput(''));
+    dispatch(changeSubscribeInput({ value: '' }));
   };
 
   return (

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  changeDeparureInput,
+  changeDepartureInput,
   changeArrivalInput,
   changeDeparureDateInput,
   changeArrivalDateInput,
@@ -23,23 +23,23 @@ export default function BookingForm() {
     const { name, value } = e.target;
     switch (name) {
       case 'departureField':
-        dispatch(changeDeparureInput(value));
+        dispatch(changeDepartureInput({value}));
         break;
       case 'arrivalField':
-        dispatch(changeArrivalInput(value));
+        dispatch(changeArrivalInput({value}));
         break;
 
       default:
         break;
     }
   };
-  const handlePickerChange = (date, { name }) => {
+  const handlePickerChange = (value, { name }) => {
     switch (name) {
       case 'departureDateField':
-        dispatch(changeDeparureDateInput(date));
+        dispatch(changeDeparureDateInput({value}));
         break;
       case 'arrivalDateField':
-        dispatch(changeArrivalDateInput(date));
+        dispatch(changeArrivalDateInput({value}));
         break;
 
       default:

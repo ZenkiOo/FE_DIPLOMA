@@ -1,13 +1,16 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
 import routesSearchReducer from '../reducers/routesSearch';
 import subscribeReduser from '../reducers/subscribe';
 
-const reducer = combineReducers({
-  searchForm: routesSearchReducer,
-  footerForm: subscribeReduser
-});
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+const middleware = {
+  immutableCheck: false,
+  serializableCheck: false,
+  thunk: true,
+};
 
+const store = configureStore({
+  reducer: { searchForm: routesSearchReducer, footerForm: subscribeReduser },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(middleware),
+  devTools: process.env.NODE_ENV !== 'production',
+});
 export default store;
