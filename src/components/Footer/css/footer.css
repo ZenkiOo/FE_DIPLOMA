@@ -1,0 +1,112 @@
+.footer_container {
+  background-color: #2d2b2f;
+  color: #e5e5e5;
+  position: relative;
+}
+.footer_container::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 97px;
+  background-color: #e5e5e5;
+}
+.footer {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 48px 20px 30px 20px;
+}
+.footer__body {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 66px 43px 85px;
+}
+.footer__block_title {
+  margin-bottom: 31px;
+  font-weight: 500;
+  font-size: 30px;
+  color: white;
+}
+.footer__block_title--socials {
+  margin-bottom: 19px;
+}
+.footer__block_item {
+  display: block;
+  margin-bottom: 30px;
+  padding-left: 66px;
+  max-width: 280px;
+  font-size: 24px;
+  line-height: 28px;
+  color: #e5e5e5;
+  position: relative;
+}
+.footer__block_item_icon {
+  top: 0;
+  left: 0;
+  display: block;
+  position: absolute;
+  margin-right: 35px;
+}
+.footer_form_title {
+  margin-bottom: 15px;
+  font-size: 24px;
+  line-height: 28px;
+}
+.footer_form {
+  display: flex;
+  margin-bottom: 43px;
+}
+.footer_form__item:nth-child(1) {
+  margin-right: 32px;
+}
+.footer_form__input {
+  width: 447px;
+  height: 60px;
+  background: white;
+  border-radius: 3px;
+  border: none;
+  padding: 0 46px 0 21px;
+  border: none;
+  font-size: 18px;
+  color: #292929;
+}
+.footer_form__input::placeholder {
+  font-size: 18px;
+  color: #e5e5e5;
+}
+.footer_form__btn {
+  border: 1px solid #ffffff;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 24px;
+  text-transform: uppercase;
+  color: inherit;
+  padding: 14px 15px 16px 15px;
+  background: transparent;
+}
+.footer_socials {
+  display: flex;
+  padding: 0 3px;
+}
+.footer_socials__item {
+  margin-right: 48px;
+}
+.footer__subrow {
+  display: flex;
+  justify-content: space-between;
+}
+.footer__subrow_item:nth-child(2) {
+  padding-left: 35px;
+}
+.footer__subrow_item_text {
+  font-weight: 300;
+  font-size: 24px;
+}
+.footer__subrow_item_text--logo {
+  font-weight: 900;
+  font-size: 36px;
+}
+.footer__subrow_item_btn {
+  border: none;
+  background: transparent;
+}
