@@ -29,8 +29,12 @@ const lastRoutes = createSlice({
 });
 
 const { actions, reducer } = lastRoutes;
-const { getLastRoutesRequest, getLastRoutesSuccess, getLastRoutesFailure } =
-  actions;
+export const {
+  getLastRoutesRequest,
+  getLastRoutesSuccess,
+  getLastRoutesFailure,
+} = actions;
+
 export const getLastRoutesFetch = () => async (dispatch, getState) => {
   dispatch(getLastRoutesRequest());
 
