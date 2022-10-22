@@ -15,7 +15,7 @@ const initialState = {
 const lastRoutes = createSlice({
   name: 'lastRoutes',
   initialState,
-  serucers: {
+  reducers: {
     getLastRoutesRequest: (state, action) => {
       return { ...state, loading: true };
     },
@@ -35,24 +35,24 @@ export const {
   getLastRoutesFailure,
 } = actions;
 
-export const getLastRoutesFetch = () => async (dispatch, getState) => {
-  dispatch(getLastRoutesRequest());
+// export const getLastRoutesFetch = () => async (dispatch, getState) => {
+//   dispatch(getLastRoutesRequest());
 
-  try {
-    const response = await fetch(
-      'https://netology-trainbooking.netoservices.ru/routes/last'
-    );
+//   try {
+//     const response = await fetch(
+//       'https://netology-trainbooking.netoservices.ru/routes/last'
+//     );
 
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
+//     if (!response.ok) {
+//       throw new Error(response.statusText);
+//     }
 
-    const routes = await response.json();
-    dispatch(getLastRoutesSuccess({ routes }));
-  } catch (error) {
-    const { message } = error;
-    dispatch(getLastRoutesFailure({ message }));
-  }
-};
+//     const routes = await response.json();
+//     dispatch(getLastRoutesSuccess({ routes }));
+//   } catch (error) {
+//     const { message } = error;
+//     dispatch(getLastRoutesFailure({ message }));
+//   }
+// };
 
 export default reducer;

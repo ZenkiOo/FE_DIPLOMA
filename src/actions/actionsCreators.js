@@ -18,24 +18,28 @@ import {
 // export const getLastRoutesRequest = createAction(GET_LAST_ROUTES_REQUEST);
 // export const getLastRoutesFailure = createAction(GET_LAST_ROUTES_FAILURE);
 // export const getLastRoutesSuccess = createAction(GET_LAST_ROUTES_SUCCESS);
-import { getLastRoutesRequest, getLastRoutesSuccess, getLastRoutesFailure } from '../reducers/lastRoutes';
+import {
+  getLastRoutesRequest,
+  getLastRoutesSuccess,
+  getLastRoutesFailure,
+} from '../reducers/lastRoutes';
 
-// export const getLastRoutes = () => async (dispatch, getState) => {
-//   dispatch(getLastRoutesRequest());
+export const getLastRoutes = () => async (dispatch, getState) => {
+  dispatch(getLastRoutesRequest());
 
-//   try {
-//     const response = await fetch(
-//       'https://netology-trainbooking.netoservices.ru/routes/last'
-//     );
+  try {
+    const response = await fetch(
+      'https://netology-trainbooking.netoservices.ru/routes/last'
+    );
 
-//     if (!response.ok) {
-//       throw new Error(response.statusText);
-//     }
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
 
-//     const routes = await response.json();
-//     dispatch(getLastRoutesSuccess({ routes }));
-//   } catch (error) {
-//     const { message } = error;
-//     dispatch(getLastRoutesFailure({ message }));
-//   }
-// };
+    const routes = await response.json();
+    dispatch(getLastRoutesSuccess({ routes }));
+  } catch (error) {
+    const { message } = error;
+    dispatch(getLastRoutesFailure({ message }));
+  }
+};
