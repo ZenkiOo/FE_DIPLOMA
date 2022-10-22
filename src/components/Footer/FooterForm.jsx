@@ -1,9 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { changeSubscribeInput } from '../../actions/actionsCreators';
+// import { changeSubscribeInput } from '../../actions/actionsCreators';
+import { changeSubscribeInput } from '../../reducers/subscribe';
 
 export default function FooterForm() {
   const dispatch = useDispatch();
-  const footerFormValue = useSelector((state) => state.footerForm);
+  const footerFormValue = useSelector((state) => state.subscribe.email);
 
   const handleInputChange = (e) => {
     const { value } = e.target;

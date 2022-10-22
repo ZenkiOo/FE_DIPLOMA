@@ -1,4 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getLastRoutesFetch } from './reducers/lastRoutes';
 import HomePage from './pages/HomePage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -6,6 +9,11 @@ import Footer from './components/Footer/Footer';
 import './css/reset.css';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getLastRoutesFetch());
+  }, [dispatch]);
+
   // fetch(
   //   'https://netology-trainbooking.netoservices.ru/routes/cities?name=санкт'
   // )

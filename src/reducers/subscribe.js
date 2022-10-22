@@ -1,10 +1,24 @@
-import { createReducer } from '@reduxjs/toolkit';
-import { changeSubscribeInput } from '../actions/actionsCreators';
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = '';
+const initialState = {
+  email: '',
+};
 
-const subscribeReduser = createReducer(initialState, {
-  [changeSubscribeInput]: (state, action) => action.payload.value,
+const subscribe = createSlice({
+  name: 'subscribe',
+  initialState,
+  reducers: {
+    changeSubscribeInput: (state, action) => {
+      return { ...state, email: action.payload.value };
+    },
+  },
 });
+const { actions, reducer } = subscribe;
+export const { changeSubscribeInput } = actions;
+export default reducer;
 
-export default subscribeReduser;
+// const subscribeReduser = createReducer(initialState, {
+//   [changeSubscribeInput]: (state, action) => action.payload.value,
+// });
+
+// export default subscribeReduser;

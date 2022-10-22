@@ -1,10 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux';
+// import {
+//   changeDepartureInput,
+//   changeArrivalInput,
+//   changeDeparureDateInput,
+//   changeArrivalDateInput,
+// } from '../../reducers/routesSearch';
 import {
   changeDepartureInput,
   changeArrivalInput,
   changeDeparureDateInput,
   changeArrivalDateInput,
-} from '../../actions/actionsCreators';
+} from '../../reducers/routesSearch';
 
 import { ReactComponent as LocaSvg } from '../../images/icons/svg/loca.svg';
 import { ReactComponent as DateSvg } from '../../images/icons/svg/date.svg';
@@ -17,16 +23,16 @@ setDefaultLocale('ru', ru);
 export default function BookingForm() {
   const dispatch = useDispatch();
   const { departureField, arrivalField, departureDateField, arrivalDateField } =
-    useSelector((state) => state.searchForm);
+    useSelector((state) => state.routesSearch);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     switch (name) {
       case 'departureField':
-        dispatch(changeDepartureInput({value}));
+        dispatch(changeDepartureInput({ value }));
         break;
       case 'arrivalField':
-        dispatch(changeArrivalInput({value}));
+        dispatch(changeArrivalInput({ value }));
         break;
 
       default:
@@ -36,10 +42,10 @@ export default function BookingForm() {
   const handlePickerChange = (value, { name }) => {
     switch (name) {
       case 'departureDateField':
-        dispatch(changeDeparureDateInput({value}));
+        dispatch(changeDeparureDateInput({ value }));
         break;
       case 'arrivalDateField':
-        dispatch(changeArrivalDateInput({value}));
+        dispatch(changeArrivalDateInput({ value }));
         break;
 
       default:
