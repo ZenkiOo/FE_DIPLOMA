@@ -16,9 +16,3 @@ const subscribe = createSlice({
 const { actions, reducer } = subscribe;
 export const { changeSubscribeInput } = actions;
 export default reducer;
-
-// const subscribeReduser = createReducer(initialState, {
-//   [changeSubscribeInput]: (state, action) => action.payload.value,
-// });
-
-// export default subscribeReduser;

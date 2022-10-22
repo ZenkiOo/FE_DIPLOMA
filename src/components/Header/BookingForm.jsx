@@ -1,16 +1,12 @@
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+
 // import {
 //   changeDepartureInput,
 //   changeArrivalInput,
 //   changeDeparureDateInput,
 //   changeArrivalDateInput,
-// } from '../../reducers/routesSearch';
-import {
-  changeDepartureInput,
-  changeArrivalInput,
-  changeDeparureDateInput,
-  changeArrivalDateInput,
-} from '../../reducers/routesSearch';
+// } from '../../store/slices/routesSearch';
 
 import { ReactComponent as LocaSvg } from '../../images/icons/svg/loca.svg';
 import { ReactComponent as DateSvg } from '../../images/icons/svg/date.svg';
@@ -20,37 +16,72 @@ import { setDefaultLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 setDefaultLocale('ru', ru);
 
+function useDebounce(value, delay) {
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      if (!value) return;
+      fetch(
+        `https://netology-trainbooking.netoservices.ru/routes/cities?name=${value}`
+      )
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+}
+
 export default function BookingForm() {
-  const dispatch = useDispatch();
-  const { departureField, arrivalField, departureDateField, arrivalDateField } =
-    useSelector((state) => state.routesSearch);
+  const [searchRoutesForm, setSearchRoutesForm] = useState({
+    departureField: '',
+    arrivalField: '',
+    departureDateField: '',
+    arrivalDateField: '',
+  });
+
+  useDebounce(searchRoutesForm.departureField, 600);
+  useDebounce(searchRoutesForm.arrivalField, 600);
+
+  // const dispatch = useDispatch();
+  // const { departureDateField, arrivalDateField } = useSelector(
+  //   (state) => state.routesSearch
+  // );
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    switch (name) {
-      case 'departureField':
-        dispatch(changeDepartureInput({ value }));
-        break;
-      case 'arrivalField':
-        dispatch(changeArrivalInput({ value }));
-        break;
+    setSearchRoutesForm((state) => {
+      return { ...state, [name]: value };
+    });
+    // setDepartureField(value);
+    // switch (name) {
+    //   case 'departureField':
+    //     dispatch(changeDepartureInput({ value }));
+    //     break;
+    //   case 'arrivalField':
+    //     dispatch(changeArrivalInput({ value }));
+    //     break;
 
-      default:
-        break;
-    }
+    //   default:
+    //     break;
+    // }
   };
   const handlePickerChange = (value, { name }) => {
-    switch (name) {
-      case 'departureDateField':
-        dispatch(changeDeparureDateInput({ value }));
-        break;
-      case 'arrivalDateField':
-        dispatch(changeArrivalDateInput({ value }));
-        break;
+    setSearchRoutesForm((state) => {
+      return { ...state, [name]: value };
+    });
+    // switch (name) {
+    //   case 'departureDateField':
+    //     dispatch(changeDeparureDateInput({ value }));
+    //     break;
+    //   case 'arrivalDateField':
+    //     dispatch(changeArrivalDateInput({ value }));
+    //     break;
 
-      default:
-        break;
-    }
+    //   default:
+    //     break;
+    // }
   };
 
   return (
@@ -73,7 +104,7 @@ export default function BookingForm() {
                 className="booking_form__form_inputs_group_input"
                 placeholder="Откуда"
                 name="departureField"
-                value={departureField}
+                value={searchRoutesForm.departureField}
                 onChange={handleInputChange}
               />
               <LocaSvg className="input__icon" />
@@ -88,7 +119,7 @@ export default function BookingForm() {
                 className="booking_form__form_inputs_group_input"
                 placeholder="Куда"
                 name="arrivalField"
-                value={arrivalField}
+                value={searchRoutesForm.arrivalField}
                 onChange={handleInputChange}
               />
               <LocaSvg className="input__icon" />
@@ -100,7 +131,7 @@ export default function BookingForm() {
               <DatePicker
                 dateFormat="dd/MM/yyyy"
                 placeholderText="ДД/ММ/ГГ"
-                selected={departureDateField}
+                selected={searchRoutesForm.departureDateField}
                 locale={ru}
                 onChange={(date) =>
                   handlePickerChange(date, { name: 'departureDateField' })
@@ -112,8 +143,7 @@ export default function BookingForm() {
               <DatePicker
                 dateFormat="dd/MM/yyyy"
                 placeholderText="ДД/ММ/ГГ"
-                name="arrivalDateField"
-                selected={arrivalDateField}
+                selected={searchRoutesForm.arrivalDateField}
                 locale={ru}
                 onChange={(date) =>
                   handlePickerChange(date, { name: 'arrivalDateField' })

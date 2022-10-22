@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-// import { changeSubscribeInput } from '../../actions/actionsCreators';
-import { changeSubscribeInput } from '../../reducers/subscribe';
+import { changeSubscribeInput } from '../../store/slices/subscribe';
 
 export default function FooterForm() {
   const dispatch = useDispatch();
