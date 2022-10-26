@@ -98,6 +98,9 @@
   font-size: 18px;
   color: #292929;
 }
+.booking_form__form_inputs_group_input_wrap input[value] {
+  text-transform: capitalize;
+}
 .booking_form__form_inputs_group_input_wrap input::placeholder {
   font-size: 18px;
   color: #e5e5e5;

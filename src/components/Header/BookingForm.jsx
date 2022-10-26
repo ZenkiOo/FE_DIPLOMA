@@ -21,14 +21,50 @@ export default function BookingForm() {
   const [getCities] = useLazyGetCitiesByNameQuery();
 
   const [searchRoutesForm, setSearchRoutesForm] = useState({
-    departureField: '',
-    arrivalField: '',
+    departureField: { cityName: '', id: null, isValid: false },
+    arrivalField: { cityName: '', id: null, isValid: false },
     departureDateField: '',
     arrivalDateField: '',
   });
   const [citiesList, setCitiesList] = useState({
     departure: [],
     arrival: [],
+  });
+
+  function useValidity(value, { name }) {
+    useEffect(() => {
+      if (!value) return;
+
+      let id = null;
+      let isValid = false;
+
+      if (citiesList[name].length === 1) {
+        const citiesArr = citiesList[name];
+        if (
+          searchRoutesForm[name + 'Field'].cityName.toLowerCase() ===
+          citiesArr[0].name
+        ) {
+          isValid = true;
+          id = citiesArr[0]._id;
+
+          setSearchRoutesForm((state) => ({
+            ...state,
+            [name + 'Field']: {
+              cityName: value,
+              id: id,
+              isValid: isValid,
+            },
+          }));
+        }
+      }
+    }, [value, name, citiesList]);
+  }
+
+  useValidity(searchRoutesForm.departureField.cityName, {
+    name: 'departure',
+  });
+  useValidity(searchRoutesForm.arrivalField.cityName, {
+    name: 'arrival',
   });
 
   function useDebounce(value, delay, { name }) {
@@ -48,8 +84,10 @@ export default function BookingForm() {
     }, [value, delay]);
   }
 
-  useDebounce(searchRoutesForm.departureField, 600, { name: 'departure' });
-  useDebounce(searchRoutesForm.arrivalField, 600, { name: 'arrival' });
+  useDebounce(searchRoutesForm.departureField.cityName, 600, {
+    name: 'departure',
+  });
+  useDebounce(searchRoutesForm.arrivalField.cityName, 600, { name: 'arrival' });
 
   // const dispatch = useDispatch();
   // const { departureDateField, arrivalDateField } = useSelector(
@@ -59,7 +97,16 @@ export default function BookingForm() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setSearchRoutesForm((state) => {
-      return { ...state, [name]: value };
+      const { id } = searchRoutesForm[name];
+      const { isValid } = searchRoutesForm[name];
+      return {
+        ...state,
+        [name]: {
+          cityName: value.toLowerCase().trim(),
+          id,
+          isValid,
+        },
+      };
     });
     // setDepartureField(value);
     // switch (name) {
@@ -91,9 +138,7 @@ export default function BookingForm() {
     // }
   };
 
-  function setSelectedCity(item) {
-    
-  }
+  function setSelectedCity(item) {}
 
   return (
     <div className="booking_form">
@@ -115,11 +160,13 @@ export default function BookingForm() {
                 className="booking_form__form_inputs_group_input"
                 placeholder="Откуда"
                 name="departureField"
-                value={searchRoutesForm.departureField}
+                value={searchRoutesForm.departureField.cityName}
                 onChange={handleInputChange}
               />
               <LocaSvg className="input__icon" />
-              <CitiesSelect cities={citiesList.departure} />
+              {!searchRoutesForm.departureField.isValid && (
+                <CitiesSelect cities={citiesList.departure} />
+              )}
             </div>
             <button
               type="button"
@@ -131,11 +178,13 @@ export default function BookingForm() {
                 className="booking_form__form_inputs_group_input"
                 placeholder="Куда"
                 name="arrivalField"
-                value={searchRoutesForm.arrivalField}
+                value={searchRoutesForm.arrivalField.cityName}
                 onChange={handleInputChange}
               />
               <LocaSvg className="input__icon" />
-              <CitiesSelect cities={citiesList.arrival} />
+              {!searchRoutesForm.arrivalField.isValid && (
+                <CitiesSelect cities={citiesList.arrival} />
+              )}
             </div>
           </div>
           <div className="booking_form__form_inputs_group">
