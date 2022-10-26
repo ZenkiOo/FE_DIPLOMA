@@ -2,6 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from '@reduxjs/toolkit';
 
 // import getLastRoutesReduser from '../reducers/getLastRoutes';
+import { rlyApi } from './api';
+
 import routesSearch from './slices/routesSearch';
 import subscribe from './slices/subscribe';
 import lastRoutes from './slices/lastRoutes';
@@ -17,12 +19,13 @@ const reducer = combineReducers({
   subscribe,
   routesSearch,
   lastRoutes,
-  loading
+  loading,
+  [rlyApi.reducerPath]: rlyApi.reducer,
 });
 
 const store = configureStore({
   reducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(middleware).concat(rlyApi.middleware),
   devTools: process.env.NODE_ENV !== 'production',
 });
 export default store;

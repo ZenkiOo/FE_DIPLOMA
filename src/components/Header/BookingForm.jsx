@@ -1,4 +1,5 @@
 // import { useSelector, useDispatch } from 'react-redux';
+import { useLazyGetCitiesByNameQuery } from '../../store/api';
 import { useState, useEffect } from 'react';
 
 // import {
@@ -10,39 +11,45 @@ import { useState, useEffect } from 'react';
 
 import { ReactComponent as LocaSvg } from '../../images/icons/svg/loca.svg';
 import { ReactComponent as DateSvg } from '../../images/icons/svg/date.svg';
-
+import CitiesSelect from './CitiesSelect';
 import DatePicker from 'react-datepicker';
 import { setDefaultLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 setDefaultLocale('ru', ru);
 
-function useDebounce(value, delay) {
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      if (!value) return;
-      fetch(
-        `https://netology-trainbooking.netoservices.ru/routes/cities?name=${value}`
-      )
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-    }, delay);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
-}
-
 export default function BookingForm() {
+  const [getCities] = useLazyGetCitiesByNameQuery();
+
   const [searchRoutesForm, setSearchRoutesForm] = useState({
     departureField: '',
     arrivalField: '',
     departureDateField: '',
     arrivalDateField: '',
   });
+  const [citiesList, setCitiesList] = useState({
+    departure: [],
+    arrival: [],
+  });
 
-  useDebounce(searchRoutesForm.departureField, 600);
-  useDebounce(searchRoutesForm.arrivalField, 600);
+  function useDebounce(value, delay, { name }) {
+    useEffect(() => {
+      const handler = setTimeout(async () => {
+        if (!value) return;
+        const res = await getCities(value).unwrap();
+        setCitiesList((state) => ({
+          ...state,
+          [name]: res,
+        }));
+      }, delay);
+
+      return () => {
+        clearTimeout(handler);
+      };
+    }, [value, delay]);
+  }
+
+  useDebounce(searchRoutesForm.departureField, 600, { name: 'departure' });
+  useDebounce(searchRoutesForm.arrivalField, 600, { name: 'arrival' });
 
   // const dispatch = useDispatch();
   // const { departureDateField, arrivalDateField } = useSelector(
@@ -84,6 +91,10 @@ export default function BookingForm() {
     // }
   };
 
+  function setSelectedCity(item) {
+    
+  }
+
   return (
     <div className="booking_form">
       <div className="booking_form__title">
@@ -108,6 +119,7 @@ export default function BookingForm() {
                 onChange={handleInputChange}
               />
               <LocaSvg className="input__icon" />
+              <CitiesSelect cities={citiesList.departure} />
             </div>
             <button
               type="button"
@@ -123,6 +135,7 @@ export default function BookingForm() {
                 onChange={handleInputChange}
               />
               <LocaSvg className="input__icon" />
+              <CitiesSelect cities={citiesList.arrival} />
             </div>
           </div>
           <div className="booking_form__form_inputs_group">
