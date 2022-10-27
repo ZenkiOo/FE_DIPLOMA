@@ -49,11 +49,7 @@ export default function BookingForm() {
 
           setSearchRoutesForm((state) => ({
             ...state,
-            [name + 'Field']: {
-              cityName: value,
-              id: id,
-              isValid: isValid,
-            },
+            [name + 'Field']: { cityName: value, id, isValid },
           }));
         }
       }
@@ -71,11 +67,9 @@ export default function BookingForm() {
     useEffect(() => {
       const handler = setTimeout(async () => {
         if (!value) return;
+        
         const res = await getCities(value).unwrap();
-        setCitiesList((state) => ({
-          ...state,
-          [name]: res,
-        }));
+        setCitiesList((state) => ({ ...state, [name]: res }));
       }, delay);
 
       return () => {
@@ -96,16 +90,12 @@ export default function BookingForm() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    const { id } = searchRoutesForm[name];
+    const { isValid } = searchRoutesForm[name];
     setSearchRoutesForm((state) => {
-      const { id } = searchRoutesForm[name];
-      const { isValid } = searchRoutesForm[name];
       return {
         ...state,
-        [name]: {
-          cityName: value.toLowerCase().trim(),
-          id,
-          isValid,
-        },
+        [name]: { cityName: value.toLowerCase().trim(), id, isValid },
       };
     });
     // setDepartureField(value);
