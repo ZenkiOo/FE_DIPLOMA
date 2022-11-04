@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import RouteTimeInfo from './RouteTimeInfo';
 import RouteSeatsInfo from './RouteSeatsInfo';
+import RouteOptions from './RouteOptions';
 
 import { ReactComponent as TrainSvg } from '../../images/icons/svg/train.svg';
 import { ReactComponent as ArrowSvg } from '../../images/icons/svg/arrow.svg';
@@ -9,7 +10,7 @@ import { ReactComponent as ArrowSvg } from '../../images/icons/svg/arrow.svg';
 export default function Routes({ data }) {
   const routes = data.map((route) => (
     <li className="routes__item" key={route.departure._id}>
-      <a href="#" className="route">
+      <div className="route">
         <div className="route__train">
           <div className="route__train_logo">
             <TrainSvg />
@@ -34,12 +35,16 @@ export default function Routes({ data }) {
                 avaliable: route.departure.available_seats_info,
               }}
             />
-            <div>{route.have_wifi.toString()}</div>
-            <div>{route.is_express.toString()}</div>
-            <div>{route.have_air_conditioning.toString()}</div>
+            <RouteOptions />
+            {/* <div>{route.have_wifi}</div>
+            <div>{route.is_express}</div>
+            <div>{route.have_air_conditioning}</div> */}
+            <div className="route__order">
+              <button className="route__order_btn">Выбрать места</button>
+            </div>
           </div>
         </div>
-      </a>
+      </div>
     </li>
   ));
 
