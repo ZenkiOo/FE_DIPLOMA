@@ -14,10 +14,12 @@
   max-width: calc(100% - 448px);
   padding: 0 41px 0 41px;
 }
+.routes__item {
+  margin-bottom: 47px;
+}
 .route {
   display: flex;
   word-wrap: break-word;
-  margin-bottom: 20px;
   font-family: inherit;
   color: var(--text-primary);
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
@@ -105,4 +107,67 @@
 }
 .route__body_prices {
   width: 37.14%;
+}
+.seats_info {
+  padding: 35px 22px 0 27px;
+}
+.seats_info__item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  position: relative;
+}
+.seats_info__item_name {
+  display: block;
+  width: 40%;
+  padding-top: 5px;
+  color: var(--text-grey-700);
+}
+.seats_info__item_data {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+}
+.seats_info__item_count {
+  padding-top: 5px;
+  color: var(--text-orange);
+  font-weight: 500;
+}
+.seats_info__item_price {
+  color: #000;
+  font-weight: 700;
+  font-size: 24px;
+}
+.seats_info__item_price_text {
+  display: inline-block;
+  margin-right: 6px;
+  transform: translate(0, -3px);
+  color: var(--text-grey);
+  font-weight: 400;
+  font-size: 16px;
+}
+.seats_info__popover {
+  position: absolute;
+  top: 34px;
+  left: -25px;
+  width: calc(100% + 44px);
+  padding: 10px 19px 8px 32px;
+  background: #e5e5e5;
+  border-radius: 5px;
+  z-index: 1;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.seats_info__popover_item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.seats_info__popover_item_name {
+  color: #000;
+  padding-top: 5px;
+}
+.seats_info__popover_item_price {
+  color: #000;
+  font-weight: 700;
+  font-size: 24px;
 }

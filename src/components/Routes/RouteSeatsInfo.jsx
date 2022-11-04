@@ -1,14 +1,15 @@
-import RouteSeatsInfoPopover from './RouteSeatsInfoPopover';
-import { nanoid } from "nanoid";
+import { nanoid } from 'nanoid';
+import RouteSeatsInfoItem from './RouteSeatsInfoItem';
+
 export default function RouteSeatsInfo({ seatsInfo }) {
   const items = [
-    { id: 'first', name: 'Люкс' },
-    { id: 'second', name: 'Купе' },
-    { id: 'third', name: 'Плацкарт' },
     { id: 'fourth', name: 'Сидячий' },
+    { id: 'third', name: 'Плацкарт' },
+    { id: 'second', name: 'Купе' },
+    { id: 'first', name: 'Люкс' },
   ];
   const data = [];
-  
+
   items.map((item) => {
     if (seatsInfo[item.id]) {
       data.push({
@@ -35,14 +36,13 @@ export default function RouteSeatsInfo({ seatsInfo }) {
     const prices = Object.entries(item.prices);
     const lowestPrice = minPrice(prices);
     return (
-      <div className="seats_info__item" key={nanoid()}>
-        <span className="seats_info__item_name">{item.name}</span>
-        <span className="seats_info__item_count">{item.avaliable}</span>
-        <span className="seats_info__item_price">от {lowestPrice} р.</span>
-        <div className="seats_info__popover">
-          <RouteSeatsInfoPopover prices={prices} />
-        </div>
-      </div>
+      <RouteSeatsInfoItem
+        key={nanoid()}
+        prices={prices}
+        lowestPrice={lowestPrice}
+        name={item.name}
+        avaliable={item.avaliable}
+      />
     );
   });
   return <div className="seats_info">{seatsInfoItems}</div>;

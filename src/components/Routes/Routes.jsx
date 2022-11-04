@@ -7,7 +7,6 @@ import { ReactComponent as TrainSvg } from '../../images/icons/svg/train.svg';
 import { ReactComponent as ArrowSvg } from '../../images/icons/svg/arrow.svg';
 
 export default function Routes({ data }) {
-
   const routes = data.map((route) => (
     <li className="routes__item" key={route.departure._id}>
       <a href="#" className="route">
@@ -35,6 +34,9 @@ export default function Routes({ data }) {
                 avaliable: route.departure.available_seats_info,
               }}
             />
+            <div>{route.have_wifi.toString()}</div>
+            <div>{route.is_express.toString()}</div>
+            <div>{route.have_air_conditioning.toString()}</div>
           </div>
         </div>
       </a>
