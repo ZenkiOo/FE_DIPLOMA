@@ -17,7 +17,7 @@
   color: #e5e5e5;
 }
 .nav {
-  background-color: #292929;
+  background-color: var(--text-primary);
   margin-bottom: 253px;
 }
 .nav_list {
@@ -69,13 +69,14 @@
   padding: 20px 0 20px 0;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 30px;
 }
-.booking_form__form_inputs_group:nth-child(1) {
+/* .booking_form__form_inputs_group:nth-child(1) {
   margin-bottom: 30px;
 }
 .booking_form__form_inputs_group:nth-child(2) {
   margin-bottom: 70px;
-}
+} */
 .booking_form__form_inputs_group_title {
   font-weight: 300;
   font-size: 30px;
@@ -96,7 +97,8 @@
   border: none;
   border-radius: 3px;
   font-size: 18px;
-  color: #292929;
+  font-family: inherit;
+  color: var(--text-primary);
 }
 .booking_form__form_inputs_group_input_wrap input[value] {
   text-transform: capitalize;
@@ -134,11 +136,48 @@
   font-size: 24px;
   text-align: center;
   text-transform: uppercase;
-  color: #292929;
+  color: var(--text-primary);
+}
+.cities_select {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  padding-top: 5px;
+}
+.cities_select__placeholder {
+  position: absolute;
+  width: calc(100% - 46px);
+  height: 60px;
+  top: -60px;
+  background-color: white;
+  pointer-events: none;
+  padding: 19px 20px 21px 21px;
+  border-radius: 3px;
+}
+.cities_select__placeholder_text {
+  text-transform: capitalize;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+.cities_select__list {
+  background: #f5f4f6;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+}
+.cities_select__item_btn {
+  display: block;
+  width: 100%;
+  border: none;
+  text-align: left;
+  font-size: 18px;
+  font-family: inherit;
+  text-transform: capitalize;
+  background: none;
+  padding: 13px 0 16px 19px;
 }
 .preloader {
   position: relative;
-  background-color: #292929;
+  background-color: var(--text-primary);
   height: 8px;
 }
 .preloader__value {

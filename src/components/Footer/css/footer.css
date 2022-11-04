@@ -68,7 +68,7 @@
   padding: 0 46px 0 21px;
   border: none;
   font-size: 18px;
-  color: #292929;
+  color: var(--text-primary);
 }
 .footer_form__input::placeholder {
   font-size: 18px;

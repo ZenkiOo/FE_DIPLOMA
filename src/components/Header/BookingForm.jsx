@@ -1,16 +1,15 @@
 // import { useSelector, useDispatch } from 'react-redux';
-import { useLazyGetCitiesByNameQuery } from '../../store/api';
+import React from 'react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useLazyGetCitiesByNameQuery } from '../../store/api';
 
-// import {
-//   changeDepartureInput,
-//   changeArrivalInput,
-//   changeDeparureDateInput,
-//   changeArrivalDateInput,
-// } from '../../store/slices/routesSearch';
+import { setForm } from '../../store/slices/routesParams';
+import { useDispatch } from 'react-redux';
 
 import { ReactComponent as LocaSvg } from '../../images/icons/svg/loca.svg';
 import { ReactComponent as DateSvg } from '../../images/icons/svg/date.svg';
+
 import CitiesSelect from './CitiesSelect';
 import DatePicker from 'react-datepicker';
 import { setDefaultLocale } from 'react-datepicker';
@@ -18,57 +17,60 @@ import ru from 'date-fns/locale/ru';
 setDefaultLocale('ru', ru);
 
 export default function BookingForm() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [getCities] = useLazyGetCitiesByNameQuery();
 
-  const [searchRoutesForm, setSearchRoutesForm] = useState({
-    departureField: { cityName: '', id: null, isValid: false },
-    arrivalField: { cityName: '', id: null, isValid: false },
-    departureDateField: '',
-    arrivalDateField: '',
-  });
-  const [citiesList, setCitiesList] = useState({
-    departure: [],
-    arrival: [],
-  });
+  const initialFormState = {
+    depField: { cityName: '', id: '', isValid: false },
+    arrField: { cityName: '', id: '', isValid: false },
+    depDateField: '',
+    arrDateField: '',
+  };
+  const initialListState = {
+    dep: [],
+    arr: [],
+  };
+
+  const [rlyForm, setSearchRoutesForm] = useState({ ...initialFormState });
+  const [citiesList, setCitiesList] = useState({ ...initialListState });
 
   function useValidity(value, { name }) {
     useEffect(() => {
       if (!value) return;
 
-      let id = null;
+      let id = '';
       let isValid = false;
 
       if (citiesList[name].length === 1) {
         const citiesArr = citiesList[name];
         if (
-          searchRoutesForm[name + 'Field'].cityName.toLowerCase() ===
-          citiesArr[0].name
+          rlyForm[name + 'Field'].cityName.toLowerCase() === citiesArr[0].name
         ) {
           isValid = true;
           id = citiesArr[0]._id;
-
-          setSearchRoutesForm((state) => ({
-            ...state,
-            [name + 'Field']: { cityName: value, id, isValid },
-          }));
         }
       }
+
+      setSearchRoutesForm((state) => ({
+        ...state,
+        [name + 'Field']: { cityName: value, id, isValid },
+      }));
     }, [value, name, citiesList]);
   }
 
-  useValidity(searchRoutesForm.departureField.cityName, {
-    name: 'departure',
-  });
-  useValidity(searchRoutesForm.arrivalField.cityName, {
-    name: 'arrival',
-  });
+  useValidity(rlyForm.depField.cityName, { name: 'dep' });
+  useValidity(rlyForm.arrField.cityName, { name: 'arr' });
 
   function useDebounce(value, delay, { name }) {
     useEffect(() => {
       const handler = setTimeout(async () => {
-        if (!value) return;
-        
-        const res = await getCities(value).unwrap();
+        if (!value) {
+          setCitiesList((state) => ({ ...state, [name]: [] }));
+          return;
+        }
+
+        const res = await getCities(value, { preferCacheValue: true }).unwrap();
         setCitiesList((state) => ({ ...state, [name]: res }));
       }, delay);
 
@@ -78,57 +80,52 @@ export default function BookingForm() {
     }, [value, delay]);
   }
 
-  useDebounce(searchRoutesForm.departureField.cityName, 600, {
-    name: 'departure',
-  });
-  useDebounce(searchRoutesForm.arrivalField.cityName, 600, { name: 'arrival' });
-
-  // const dispatch = useDispatch();
-  // const { departureDateField, arrivalDateField } = useSelector(
-  //   (state) => state.routesSearch
-  // );
+  useDebounce(rlyForm.depField.cityName, 600, { name: 'dep' });
+  useDebounce(rlyForm.arrField.cityName, 600, { name: 'arr' });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    const { id } = searchRoutesForm[name];
-    const { isValid } = searchRoutesForm[name];
-    setSearchRoutesForm((state) => {
-      return {
-        ...state,
-        [name]: { cityName: value.toLowerCase().trim(), id, isValid },
-      };
-    });
-    // setDepartureField(value);
-    // switch (name) {
-    //   case 'departureField':
-    //     dispatch(changeDepartureInput({ value }));
-    //     break;
-    //   case 'arrivalField':
-    //     dispatch(changeArrivalInput({ value }));
-    //     break;
-
-    //   default:
-    //     break;
-    // }
+    const { id } = rlyForm[name];
+    const { isValid } = rlyForm[name];
+    setSearchRoutesForm((state) => ({
+      ...state,
+      [name]: { cityName: value.toLowerCase().trim(), id, isValid },
+    }));
   };
+
   const handlePickerChange = (value, { name }) => {
-    setSearchRoutesForm((state) => {
-      return { ...state, [name]: value };
-    });
-    // switch (name) {
-    //   case 'departureDateField':
-    //     dispatch(changeDeparureDateInput({ value }));
-    //     break;
-    //   case 'arrivalDateField':
-    //     dispatch(changeArrivalDateInput({ value }));
-    //     break;
-
-    //   default:
-    //     break;
-    // }
+    setSearchRoutesForm((state) => ({
+      ...state,
+      [name]: value + 3 * 60 * 60 * 1000,
+    }));
   };
 
-  function setSelectedCity(item) {}
+  const handleCitySelect = (value, { name }) => {
+    setSearchRoutesForm((state) => ({
+      ...state,
+      [name]: { ...rlyForm[name], cityName: value },
+    }));
+  };
+
+  async function handleFormSubmit(e) {
+    e.preventDefault();
+    const params = {
+      from_city_id: rlyForm.depField.id,
+      to_city_id: rlyForm.arrField.id,
+      date_start: rlyForm.depDateField
+        ? new Date(rlyForm.depDateField).toISOString()
+        : null,
+      date_end: rlyForm.arrDateField
+        ? new Date(rlyForm.arrDateField).toISOString()
+        : null,
+    };
+
+    dispatch(setForm({ ...params }));
+    // setSearchRoutesForm({ ...initialFormState });
+    // setCitiesList({ ...initialListState });
+
+    navigate('routes');
+  }
 
   return (
     <div className="booking_form">
@@ -138,7 +135,11 @@ export default function BookingForm() {
           <span className="booking_form__title_text_subrow">путешествие!</span>
         </h1>
       </div>
-      <form className="booking_form__form">
+      <form
+        className="booking_form__form"
+        onSubmit={handleFormSubmit}
+        autoComplete="off"
+      >
         <div className="booking_form__form_inputs">
           <div className="booking_form__form_inputs_group">
             <h3 className="booking_form__form_inputs_group_title">
@@ -149,13 +150,17 @@ export default function BookingForm() {
                 type="text"
                 className="booking_form__form_inputs_group_input"
                 placeholder="Откуда"
-                name="departureField"
-                value={searchRoutesForm.departureField.cityName}
+                name="depField"
+                value={rlyForm.depField.cityName}
                 onChange={handleInputChange}
               />
               <LocaSvg className="input__icon" />
-              {!searchRoutesForm.departureField.isValid && (
-                <CitiesSelect cities={citiesList.departure} />
+              {!rlyForm.depField.isValid && (
+                <CitiesSelect
+                  selectName={'depField'}
+                  onSelect={handleCitySelect}
+                  cities={citiesList.dep}
+                />
               )}
             </div>
             <button
@@ -167,13 +172,17 @@ export default function BookingForm() {
                 type="text"
                 className="booking_form__form_inputs_group_input"
                 placeholder="Куда"
-                name="arrivalField"
-                value={searchRoutesForm.arrivalField.cityName}
+                name="arrField"
+                value={rlyForm.arrField.cityName}
                 onChange={handleInputChange}
               />
               <LocaSvg className="input__icon" />
-              {!searchRoutesForm.arrivalField.isValid && (
-                <CitiesSelect cities={citiesList.arrival} />
+              {!rlyForm.arrField.isValid && (
+                <CitiesSelect
+                  selectName={'arrField'}
+                  onSelect={handleCitySelect}
+                  cities={citiesList.arr}
+                />
               )}
             </div>
           </div>
@@ -183,10 +192,10 @@ export default function BookingForm() {
               <DatePicker
                 dateFormat="dd/MM/yyyy"
                 placeholderText="ДД/ММ/ГГ"
-                selected={searchRoutesForm.departureDateField}
+                selected={rlyForm.depDateField}
                 locale={ru}
                 onChange={(date) =>
-                  handlePickerChange(date, { name: 'departureDateField' })
+                  handlePickerChange(+date, { name: 'depDateField' })
                 }
               />
               <DateSvg className="input__icon" />
@@ -195,10 +204,10 @@ export default function BookingForm() {
               <DatePicker
                 dateFormat="dd/MM/yyyy"
                 placeholderText="ДД/ММ/ГГ"
-                selected={searchRoutesForm.arrivalDateField}
+                selected={rlyForm.arrDateField}
                 locale={ru}
                 onChange={(date) =>
-                  handlePickerChange(date, { name: 'arrivalDateField' })
+                  handlePickerChange(+date, { name: 'arrDateField' })
                 }
               />
               <DateSvg className="input__icon" />
@@ -206,7 +215,8 @@ export default function BookingForm() {
           </div>
         </div>
         <div className="booking_form__form_action">
-          <button type="button" className="booking_form__form_action_btn">
+          {/* <GetRoutesButton /> */}
+          <button type="submit" className="booking_form__form_action_btn">
             Найти билеты
           </button>
         </div>

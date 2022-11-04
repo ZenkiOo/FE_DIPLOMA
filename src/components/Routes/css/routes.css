@@ -1,0 +1,108 @@
+.routes_page__container {
+  max-width: 1490px;
+  margin: 0 auto;
+  display: flex;
+}
+.routes_page__aside {
+  width: 100%;
+  max-width: 448px;
+  min-height: 100vh;
+  background-color: #333;
+}
+.routes_page__main {
+  width: 100%;
+  max-width: calc(100% - 448px);
+  padding: 0 41px 0 41px;
+}
+.route {
+  display: flex;
+  word-wrap: break-word;
+  margin-bottom: 20px;
+  font-family: inherit;
+  color: var(--text-primary);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.route__train {
+  background-color: #e4e0e9;
+  padding: 57px 0 30px 28px;
+  width: 197px;
+  border-bottom: 1px solid #c4c4c4;
+}
+.route__train_logo {
+  padding-left: 16px;
+  margin-bottom: 12px;
+}
+.route__train_id {
+  padding-left: 30px;
+  margin-bottom: 14px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-grey-700);
+}
+.route__train_from svg {
+  display: inline-block;
+  margin-left: 7px;
+}
+.route__train_from,
+.route__train_to {
+  text-transform: capitalize;
+}
+.route__body {
+  display: flex;
+  width: calc(100% - 197px);
+  position: relative;
+  border: 1px solid #c4c4c4;
+  border-left: none;
+}
+.route__body_time {
+  width: 62.86%;
+  max-width: 480px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  border-right: 1px dashed #e5e5e5;
+}
+.route_time {
+  display: flex;
+  padding: 39px 10px 24px 10px;
+}
+.route_time__item {
+  display: flex;
+  flex-direction: column;
+  width: 52%;
+  padding-left: 48px;
+}
+.route_time__item--from {
+  width: 40%;
+  padding-left: 30px;
+}
+.route_time__duration {
+  display: flex;
+  width: 8%;
+  flex-direction: column;
+  align-items: center;
+}
+.route_time__duration_time {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: var(--text-grey-100);
+}
+.route_time__duration svg.reversed {
+  transform: rotate(180deg);
+}
+.route_time__time {
+  color: #000;
+  font-weight: 700;
+  font-size: 24px;
+}
+.route_time__city {
+  font-size: 18px;
+  text-transform: capitalize;
+}
+.route_time__station {
+  font-size: 18px;
+  color: var(--text-grey);
+}
+.route__body_prices {
+  width: 37.14%;
+}

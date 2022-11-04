@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { getLastRoutes } from './store/asyncActions/getLastRoutes';
 import { useGetLastRoutesQuery } from './store/api';
 import HomePage from './pages/HomePage';
+import RoutesPage from './pages/RoutesPage'
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
@@ -19,31 +20,6 @@ function App() {
   // const { data = [], error, isLoading } = useGetLastRoutesQuery();
   // console.log(data, error, isLoading);
 
-  // fetch(
-  //   'https://netology-trainbooking.netoservices.ru/subscribe?email=hello@kitty.com'
-  // )
-  //   .then((response) => response.json())
-  //   .then((data) => console.log(data));
-
-  // fetch(
-  //   `https://netology-trainbooking.netoservices.ru/routes/cities?name=${value}`
-  // )
-  //   .then((response) => response.json())
-  //   .then((data) => console.log(data));
-
-  // fetch(
-  //   'https://netology-trainbooking.netoservices.ru/routes/cities?name=санкт'
-  // )
-  //   .then((response) => response.json())
-  //   .then((data) => console.log(data));
-
-  // fetch(
-  //   'https://netology-trainbooking.netoservices.ru/routes?from_city_id=63329d7b591d1e00467e8a30&to_city_id=63329d7b591d1e00467e8a31'
-  // ).then((response) =>
-  //   response.json().then((data) => {
-  //     console.log('routes', data);
-  //   })
-  // );
   const getLast = async () => {
     let response = await fetch(
       'https://netology-trainbooking.netoservices.ru/routes/last'
@@ -92,6 +68,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/routes" element={<RoutesPage />} />
       </Routes>
       <Footer />
     </div>

@@ -7,7 +7,7 @@
   margin: 0 auto;
   padding: 0 20px;
   font-size: 24px;
-  color: #292929;
+  color: var(--text-primary);
 }
 .about__title {
   font-weight: 500;

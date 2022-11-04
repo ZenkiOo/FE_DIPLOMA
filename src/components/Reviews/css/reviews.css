@@ -9,7 +9,7 @@
   font-weight: 500;
   font-size: 36px;
   text-transform: uppercase;
-  color: #292929;
+  color: var(--text-primary);
 }
 .reviews__item {
   max-width: 1440px;
@@ -55,14 +55,14 @@
   font-weight: 300;
   font-size: 18px;
   line-height: 21px;
-  color: #928f94;
+  color: var(--text-grey);
   position: relative;
 }
 .reviews__item_review_content_text span {
   position: absolute;
   font-weight: 500;
   font-size: 36px;
-  color: #928f94;
+  color: var(--text-grey);
 }
 .reviews__item_review_content_text span:nth-child(1) {
   margin-left: -17px;

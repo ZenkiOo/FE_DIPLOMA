@@ -6,13 +6,20 @@ export const rlyApi = createApi({
     baseUrl: 'https://netology-trainbooking.netoservices.ru/',
   }),
   endpoints: (builder) => ({
+    getCitiesByName: builder.query({
+      query: (value) => `routes/cities?name=${value}`,
+    }),
     getLastRoutes: builder.query({
       query: () => `routes/last/`,
     }),
-    getCitiesByName: builder.query({
-      query: (value) => `routes/cities?name=${value}`,
+    getRoutes: builder.query({
+      query: (params) => `routes?${ params }`,
     }),
   }),
 });
 
-export const { useGetLastRoutesQuery, useGetCitiesByNameQuery, useLazyGetCitiesByNameQuery } = rlyApi;
+export const {
+  useLazyGetCitiesByNameQuery,
+  useGetLastRoutesQuery,
+  useGetRoutesQuery
+} = rlyApi;

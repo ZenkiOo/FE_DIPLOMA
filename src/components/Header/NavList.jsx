@@ -1,6 +1,9 @@
 import { nanoid } from 'nanoid';
+import { useLocation } from 'react-router-dom';
 
 export default function NavList() {
+  const location = useLocation();
+  // console.log(location);
   const links = [
     {
       text: 'О нас',

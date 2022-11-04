@@ -8,6 +8,7 @@ import routesSearch from './slices/routesSearch';
 import subscribe from './slices/subscribe';
 import lastRoutes from './slices/lastRoutes';
 import loading from './slices/loading';
+import routesParams from './slices/routesParams';
 
 const middleware = {
   immutableCheck: false,
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   routesSearch,
   lastRoutes,
   loading,
+  routesParams,
   [rlyApi.reducerPath]: rlyApi.reducer,
 });
 
