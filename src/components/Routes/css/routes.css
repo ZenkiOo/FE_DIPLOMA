@@ -17,6 +17,9 @@
 .routes__item {
   margin-bottom: 47px;
 }
+.routes__item:last-child {
+  margin-bottom: 0;
+}
 .route {
   display: flex;
   word-wrap: break-word;
@@ -279,4 +282,10 @@
 }
 .routes_header__show_btn--active {
   color: var(--text-grey-700);
+}
+.pagination__dots {
+  display: none;
+}
+.selected {
+  color: red;
 }

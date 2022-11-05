@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
 import RouteTimeInfo from './RouteTimeInfo';
 import RouteSeatsInfo from './RouteSeatsInfo';
 import RouteOptions from './RouteOptions';
@@ -48,12 +47,12 @@ export default function Routes({ data }) {
     </li>
   ));
 
-  return <ul className="routes">{routes}</ul>;
+  return (
+    <>
+      <ul className="routes">{routes}</ul>
+    </>
+  );
 }
-
-// Routes.defaultProps = {
-//   data: [],
-// };
 
 Routes.propTypes = {
   data: PropTypes.array,
