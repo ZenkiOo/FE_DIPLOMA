@@ -1,5 +1,6 @@
 import '../components/Routes/css/routes.css';
 import RoutesDetails from '../components/Routes/RoutesDetails';
+import RoutesHeader from '../components/Routes/RoutesHeader';
 import Routes from '../components/Routes/Routes';
 
 import { useSelector } from 'react-redux';
@@ -21,6 +22,7 @@ export default function RoutesPage() {
       <div className="routes_page__container">
         <div className="routes_page__aside">{<RoutesDetails />}</div>
         <div className="routes_page__main">
+          <RoutesHeader count={data.total_count}/>
           {data.items && <Routes data={data.items} />}
         </div>
       </div>

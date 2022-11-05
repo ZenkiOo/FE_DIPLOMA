@@ -48,17 +48,12 @@ export default function Routes({ data }) {
     </li>
   ));
 
-  return (
-    <>
-      Routes
-      <ul className="routes">{routes}</ul>
-    </>
-  );
+  return <ul className="routes">{routes}</ul>;
 }
 
-Routes.defaultProps = {
-  data: [],
-};
+// Routes.defaultProps = {
+//   data: [],
+// };
 
 Routes.propTypes = {
   data: PropTypes.array,

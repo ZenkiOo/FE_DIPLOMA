@@ -35,8 +35,8 @@
 }
 .how_it_works__header_btn:hover {
   color: #2d2b2f;
-  background: #ffca62;
-  border: 1px solid #ffca62;
+  background: var(--bg-orange);
+  border: 1px solid var(--bg-orange);
 }
 .how_it_works__items {
   display: flex;

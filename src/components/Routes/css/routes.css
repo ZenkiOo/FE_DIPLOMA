@@ -12,7 +12,7 @@
 .routes_page__main {
   width: 100%;
   max-width: calc(100% - 448px);
-  padding: 0 41px 0 41px;
+  padding: 95px 41px 0 41px;
 }
 .routes__item {
   margin-bottom: 47px;
@@ -135,6 +135,7 @@
   padding-top: 5px;
   color: var(--text-orange);
   font-weight: 500;
+  cursor: pointer;
 }
 .seats_info__item_price {
   color: #000;
@@ -201,4 +202,81 @@
   color: white;
   font-weight: 700;
   font-size: 24px;
+}
+.routes_header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 47px;
+  font-size: 18px;
+  color: var(--text-grey);
+}
+.routes_header__item:nth-child(2) {
+  display: flex;
+}
+.routes_header__sort {
+  margin-right: 4px;
+  display: flex;
+}
+.routes_header__sort_text {
+  display: inline-block;
+  margin-right: 2px;
+}
+.routes_header__sort_select {
+  width: 139px;
+  position: relative;
+}
+.routes_header__sort_select_field {
+  padding-left: 7px;
+}
+.routes_header__sort_select_field_text {
+  cursor: pointer;
+}
+.routes_header__sort_select_items {
+  position: absolute;
+  width: 100%;
+  top: -8px;
+  background: #f7f5f9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+}
+.routes_header__sort_select_item {
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 11px 10px 7px;
+  margin-right: 12px;
+  background: none;
+  border: none;
+  color: var(--text-grey-700);
+  font-family: inherit;
+  font-size: inherit;
+  border-bottom: 1px solid #e5e5e5;
+}
+.routes_header__sort_select_item:last-child {
+  border: none;
+}
+.routes_header__sort_select_item:hover {
+  background: var(--bg-orange);
+  color: white;
+}
+.routes_header__show_text {
+  display: inline-block;
+  margin-right: 6px;
+}
+.routes_header__show_btn {
+  display: inline-block;
+  padding: 0;
+  margin-right: 12px;
+  background: none;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+.routes_header__show_btn:last-child {
+  margin-right: 0;
+}
+.routes_header__show_btn--active {
+  color: var(--text-grey-700);
 }
