@@ -170,7 +170,7 @@
   border-radius: 50%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #e5e5e5;
+  background: var(--text-white);
 }
 .slick-dots li.slick-active button:before {
   background: #c4c4c4;

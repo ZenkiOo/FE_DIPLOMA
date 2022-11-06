@@ -14,7 +14,7 @@
 .logo__link {
   font-weight: 900;
   font-size: 36px;
-  color: #e5e5e5;
+  color: var(--text-white);
 }
 .nav {
   background-color: var(--text-primary);
@@ -98,7 +98,7 @@
 }
 .booking_form__form_inputs_group_input_wrap input::placeholder {
   font-size: 18px;
-  color: #e5e5e5;
+  color: var(--text-white);
 }
 .booking_form__form_inputs_group_btn {
   background-color: transparent;

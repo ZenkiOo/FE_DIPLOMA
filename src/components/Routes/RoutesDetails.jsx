@@ -6,7 +6,12 @@ import { ReactComponent as FirstClassSvg } from '../../images/icons/svg/routes_o
 import { ReactComponent as WifiSvg } from '../../images/icons/svg/routes_options/have_wifi.svg';
 import { ReactComponent as ExpressSvg } from '../../images/icons/svg/routes_options/have_express.svg';
 
+import 'react-input-range/lib/css/index.css';
+import InputRange from 'react-input-range';
+
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
+
 import DatePicker from 'react-datepicker';
 import { setDefaultLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
@@ -17,7 +22,6 @@ export default function RoutesDetails() {
   const handlePickerChange = (value, { name }) => {
     console.log(value, name);
   };
-
   const options = {
     have_second_class: {
       id: 0,
@@ -50,6 +54,7 @@ export default function RoutesDetails() {
       icon: <ExpressSvg />,
     },
   };
+  const [priceValue, setPriceValue] = useState({ min: 2500, max: 5000 });
 
   const optionsList = Object.entries(options).map((option) => (
     <li className="routes_details__option" key={option[1].id}>
@@ -108,6 +113,20 @@ export default function RoutesDetails() {
       </div>
       <div className="routes_details__options">
         <ul className="routes_details__options_list">{optionsList}</ul>
+      </div>
+      <div className="routes_details__price">
+        <h3 className="routes_details__title routes_details__title--price">
+          Стоимость
+        </h3>
+        <div className="routes_details__price_range">
+          <InputRange
+            maxValue={7000}
+            minValue={1920}
+            value={priceValue}
+            onChange={(value) => setPriceValue(value)}
+            onChangeComplete={(value) => console.log('hoba', value)}
+          />
+        </div>
       </div>
     </div>
   );
