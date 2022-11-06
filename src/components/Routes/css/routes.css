@@ -14,6 +14,9 @@
   max-width: calc(100% - 448px);
   padding: 95px 41px 0 41px;
 }
+.routes {
+  margin-bottom: 142px;
+}
 .routes__item {
   margin-bottom: 47px;
 }
@@ -31,7 +34,7 @@
   background-color: #e4e0e9;
   padding: 57px 0 30px 28px;
   width: 197px;
-  border-bottom: 1px solid #c4c4c4;
+  border-bottom: 1px solid var(--text-grey-100);
 }
 .route__train_logo {
   padding-left: 16px;
@@ -56,7 +59,7 @@
   display: flex;
   width: calc(100% - 197px);
   position: relative;
-  border: 1px solid #c4c4c4;
+  border: 1px solid var(--text-grey-100);
   border-left: none;
 }
 .route__body_time {
@@ -283,9 +286,71 @@
 .routes_header__show_btn--active {
   color: var(--text-grey-700);
 }
-.pagination__dots {
-  display: none;
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 193px;
 }
-.selected {
-  color: red;
+.pagination__item {
+  margin-right: 37px;
+}
+.pagination__item.selected .pagination__btn {
+  color: white;
+  background: var(--text-orange);
+  border: 2px solid var(--text-orange);
+}
+.pagination__btn {
+  display: block;
+  width: 84px;
+  height: 75px;
+  color: var(--text-grey);
+  font-weight: 700;
+  font-size: 30px;
+  border: 2px solid var(--text-grey-100);
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 18px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.pagination__btn:hover {
+  border: 2px solid var(--text-orange);
+  color: var(--text-orange);
+}
+.pagination__dots {
+  margin-right: 35px;
+}
+.pagination .previous a,
+.pagination .next a {
+  display: block;
+  width: 84px;
+  height: 75px;
+  padding-top: 22px;
+  text-align: center;
+  border: 2px solid var(--text-grey-100);
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.pagination .previous a:hover,
+.pagination .next a:hover {
+  border: 2px solid var(--text-orange);
+}
+.pagination .previous a:hover svg path,
+.pagination .next a:hover svg path {
+  fill: var(--text-orange);
+}
+.pagination .previous {
+  margin-right: 35px;
+}
+.pagination .next svg {
+  transform: rotate(180deg);
 }

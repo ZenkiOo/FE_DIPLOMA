@@ -1,4 +1,3 @@
-// import { useSelector, useDispatch } from 'react-redux';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -128,7 +127,7 @@ export default function BookingForm() {
   }
 
   return (
-    <div className="booking_form">
+    <div className='booking_form'>
       <div className="booking_form__title">
         <h1 className="booking_form__title_text">
           <span className="booking_form__title_text_row">Вся жизнь -</span>

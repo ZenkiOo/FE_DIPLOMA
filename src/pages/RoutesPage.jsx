@@ -25,10 +25,10 @@ export default function RoutesPage() {
         <div className="routes_page__main">
           <RoutesHeader count={data.total_count} />
           {data.items && (
-            <div>
+            <>
               <Routes data={data.items} />
               <RoutesPagination total_count={data.total_count} />
-            </div>
+            </>
           )}
         </div>
       </div>
