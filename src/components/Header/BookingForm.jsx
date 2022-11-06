@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLazyGetCitiesByNameQuery } from '../../store/api';
@@ -112,10 +111,10 @@ export default function BookingForm() {
       from_city_id: rlyForm.depField.id,
       to_city_id: rlyForm.arrField.id,
       date_start: rlyForm.depDateField
-        ? new Date(rlyForm.depDateField).toISOString()
+        ? new Date(rlyForm.depDateField).toISOString().substring(0, 10)
         : null,
       date_end: rlyForm.arrDateField
-        ? new Date(rlyForm.arrDateField).toISOString()
+        ? new Date(rlyForm.arrDateField).toISOString().substring(0, 10)
         : null,
     };
 
@@ -127,7 +126,7 @@ export default function BookingForm() {
   }
 
   return (
-    <div className='booking_form'>
+    <div className="booking_form">
       <div className="booking_form__title">
         <h1 className="booking_form__title_text">
           <span className="booking_form__title_text_row">Вся жизнь -</span>

@@ -16,7 +16,7 @@ export default function RoutesPage() {
     isFetching,
     isError,
   } = useGetRoutesQuery(queryString.stringify(params, { skipNull: true }));
-  console.log(data, isLoading, isFetching, isError);
+  // console.log(data, isLoading, isFetching, isError);
 
   return (
     <section className="routes_page">

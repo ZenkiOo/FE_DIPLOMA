@@ -6,8 +6,7 @@
 .routes_page__aside {
   width: 100%;
   max-width: 448px;
-  min-height: 100vh;
-  background-color: #333;
+  padding: 95px 46px 10px 42px;
 }
 .routes_page__main {
   width: 100%;
@@ -353,4 +352,141 @@
 }
 .pagination .next svg {
   transform: rotate(180deg);
+}
+.routes_details {
+  padding: 42px 36px 10px 28px;
+  background: #3e3c41;
+}
+.routes_details__title {
+  margin-bottom: 10px;
+  font-size: 30px;
+  color: white;
+}
+.routes_details__dates {
+  margin-bottom: 32px;
+}
+.routes_details__dates_item {
+  position: relative;
+}
+.routes_details__dates_item:not(:last-child) {
+  margin-bottom: 26px;
+}
+.routes_details__dates_item input {
+  width: 100%;
+  height: 43px;
+  background: white;
+  border-radius: 3px;
+  border: none;
+  padding: 0 56px 0 8px;
+  font-size: 18px;
+  font-family: inherit;
+  color: var(--text-primary);
+}
+.routes_details__dates_item svg {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  width: 20px;
+  height: 22px;
+}
+.routes_details__options {
+  position: relative;
+  padding: 29px 0px 0px 40px;
+}
+.routes_details__options::before {
+  content: '';
+  position: absolute;
+  width: calc(100% + 64px);
+  height: 1px;
+  top: 0;
+  left: -28px;
+  background-color: white;
+}
+.routes_details__option:not(:last-child) {
+  margin-bottom: 26px;
+}
+.routes_details__option_label {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.routes_details__option_label:hover .routes_details__option_name_text {
+  color: var(--text-orange);
+}
+.routes_details__option_icon {
+  width: 30px;
+  height: 30px;
+}
+.routes_details__option_icon--have_second_class svg {
+  transform: translate(0, 4px);
+}
+.routes_details__option_icon--have_third_class svg {
+  transform: translate(0, 3px);
+}
+.routes_details__option_icon--have_fourth_class svg {
+  transform: translate(3px, -3px);
+}
+.routes_details__option_icon--have_first_class svg {
+  transform: translate(-5px, 0);
+}
+.routes_details__option_icon--have_wifi svg {
+  transform: translate(-7px, 1px);
+}
+.routes_details__option_icon--have_express svg {
+  transform: translate(-4px, 0);
+}
+.routes_details__option_name {
+  width: calc(100% - 102px);
+  padding-left: 21px;
+}
+.routes_details__option_name_text {
+  font-size: 18px;
+  color: white;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.routes_details__option_checkbox {
+  width: 72px;
+  padding-top: 2px;
+}
+.routes_details__option_checkbox input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+.routes_details__option_checkbox_fake_body {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 19px;
+  border-radius: 9px;
+  background: white;
+  transition: 0.4s;
+}
+.routes_details__option_checkbox_fake_body::before {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  top: -4px;
+  left: -1px;
+  transition: 0.4s;
+  background: var(--text-grey-100);
+}
+.routes_details__option_checkbox
+  input:checked
+  ~ .routes_details__option_checkbox_fake_body {
+  background: var(--bg-orange-100);
+}
+.routes_details__option_checkbox
+  input:checked
+  ~ .routes_details__option_checkbox_fake_body::before {
+  transform: translate(47px, 0);
+  background: var(--text-orange);
 }
