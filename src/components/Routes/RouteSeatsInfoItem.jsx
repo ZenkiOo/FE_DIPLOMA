@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import RouteSeatsInfoPopover from './RouteSeatsInfoPopover';
-import { ReactComponent as RubleSvg } from '../../images/icons/svg/ruble.svg';
+import Price from '../Price/Price';
 import { useState } from 'react';
 
 export default function RouteSeatsInfoItem({
@@ -21,10 +21,7 @@ export default function RouteSeatsInfoItem({
         >
           {avaliable}
         </span>
-        <span className="seats_info__item_price">
-          <span className="seats_info__item_price_text">от</span> {lowestPrice}{' '}
-          <RubleSvg />
-        </span>
+        <Price name='default' value={lowestPrice}/>
       </div>
       {active && (
         <div className="seats_info__popover">

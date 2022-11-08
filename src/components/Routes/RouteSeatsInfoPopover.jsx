@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
-import { ReactComponent as RubleSvg } from '../../images/icons/svg/ruble.svg';
+import Price from '../Price/Price';
 
 export default function RouteSeatsInfoPopover({ prices }) {
   const names = {
@@ -14,9 +14,7 @@ export default function RouteSeatsInfoPopover({ prices }) {
     return (
       <div className="seats_info__popover_item" key={nanoid()}>
         <span className="seats_info__popover_item_name">{name}</span>
-        <span className="seats_info__popover_item_price">
-          {currPrice} <RubleSvg />
-        </span>
+        <Price name="current" value={currPrice}/>
       </div>
     );
   });

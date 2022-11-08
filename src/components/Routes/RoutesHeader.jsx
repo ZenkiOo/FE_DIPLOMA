@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { setParam } from '../../store/slices/routesParams';
 import { useState } from 'react';
+import { nanoid } from 'nanoid';
 
 export default function RoutesHeader({ count }) {
   const params = useSelector((state) => state.routesParams);
@@ -25,6 +26,11 @@ export default function RoutesHeader({ count }) {
   function setLimit(value) {
     dispatch(setParam({ param: 'limit', value }));
   }
+  const sortList = [
+    { name: 'времени', param: null },
+    { name: 'стоимости', param: 'price' },
+    { name: 'длительности', param: 'duration' },
+  ];
 
   return (
     <div className="routes_header">
@@ -45,24 +51,15 @@ export default function RoutesHeader({ count }) {
             </div>
             {sortActive && (
               <div className="routes_header__sort_select_items">
-                <button
-                  className="routes_header__sort_select_item"
-                  onClick={() => setSortName(null)}
-                >
-                  времени
-                </button>
-                <button
-                  className="routes_header__sort_select_item"
-                  onClick={() => setSortName('price')}
-                >
-                  стоимости
-                </button>
-                <button
-                  className="routes_header__sort_select_item"
-                  onClick={() => setSortName('duration')}
-                >
-                  длительности
-                </button>
+                {sortList.map((item) => (
+                  <button
+                    key={nanoid()}
+                    className="routes_header__sort_select_item"
+                    onClick={() => setSortName(item.param)}
+                  >
+                    {item.name}
+                  </button>
+                ))}
               </div>
             )}
           </div>

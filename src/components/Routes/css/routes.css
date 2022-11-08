@@ -142,19 +142,6 @@
   font-weight: 500;
   cursor: pointer;
 }
-.seats_info__item_price {
-  color: #000;
-  font-weight: 700;
-  font-size: 24px;
-}
-.seats_info__item_price_text {
-  display: inline-block;
-  margin-right: 6px;
-  transform: translate(0, -3px);
-  color: var(--text-grey);
-  font-weight: 400;
-  font-size: 16px;
-}
 .seats_info__popover {
   position: absolute;
   top: 34px;
@@ -174,11 +161,6 @@
 .seats_info__popover_item_name {
   color: #000;
   padding-top: 5px;
-}
-.seats_info__popover_item_price {
-  color: #000;
-  font-weight: 700;
-  font-size: 24px;
 }
 .route__options {
   padding: 4px 12px 0 0;
@@ -300,7 +282,7 @@
 }
 .pagination__btn {
   display: block;
-  width: 84px;
+  width: 75px;
   height: 75px;
   color: var(--text-grey);
   font-weight: 700;
@@ -326,7 +308,7 @@
 .pagination .previous a,
 .pagination .next a {
   display: block;
-  width: 84px;
+  width: 75px;
   height: 75px;
   padding-top: 22px;
   text-align: center;
@@ -356,6 +338,7 @@
 .routes_details {
   padding: 42px 36px 15px 28px;
   background: #3e3c41;
+  margin-bottom: 95px;
 }
 .routes_details__title {
   margin-bottom: 10px;

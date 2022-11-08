@@ -1,0 +1,56 @@
+.rly_price {
+  display: inline-block;
+  position: relative;
+}
+.rly_price__text {
+  display: inline-block;
+  font-weight: 400;
+  font-size: 16px;
+}
+.rly_price svg {
+  position: absolute;
+}
+.rly_price--default,
+.rly_price--current {
+  color: #000;
+  font-weight: 700;
+  font-size: 24px;
+  padding-right: 21px;
+}
+.rly_price--default .rly_price__text {
+  margin-right: 6px;
+  transform: translate(0, -3px);
+  color: var(--text-grey);
+}
+.rly_price--default svg,
+.rly_price--current svg {
+  width: 16px;
+  height: 19px;
+  top: 5px;
+  right: -1px;
+}
+.rly_price--last_routes {
+  padding-right: 19px;
+  font-size: 36px;
+  color: var(--text-orange);
+}
+.rly_price--last_routes .rly_price__text {
+  margin-right: 6px;
+  color: var(--text-grey);
+}
+.rly_price--last_routes svg {
+  width: 20px;
+  height: 25px;
+  top: 8px;
+  right: -8px;
+}
+.rly_price--total {
+  padding-right: 37px;
+  font-size: 48px;
+  color: var(--text-orange);
+}
+.rly_price--total svg {
+  width: 26px;
+  height: 32px;
+  /* --text-white */
+}

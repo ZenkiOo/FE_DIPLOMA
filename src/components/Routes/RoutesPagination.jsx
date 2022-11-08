@@ -44,8 +44,8 @@ export default function RoutesPagination({ total_count }) {
           nextLabel={<ArrowSvg />}
           previousLabel={<ArrowSvg />}
           onPageChange={handlePageClick}
-          pageRangeDisplayed={2}
-          marginPagesDisplayed={0}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={1}
           pageCount={pageCount}
           renderOnZeroPageCount={null}
           containerClassName="pagination"

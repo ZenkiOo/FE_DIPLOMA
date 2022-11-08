@@ -1,5 +1,6 @@
 import '../components/Routes/css/routes.css';
-import RoutesDetails from '../components/Routes/RoutesDetails';
+import LastRoutes from '../components/LastRoutes/LastRoutes';
+import AsideBar from '../components/AsideBar/AsideBar';
 import RoutesHeader from '../components/Routes/RoutesHeader';
 import Routes from '../components/Routes/Routes';
 import RoutesPagination from '../components/Routes/RoutesPagination';
@@ -21,15 +22,26 @@ export default function RoutesPage() {
   return (
     <section className="routes_page">
       <div className="routes_page__container">
-        <div className="routes_page__aside">{<RoutesDetails />}</div>
+        <div className="routes_page__aside">
+          <AsideBar />
+          <LastRoutes />
+        </div>
         <div className="routes_page__main">
-          <RoutesHeader count={data.total_count} />
-          {data.items && (
-            <>
-              <Routes data={data.items} />
-              <RoutesPagination total_count={data.total_count} />
-            </>
-          )}
+          {isLoading
+            ? 'Loading'
+            : data.items && (
+                <>
+                  <RoutesHeader
+                    count={
+                      data.items?.length < 5
+                        ? data.items.length
+                        : data.total_count
+                    }
+                  />
+                  <Routes data={data.items} />
+                  <RoutesPagination total_count={data.total_count} />
+                </>
+              )}
         </div>
       </div>
     </section>
