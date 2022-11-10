@@ -4,10 +4,10 @@ import Reviews from '../components/Reviews/Reviews';
 
 export default function HomePage() {
   return (
-    <div className="home_page">
+    <main className="home_page">
       <About />
       <HowItWorks />
       <Reviews />
-    </div>
+    </main>
   );
 }

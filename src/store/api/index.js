@@ -15,11 +15,15 @@ export const rlyApi = createApi({
     getRoutes: builder.query({
       query: (params) => `routes?${ params }`,
     }),
+    getRoute: builder.query({
+      query: (id) => `routes/${ id }/seats`,
+    }),
   }),
 });
 
 export const {
   useLazyGetCitiesByNameQuery,
   useGetLastRoutesQuery,
-  useGetRoutesQuery
+  useGetRoutesQuery,
+  useGetRouteQuery
 } = rlyApi;

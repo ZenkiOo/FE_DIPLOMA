@@ -10,15 +10,17 @@ import 'react-input-range/lib/css/index.css';
 import InputRange from 'react-input-range';
 
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setParam } from '../../store/slices/routesParams';
 
 import DatePicker from 'react-datepicker';
 import { setDefaultLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 setDefaultLocale('ru', ru);
 
-export default function RoutesDetails() {
+export default function AsideBar() {
   const params = useSelector((state) => state.routesParams);
+  const dispatch = useDispatch();
   const handlePickerChange = (value, { name }) => {
     console.log(value, name);
   };
@@ -56,30 +58,44 @@ export default function RoutesDetails() {
   };
   const [priceValue, setPriceValue] = useState({ min: 2500, max: 5000 });
 
-  const optionsList = Object.entries(options).map((option) => (
-    <li className="routes_details__option" key={option[1].id}>
-      <label className="routes_details__option_label">
-        <div
-          className={`routes_details__option_icon routes_details__option_icon--${option[0]}`}
-        >
-          {option[1].icon}
-        </div>
-        <div className="routes_details__option_name">
-          <span className="routes_details__option_name_text">
-            {option[1].name}
-          </span>
-        </div>
-        <div className="routes_details__option_checkbox">
-          <input
-            type="checkbox"
-            name={option[0]}
-            id={`routes_checkbox_${option[0]}`}
-          />
-          <span className="routes_details__option_checkbox_fake_body"></span>
-        </div>
-      </label>
-    </li>
-  ));
+  const handleCheckboxChange = (e) => {
+    // console.log(e.target.name, e.target.checked);
+    dispatch(
+      setParam({
+        param: e.target.name,
+        value: e.target.checked === true ? true : null,
+      })
+    );
+  };
+
+  const optionsList = Object.entries(options).map((option) => {
+    const name = option[0],
+      obj = option[1];
+    return (
+      <li className="routes_details__option" key={obj.id}>
+        <label className="routes_details__option_label">
+          <div
+            className={`routes_details__option_icon routes_details__option_icon--${name}`}
+          >
+            {obj.icon}
+          </div>
+          <div className="routes_details__option_name">
+            <span className="routes_details__option_name_text">{obj.name}</span>
+          </div>
+          <div className="routes_details__option_checkbox">
+            <input
+              type="checkbox"
+              name={name}
+              id={`routes_checkbox_${name}`}
+              onChange={handleCheckboxChange}
+              defaultChecked={params[name]}
+            />
+            <span className="routes_details__option_checkbox_fake_body"></span>
+          </div>
+        </label>
+      </li>
+    );
+  });
 
   return (
     <div className="routes_details">
