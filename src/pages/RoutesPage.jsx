@@ -12,14 +12,15 @@ import { useGetRoutesQuery } from '../store/api';
 const queryString = require('query-string');
 
 export default function RoutesPage() {
-  const { params } = useSelector((state) => state.routesParams);
-  const { state } = useSelector((state) => state.routesParams);
+  const state = useSelector((state) => state.routesParams);
   const {
     data = {},
     isLoading,
     isFetching,
     isError,
-  } = useGetRoutesQuery(queryString.stringify(params, { skipNull: true }));
+  } = useGetRoutesQuery(
+    queryString.stringify(state.routes.params, { skipNull: true })
+  );
 
   const allRoutes = isLoading
     ? 'Loading'
@@ -39,7 +40,7 @@ export default function RoutesPage() {
     return (
       <>
         <RouteWithCoach route={state.routes.dep} name="from" />
-        {state.routes.arr.departure !== null && (
+        {state.routes.arr.departure.__id && (
           <RouteWithCoach route={state.routes.arr} name="to" />
         )}
       </>
@@ -56,7 +57,7 @@ export default function RoutesPage() {
         </aside>
         <main className="routes_page__main">
           {state.routes.active && allRoutes}
-          {state.coaches.active && withCoaches()}
+          {!state.routes.active && withCoaches()}
         </main>
       </div>
     </section>

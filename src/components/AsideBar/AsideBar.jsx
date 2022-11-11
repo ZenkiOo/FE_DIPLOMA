@@ -11,7 +11,7 @@ import InputRange from 'react-input-range';
 
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setParam } from '../../store/slices/routesParams';
+import { setRoutesParam } from '../../store/slices/routesParams';
 
 import DatePicker from 'react-datepicker';
 import { setDefaultLocale } from 'react-datepicker';
@@ -61,7 +61,7 @@ export default function AsideBar() {
   const handleCheckboxChange = (e) => {
     // console.log(e.target.name, e.target.checked);
     dispatch(
-      setParam({
+      setRoutesParam({
         param: e.target.name,
         value: e.target.checked === true ? true : null,
       })

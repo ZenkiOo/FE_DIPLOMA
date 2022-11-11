@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setParam } from '../../store/slices/routesParams';
+import { setRoutesParam } from '../../store/slices/routesParams';
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 
@@ -19,12 +19,12 @@ export default function RoutesHeader({ count }) {
   }
 
   function setSortName(value) {
-    dispatch(setParam({ param: 'sort', value }));
+    dispatch(setRoutesParam({ param: 'sort', value }));
     setSortActive(false);
   }
 
   function setLimit(value) {
-    dispatch(setParam({ param: 'limit', value }));
+    dispatch(setRoutesParam({ param: 'limit', value }));
   }
   const sortList = [
     { name: 'времени', param: null },

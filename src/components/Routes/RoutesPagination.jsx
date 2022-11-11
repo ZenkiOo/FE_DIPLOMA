@@ -1,7 +1,7 @@
 import ReactPaginate from 'react-paginate';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setParam } from '../../store/slices/routesParams';
+import { setRoutesParam } from '../../store/slices/routesParams';
 import { ReactComponent as ArrowSvg } from '../../images/icons/svg/pagination_arrow.svg';
 let Scroll = require('react-scroll');
 
@@ -22,9 +22,9 @@ export default function RoutesPagination({ total_count }) {
     let limit = 5;
     if (params.limit !== null) limit = params.limit;
     if (selected === 0) {
-      dispatch(setParam({ param: 'offset', value: null }));
+      dispatch(setRoutesParam({ param: 'offset', value: null }));
     } else {
-      dispatch(setParam({ param: 'offset', value: selected * limit }));
+      dispatch(setRoutesParam({ param: 'offset', value: selected * limit }));
     }
     scroll.scrollToTop();
   };

@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCoachesActive } from '../../store/slices/routesParams';
 
 export default function Route(props) {
-  const { state } = useSelector((state) => state.routesParams);
+  // const state = useSelector((state) => state.routesParams);
   const dispatch = useDispatch();
   const { departure } = props.route;
   return (
@@ -55,7 +55,7 @@ export default function Route(props) {
                           arr: {
                             departure: props.route.arrival
                               ? props.route.arrival
-                              : null,
+                              : {},
                           },
                         })
                       )
