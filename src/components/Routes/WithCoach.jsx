@@ -2,6 +2,7 @@ import { useGetRouteQuery } from '../../store/api';
 import { useSelector } from 'react-redux';
 import Coaches from '../Coaches/Coaches';
 import RouteBtn from '../RouteBtn/RouteBtn';
+import PassengersCounter from '../Coaches/PassengersCounter';
 const queryString = require('query-string');
 
 export default function WithCoach(Component, name) {
@@ -12,8 +13,9 @@ export default function WithCoach(Component, name) {
   return (props) => {
     return (
       <>
-        <RouteBtn direction={name}/>
+        <RouteBtn direction={name} />
         <Component {...props} />
+        <PassengersCounter direction={name} id={id}/>
         <Coaches coaches={data} />
       </>
     );

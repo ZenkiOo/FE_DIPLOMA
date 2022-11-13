@@ -1,6 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-const initialState = {};
+import { act } from 'react-dom/test-utils';
+const globalParams = {
+  active: false,
+  adultStatus: null,
+  route_direction_id: '',
+  seats: [],
+};
+const initialState = {
+  departure: { ...globalParams },
+  arrival: { ...globalParams },
+};
 const fakePassenger = {
   user: {
     first_name: 'Иван',
@@ -33,65 +42,39 @@ const fakePassenger = {
   },
 };
 
-const passangers = createSlice({
+const passengers = createSlice({
   name: 'passengers',
   initialState,
   reducers: {
-    // setCoachesActive: (state, action) => ({
-    //   ...state,
-    //   routes: {
-    //     ...state.routes,
-    //     active: false,
-    //     departure: action.payload.departure,
-    //     arrival: action.payload.arrival ? action.payload.arrival : {},
-    //   },
-    // }),
-    // setRoutesParam: (state, action) => ({
-    //   routes: {
-    //     ...state.routes,
-    //     params: {
-    //       ...state.routes.params,
-    //       [action.payload.param]: action.payload.value,
-    //     },
-    //   },
-    //   coaches: {
-    //     ...state.coaches,
-    //     params: {
-    //       0: globalParams.hasOwnProperty(action.payload.param)
-    //         ? {
-    //             ...state.coaches.params[0],
-    //             [action.payload.param]: action.payload.value,
-    //           }
-    //         : { ...state.coaches.params[0] },
-    //       1: globalParams.hasOwnProperty(action.payload.param)
-    //         ? {
-    //             ...state.coaches.params[1],
-    //             [action.payload.param]: action.payload.value,
-    //           }
-    //         : { ...state.coaches.params[1] },
-    //     },
-    //   },
-    // }),
-    // setForm: (state, action) => {
-    //   const { from_city_id, to_city_id, date_start, date_end } = action.payload;
-    //   return {
-    //     ...state,
-    //     routes: {
-    //       ...state.routes,
-    //       active: true,
-    //       params: {
-    //         ...state.routes.params,
-    //         from_city_id,
-    //         to_city_id,
-    //         date_start,
-    //         date_end,
-    //       },
-    //     },
-    //   };
-    // },
+    setRouteParam: (state, action) => {
+      return {
+        ...state,
+        [action.payload.route]: {
+          active: action.payload.active,
+          adultStatus: action.payload.adultStatus,
+          route_direction_id: action.payload.route_direction_id,
+          seats: action.payload.seats,
+        },
+      };
+    },
+    setAdultStatus: (state, action) => ({
+      ...state,
+      [action.payload.route]: {
+        ...state[action.payload.route],
+        adultStatus: action.payload.adultStatus,
+      },
+    }),
+    setDepartureActive: (state, action) => ({
+      ...state,
+      departure: { ...state.departure, active: action.payload },
+    }),
+    setArrivalActive: (state, action) => ({
+      ...state,
+      arrival: { ...state.arrival, active: action.payload },
+    }),
   },
 });
 
-const { actions, reducer } = routesParams;
-export const { setRoutesParam, setForm, setCoachesActive } = actions;
+const { actions, reducer } = passengers;
+export const { setRouteParam, setAdultStatus } = actions;
 export default reducer;
