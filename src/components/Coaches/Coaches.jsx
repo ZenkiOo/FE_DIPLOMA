@@ -90,7 +90,7 @@ export default function Coaches(data) {
       {dataArray.length > 0 && (
         <>
           <div>{tabTriggers}</div>
-          <div>
+          <div className='coaches'>
             <Coach coach={data.coaches[activeTab]} map={coachMap} />
           </div>
         </>

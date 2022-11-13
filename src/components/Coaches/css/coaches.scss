@@ -7,11 +7,14 @@
     display: block;
     margin: 0;
     padding: 0;
-    // width: 100%;
+    min-width: 33.33%;
+    &:nth-child(odd) {
+      margin-right: 33.33%;
+    }
   }
   // .rly_coach__coupe
   &__coupe {
-    padding: 5px;
+    padding: 2px 2px 55px 2px;
     width: 12.5%;
     position: relative;
     display: flex;
@@ -23,18 +26,23 @@
     }
     &--second {
       .rly_coach__seat {
-        min-width: 50%;
+        &:nth-child(odd) {
+          margin-right: 33.33%;
+        }
       }
     }
     &--third {
-      .rly_coach__seat {
-        min-width: 50%;
-      }
+      // .rly_coach__seat {
+      //   min-width: 50%;
+      // }
     }
     &--fourth {
-      .rly_coach__seat {
-        min-width: 50%;
-      }
+      // .rly_coach__seat {
+      //   min-width: 50%;
+      // }
     }
   }
+}
+.coaches {
+  padding: 2;
 }

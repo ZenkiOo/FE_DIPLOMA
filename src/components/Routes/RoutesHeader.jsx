@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { nanoid } from 'nanoid';
 
 export default function RoutesHeader({ count }) {
-  const params = useSelector((state) => state.routesParams);
+  const params = useSelector((state) => state.routesParams.routes.params);
   const dispatch = useDispatch();
 
   const [sortActive, setSortActive] = useState(false);

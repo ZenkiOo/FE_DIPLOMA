@@ -20,7 +20,7 @@ export default function RoutesPage() {
   } = useGetRoutesQuery(
     queryString.stringify(state.routes.params, { skipNull: true })
   );
-  // console.log(data, isLoading, isFetching, isError);
+  console.log(data, isLoading, isFetching, isError);
 
   const allRoutes = isLoading
     ? 'Loading'
@@ -32,7 +32,7 @@ export default function RoutesPage() {
             }
           />
           <Routes data={data.items} />
-          <RoutesPagination total_count={data.total_count} />
+          <RoutesPagination total_count={data.items?.length < 5 ? data.items.length : data.total_count} />
         </>
       );
 
