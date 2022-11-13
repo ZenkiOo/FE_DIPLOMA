@@ -13,7 +13,7 @@ export default function Route(props) {
   return (
     <>
       {departure._id && (
-        <li className="routes__item">
+        <div className={`routes__item routes__item--${props.name}`}>
           <div className="route">
             <div className="route__train">
               <div className="route__train_logo">
@@ -30,7 +30,7 @@ export default function Route(props) {
             <div className="route__body">
               <div className="route__body_time">
                 <RouteTimeInfo route={departure} />
-                {props.route.arrival && (
+                {props.route.arrival && props.name === 'default' && (
                   <RouteTimeInfo route={props.route.arrival} reversed />
                 )}
               </div>
@@ -41,7 +41,7 @@ export default function Route(props) {
                     avaliable: departure.available_seats_info,
                   }}
                 />
-                <RouteOptions />
+                <RouteOptions options={[props.route.have_wifi, props.route.is_express]}/>
                 {/* <div>{route.have_wifi}</div>
   <div>{route.is_express}</div>
   <div>{route.have_air_conditioning}</div> */}
@@ -51,8 +51,8 @@ export default function Route(props) {
                     onClick={() =>
                       dispatch(
                         setCoachesActive({
-                          dep: props.route,
-                          arr: {
+                          departure: props.route,
+                          arrival: {
                             departure: props.route.arrival
                               ? props.route.arrival
                               : {},
@@ -67,7 +67,7 @@ export default function Route(props) {
               </div>
             </div>
           </div>
-        </li>
+        </div>
       )}
     </>
   );

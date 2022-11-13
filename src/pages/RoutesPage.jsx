@@ -1,11 +1,10 @@
-import '../components/Routes/css/routes.css';
+import '../components/Routes/css/routes.scss';
 import LastRoutes from '../components/LastRoutes/LastRoutes';
 import AsideBar from '../components/AsideBar/AsideBar';
 import RoutesHeader from '../components/Routes/RoutesHeader';
 import Routes from '../components/Routes/Routes';
 import RoutesPagination from '../components/Routes/RoutesPagination';
-import WithCoach from '../components/Routes/WithCoach';
-import Route from '../components/Routes/Route';
+import RoutesWithCoaches from '../components/Routes/RoutesWithCoaches';
 
 import { useSelector } from 'react-redux';
 import { useGetRoutesQuery } from '../store/api';
@@ -21,6 +20,7 @@ export default function RoutesPage() {
   } = useGetRoutesQuery(
     queryString.stringify(state.routes.params, { skipNull: true })
   );
+  // console.log(data, isLoading, isFetching, isError);
 
   const allRoutes = isLoading
     ? 'Loading'
@@ -35,18 +35,6 @@ export default function RoutesPage() {
           <RoutesPagination total_count={data.total_count} />
         </>
       );
-  function withCoaches() {
-    const RouteWithCoach = WithCoach(Route);
-    return (
-      <>
-        <RouteWithCoach route={state.routes.dep} name="from" />
-        {state.routes.arr.departure.__id && (
-          <RouteWithCoach route={state.routes.arr} name="to" />
-        )}
-      </>
-    );
-  }
-  // console.log(data, isLoading, isFetching, isError);
 
   return (
     <section className="routes_page">
@@ -56,8 +44,7 @@ export default function RoutesPage() {
           <LastRoutes />
         </aside>
         <main className="routes_page__main">
-          {state.routes.active && allRoutes}
-          {!state.routes.active && withCoaches()}
+          {state.routes.active ? allRoutes : <RoutesWithCoaches />}
         </main>
       </div>
     </section>

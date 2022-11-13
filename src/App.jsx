@@ -5,7 +5,6 @@ import { getLastRoutes } from './store/asyncActions/getLastRoutes';
 import { useGetLastRoutesQuery } from './store/api';
 import HomePage from './pages/HomePage';
 import RoutesPage from './pages/RoutesPage';
-import RoutePage from './pages/RoutePage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
@@ -63,7 +62,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/routes" element={<RoutesPage />} />
-          <Route path="/routes/:id" element={<RoutePage />} />
         </Routes>
       <Footer />
     </div>

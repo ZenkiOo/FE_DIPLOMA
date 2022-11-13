@@ -549,3 +549,12 @@
 .input-range__label--value {
   top: -42px !important;
 }
+.routes__item--departure,
+.routes__item--arrival {
+  .route__train {
+    padding: 2px 0 5px 28px;
+  }
+  .route__body_prices {
+    display: none;
+  }
+}
