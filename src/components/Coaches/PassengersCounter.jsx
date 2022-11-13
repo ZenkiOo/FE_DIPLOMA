@@ -7,14 +7,17 @@ export default function PassengersCounter(props) {
   const dispatch = useDispatch();
 
   function changeValue(event) {
-    let adultStatus;
-    const { value } = event.target;
-    const route = passengers[props.direction];
+    dispatch(
+      setAdultStatus({
+        route: props.direction,
+        adultStatus: event.target.value,
+      })
+    );
+  }
 
-    if (route.adultStatus === value) adultStatus = null;
-    else if (route.adultStatus !== value) adultStatus = event.target.value;
-
-    dispatch(setAdultStatus({ route: props.direction, adultStatus }));
+  function removeValue(event) {
+    if (passengers[props.direction].adultStatus !== event.target.value) return;
+    dispatch(setAdultStatus({ route: props.direction, adultStatus: null }));
   }
 
   const labels = [
@@ -37,17 +40,18 @@ export default function PassengersCounter(props) {
       <label
         style={{ width: 33.33 + '%', display: 'block', height: 100 + 'px' }}
         key={label.id}
+        onClick={removeValue}
       >
         <input
           type="radio"
-          name="radio"
+          name={`${props.direction}_radio_${label.id}`}
           value={label.value}
           checked={
             label.value === passengers[props.direction].adultStatus
               ? true
               : false
           }
-          onClick={changeValue}
+          onChange={changeValue}
         />
       </label>
     );

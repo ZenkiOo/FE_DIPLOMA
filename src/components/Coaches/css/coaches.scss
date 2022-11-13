@@ -1,0 +1,40 @@
+.rly_coach {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  // .rly_coach__seat
+  &__seat {
+    display: block;
+    margin: 0;
+    padding: 0;
+    // width: 100%;
+  }
+  // .rly_coach__coupe
+  &__coupe {
+    padding: 5px;
+    width: 12.5%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    &--first {
+      .rly_coach__seat {
+        min-width: 50%;
+      }
+    }
+    &--second {
+      .rly_coach__seat {
+        min-width: 50%;
+      }
+    }
+    &--third {
+      .rly_coach__seat {
+        min-width: 50%;
+      }
+    }
+    &--fourth {
+      .rly_coach__seat {
+        min-width: 50%;
+      }
+    }
+  }
+}
