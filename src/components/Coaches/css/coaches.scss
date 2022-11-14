@@ -2,29 +2,35 @@
   display: flex;
   flex-wrap: wrap;
   position: relative;
-  // .rly_coach__seat
-  &__seat {
-    display: block;
-    margin: 0;
-    padding: 0;
-    min-width: 33.33%;
-    &:nth-child(odd) {
-      margin-right: 33.33%;
-    }
+  padding: 27px 111px 8px 132px;
+  background-image: url(../../../images/coach_first.jpg);
+  background-repeat: no-repeat;
+  &--second {
+    padding: 27px 111px 62px 132px;
+  }
+  &--third {
+    background-size: 921px;
+    background-image: url(../../../images/coach_third.jpg);
+  }
+  &--fourth {
+    background-image: url(../../../images/coach_fourth.jpg);
   }
   // .rly_coach__coupe
   &__coupe {
-    padding: 2px 2px 55px 2px;
+    padding: 2px 2px 2px 2px;
     width: 12.5%;
     position: relative;
+    
     display: flex;
     flex-wrap: wrap;
     &--first {
+      padding: 3px 3px 83px 3px;
       .rly_coach__seat {
-        min-width: 50%;
+        height: 55px;
       }
     }
     &--second {
+      padding: 3px 3px 2px 3px;
       .rly_coach__seat {
         &:nth-child(odd) {
           margin-right: 33.33%;
@@ -32,14 +38,48 @@
       }
     }
     &--third {
-      // .rly_coach__seat {
-      //   min-width: 50%;
-      // }
+      padding: 3px 3px 27px 3px;
+      background-size: 100%;
+      &:nth-child(N + 9) {
+        padding: 2px 4px 5px 4px;
+        .rly_coach__seat {
+          height: 22px;
+          margin-right: 0;
+          width: 50%;
+        }
+      }
     }
     &--fourth {
-      // .rly_coach__seat {
-      //   min-width: 50%;
-      // }
+      padding: 5px 5px 5px 10px;
+      .rly_coach__seat {
+        min-width: calc(33.33% - 4px);
+        min-width: calc(33.33% - 4px);
+        margin: 2px;
+        height: 21px;
+        &:nth-child(odd) {
+          margin-right: calc(33.33% - 4px);
+        }
+      }
+    }
+  }
+  // .rly_coach__seat
+  &__seat {
+    display: block;
+    margin: 0;
+    padding: 0;
+    min-width: 33.33%;
+    height: 27px;
+    color: inherit;
+    border-radius: none;
+    border: 2px solid #d8d8d8;
+    background-color: #d8d8d8;
+    transition: border 0.2s;
+    cursor: pointer;
+    &:hover {
+      border: 2px solid var(--text-orange);
+    }
+    &:nth-child(odd) {
+      margin-right: 33.33%;
     }
   }
 }
