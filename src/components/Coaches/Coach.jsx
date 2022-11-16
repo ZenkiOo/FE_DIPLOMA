@@ -11,7 +11,7 @@ export default function Coach({ coach, map }) {
       <div style={{ marginBottom: 40 + 'px'}}>
         {coach.coach.class_type}
       </div>
-      <div className={`rly_coach rly_coach--${coach.coach.class_type}`}>
+      <div className={`coach coach--${coach.coach.class_type}`}>
         {coupesList}
       </div>
     </>

@@ -62,6 +62,7 @@ const passengers = createSlice({
       [action.payload.route]: {
         ...state[action.payload.route],
         adultStatus: action.payload.adultStatus,
+        active: action.payload.active
       },
     }),
     setDepartureActive: (state, action) => ({

@@ -7,7 +7,7 @@ export default function Coupe({ seats, type }) {
   });
   return (
     <>
-      <div className={`rly_coach__coupe rly_coach__coupe--${type}`}>
+      <div className={`coach__coupe coach__coupe--${type}`}>
         {firstSeatsList}
       </div>
     </>

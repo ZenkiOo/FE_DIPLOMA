@@ -1,0 +1,21 @@
+.dir_icon {
+  width: 100%;
+  max-width: 76px;
+  position: relative;
+  background: var(--text-orange);
+  margin-right: 20px;
+  border-radius: 5px;
+  & svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(180deg);
+  }
+  &--departure {
+  }
+  &--arrival {
+    & svg {
+      transform: translate(-50%, -50%);
+    }
+  }
+}

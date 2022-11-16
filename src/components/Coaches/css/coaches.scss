@@ -1,37 +1,54 @@
-.rly_coach {
+@import '../../../css/mixins.scss';
+
+.route_with_coaches {
+  margin-bottom: 29px;
+  background: white;
+  border: 1px solid #c4c4c4;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
+.coaches_back_btn {
+  display: flex;
+  padding: 36px 19px 32px 19px;
+  // .coaches_back_btn__btn
+  &__btn {
+    @include rly_btn_white;
+  }
+}
+.coach {
   display: flex;
   flex-wrap: wrap;
   position: relative;
-  padding: 27px 111px 8px 132px;
+  padding: 27px 72px 8px 132px;
   background-image: url(../../../images/coach_first.jpg);
   background-repeat: no-repeat;
+  max-width: 921px;
+  background-size: 921px;
   &--second {
-    padding: 27px 111px 62px 132px;
+    padding: 27px 72px 62px 132px;
   }
   &--third {
-    background-size: 921px;
     background-image: url(../../../images/coach_third.jpg);
   }
   &--fourth {
     background-image: url(../../../images/coach_fourth.jpg);
   }
-  // .rly_coach__coupe
+  // .coach__coupe
   &__coupe {
     padding: 2px 2px 2px 2px;
     width: 12.5%;
     position: relative;
-    
+
     display: flex;
     flex-wrap: wrap;
     &--first {
       padding: 3px 3px 83px 3px;
-      .rly_coach__seat {
+      .coach__seat {
         height: 55px;
       }
     }
     &--second {
       padding: 3px 3px 2px 3px;
-      .rly_coach__seat {
+      .coach__seat {
         &:nth-child(odd) {
           margin-right: 33.33%;
         }
@@ -42,7 +59,7 @@
       background-size: 100%;
       &:nth-child(N + 9) {
         padding: 2px 4px 5px 4px;
-        .rly_coach__seat {
+        .coach__seat {
           height: 22px;
           margin-right: 0;
           width: 50%;
@@ -51,7 +68,7 @@
     }
     &--fourth {
       padding: 5px 5px 5px 10px;
-      .rly_coach__seat {
+      .coach__seat {
         min-width: calc(33.33% - 4px);
         min-width: calc(33.33% - 4px);
         margin: 2px;
@@ -62,7 +79,7 @@
       }
     }
   }
-  // .rly_coach__seat
+  // .coach__seat
   &__seat {
     display: block;
     margin: 0;
@@ -70,6 +87,7 @@
     min-width: 33.33%;
     height: 27px;
     color: inherit;
+    font-family: inherit;
     border-radius: none;
     border: 2px solid #d8d8d8;
     background-color: #d8d8d8;
@@ -83,6 +101,93 @@
     }
   }
 }
-.coaches {
-  padding: 2;
+.pass_counter {
+  display: flex;
+}
+.count_label {
+  width: 33.33%;
+  display: block;
+  position: relative;
+  &:nth-child(3) {
+    .count_item__subtext {
+      margin-bottom: 30px;
+    }
+  }
+  & input {
+    @include hiddenInput;
+    &:checked {
+      & ~ .count_item {
+        border: 1px solid rgba(255, 168, 0, 0.79);
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+}
+.count_item {
+  padding: 23px 31px 19px 31px;
+  border: 1px solid white;
+  height: 100%;
+  // .count_item__text
+  &__text {
+    display: block;
+    margin-bottom: 23px;
+    padding: 16px 15px 15px 15px;
+    border: 1px solid #928f94;
+    border-radius: 5px;
+  }
+  // .count_item__subtext
+  &__subtext {
+    color: var(--text-grey);
+  }
+  // .count_item__btn
+  &__btn {
+    @include rly_btn_white--thin;
+  }
+}
+.coach_type {
+  display: flex;
+  padding: 34px 34px 34px 34px;
+  // .coach_type__item
+  &__item {
+    width: 25%;
+    text-align: center;
+    padding: 20px 0 20px 0;
+    &--fourth {
+      & svg {
+        width: 31px;
+      }
+    }
+    &--third {
+      & svg {
+        width: 50px;
+      }
+    }
+    &--second {
+      & svg {
+        width: 50px;
+      }
+    }
+    &--first {
+      & svg {
+        width: 56px;
+      }
+    }
+    // .coach_type__item_icon
+    &_icon {
+      margin-bottom: 20px;
+      &--active {
+        & svg {
+          & path {
+            fill: var(--text-orange);
+          }
+        }
+      }
+    }
+    & svg {
+      height: 50px;
+    }
+    // .coach_type__item_text
+    &_text {
+    }
+  }
 }

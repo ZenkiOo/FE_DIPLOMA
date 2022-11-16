@@ -1,6 +1,7 @@
 import RouteTimeInfo from './RouteTimeInfo';
 import RouteSeatsInfo from './RouteSeatsInfo';
 import RouteOptions from './RouteOptions';
+import Time from '../Time/Time';
 import { ReactComponent as TrainSvg } from '../../images/icons/svg/train.svg';
 import { ReactComponent as ArrowSvg } from '../../images/icons/svg/arrow.svg';
 import { useSelector, useDispatch } from 'react-redux';
@@ -34,37 +35,45 @@ export default function Route(props) {
                   <RouteTimeInfo route={props.route.arrival} reversed />
                 )}
               </div>
-              <div className="route__body_prices">
-                <RouteSeatsInfo
-                  seatsInfo={{
-                    ...departure.price_info,
-                    avaliable: departure.available_seats_info,
-                  }}
-                />
-                <RouteOptions options={[props.route.have_wifi, props.route.is_express]}/>
-                {/* <div>{route.have_wifi}</div>
-  <div>{route.is_express}</div>
-  <div>{route.have_air_conditioning}</div> */}
-                <div className="route__order">
-                  <button
-                    className="route__order_btn"
-                    onClick={() =>
-                      dispatch(
-                        setCoachesActive({
-                          departure: props.route,
-                          arrival: {
-                            departure: props.route.arrival
-                              ? props.route.arrival
-                              : {},
-                          },
-                        })
-                      )
-                    }
-                  >
-                    Выбрать места
-                  </button>
+              {props.name === 'default' ? (
+                <div className="route__body_prices">
+                  <RouteSeatsInfo
+                    seatsInfo={{
+                      ...departure.price_info,
+                      avaliable: departure.available_seats_info,
+                    }}
+                  />
+                  <RouteOptions
+                    options={[props.route.have_wifi, props.route.is_express]}
+                  />
+                  {/* <div>{route.have_wifi}</div>
+                      <div>{route.is_express}</div>
+                      <div>{route.have_air_conditioning}</div> */}
+                  <div className="route__order">
+                    <button
+                      className="route__order_btn"
+                      onClick={() =>
+                        dispatch(
+                          setCoachesActive({
+                            departure: props.route,
+                            arrival: {
+                              departure: props.route.arrival
+                                ? props.route.arrival
+                                : {},
+                            },
+                          })
+                        )
+                      }
+                    >
+                      Выбрать места
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="route__duration">
+                  <Time />
+                </div>
+              )}
             </div>
           </div>
         </div>

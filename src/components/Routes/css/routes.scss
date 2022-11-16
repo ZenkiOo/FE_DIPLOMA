@@ -1,3 +1,4 @@
+@import '../../../css/mixins.scss';
 .routes_page__container {
   max-width: 1490px;
   margin: 0 auto;
@@ -440,11 +441,7 @@
   padding-top: 2px;
 }
 .routes_details__option_checkbox input {
-  position: absolute;
-  width: 0;
-  height: 0;
-  opacity: 0;
-  visibility: hidden;
+  @include hiddenInput;
 }
 .routes_details__option_checkbox_fake_body {
   position: relative;
@@ -549,12 +546,81 @@
 .input-range__label--value {
   top: -42px !important;
 }
+.route__duration {
+  width: 37.14%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .duration {
+    display: flex;
+    // .duration__icon
+    &__icon {
+      transform: translate(-12px, 8px);
+    }
+    // .duration__time
+    &__time {
+      // .duration__time_row
+      &_row {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
 .routes__item--departure,
 .routes__item--arrival {
-  .route__train {
-    padding: 2px 0 5px 28px;
+  .route {
+    background: var(--grey-bg);
+    justify-content: space-between;
+    box-shadow: none;
   }
-  .route__body_prices {
-    display: none;
+  .route__train {
+    width: 254px;
+    border: none;
+    padding: 15px 0 5px 92px;
+    background-color: transparent;
+    position: relative;
+  }
+  .route__train_id {
+    padding-left: 0;
+    margin-bottom: 4px;
+  }
+  .route__body {
+    width: calc(100% - 254px);
+    border: none;
+  }
+  .route__body_time {
+    border: 1px solid white;
+    border-top: none;
+    border-bottom: none;
+  }
+  .route__train_logo {
+    position: absolute;
+    top: 46px;
+    left: 19px;
+    & svg {
+      width: 30px !important;
+      height: 30px !important;
+      & path {
+        fill: var(--text-orange);
+      }
+      & circle {
+        stroke: var(--text-orange);
+      }
+    }
+  }
+  .route__body_time {
+    padding: 0;
+    .route_time__duration_time {
+      color: var(--grey-bg);
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  }
+  .route_time {
+    padding: 22px 10px 24px 10px;
   }
 }

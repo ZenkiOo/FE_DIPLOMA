@@ -1,14 +1,17 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Coach from './Coach';
-import './css/coaches.scss'
+import CoachesType from './CoachesType';
 
-export default function Coaches(data) {
-  const dataArray = Object.entries(data.coaches);
+export default function Coaches({ coaches, direction }) {
+  const dataArray = Object.entries(coaches);
   const [activeTab, setActiveTab] = useState('0');
+  const isActive = useSelector((state) => state.passengers[direction].active);
 
   const handleTriggerClick = (name) => {
     setActiveTab(name);
   };
+
   const tabTriggers = dataArray.map((coach) => {
     const name = coach[0];
     const currCoach = coach[1];
@@ -23,6 +26,7 @@ export default function Coaches(data) {
       </button>
     );
   });
+
   function createCoach(type) {
     const coach = [];
     let j = 1;
@@ -83,18 +87,23 @@ export default function Coaches(data) {
 
     return coach;
   }
-  // console.log(data?.coaches[activeTab].coach.class_type);
-  const coachMap = createCoach(data.coaches[activeTab]?.coach.class_type);
+
+  const coachMap = createCoach(coaches[activeTab]?.coach.class_type);
+
   return (
-    <>
-      {dataArray.length > 0 && (
+    <div className="coaches">
+      <CoachesType
+        activeType={coaches[activeTab]?.coach.class_type}
+        active={isActive}
+      />
+      {isActive && dataArray.length > 0 && (
         <>
           <div>{tabTriggers}</div>
-          <div className='coaches'>
-            <Coach coach={data.coaches[activeTab]} map={coachMap} />
+          <div className="coaches__coach">
+            <Coach coach={coaches[activeTab]} map={coachMap} />
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }

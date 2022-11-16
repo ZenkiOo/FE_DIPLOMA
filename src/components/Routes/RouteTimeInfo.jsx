@@ -3,6 +3,7 @@ import { ReactComponent as RouteArrowSvg } from '../../images/icons/svg/route_ar
 export default function RouteTimeInfo({ route, reversed }) {
   const timeHandler = (time) => {
     const date = new Date(time);
+    // console.log(date);
     const hours = `0${date.getHours()}`.slice(-2);
     const minutes = `0${date.getMinutes()}`.slice(-2);
     const timeParsed = `${hours}:${minutes}`;
@@ -23,12 +24,14 @@ export default function RouteTimeInfo({ route, reversed }) {
             : route.from.railway_station_name}
         </span>
       </div>
+
       <div className="route_time__duration">
         <span className="route_time__duration_time">
           {timeHandler(route.duration)}
         </span>
         <RouteArrowSvg className={reversed && 'reversed'} />
       </div>
+
       <div className="route_time__item">
         <span className="route_time__time">
           {timeHandler(reversed ? route.from.datetime : route.to.datetime)}

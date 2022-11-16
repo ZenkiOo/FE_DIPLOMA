@@ -1,0 +1,26 @@
+@mixin hiddenInput() {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+@mixin rly_btn() {
+  font-family: 'Roboto', sans-serif;
+  color: inherit;
+}
+@mixin rly_btn_white() {
+  @include rly_btn;
+  padding: 16px 33px 15px 33px;
+  background: white;
+  font-weight: 700;
+  font-size: 24px;
+  border-radius: 5px;
+  border: 1px solid var(--text-primary);
+}
+@mixin rly_btn_white--thin() {
+  @include rly_btn_white;
+  padding: 8px 16px 7px 16px;
+  font-weight: 400;
+  font-size: 16px;
+}
