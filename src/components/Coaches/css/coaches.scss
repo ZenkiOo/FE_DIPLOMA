@@ -53,9 +53,34 @@
     }
   }
 }
-
+.coach_options {
+  display: flex;
+  // .coach_options__btn
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    background: white;
+    border: 1px solid var(--text-primary);
+    border-radius: 5px;
+    width: 36px;
+    height: 34px;
+    cursor: pointer;
+    &:not(:last-child) {
+      margin-right: 13px;
+    }
+  }
+}
+.coach_wrap {
+  display: flex;
+  justify-content: center;
+  padding: 30px 0 25px 0;
+}
 .coach {
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
   position: relative;
   padding: 27px 72px 8px 132px;
@@ -81,7 +106,7 @@
     display: flex;
     flex-wrap: wrap;
     &--first {
-      padding: 3px 3px 83px 3px;
+      padding: 3px 3px 55px 3px;
       .coach__seat {
         height: 55px;
       }
@@ -141,6 +166,58 @@
     }
   }
 }
+.coach_info {
+  display: flex;
+  // .coach_info__title
+  &__title {
+    padding: 29px 10px 17px 37px;
+    background: var(--bg-orange-500);
+    width: calc(19.83%);
+    // .coach_info__title_text
+    &_text {
+      display: block;
+      &:nth-child(1) {
+        font-size: 72px;
+        font-weight: 700;
+      }
+      &:nth-child(2) {
+        font-size: 24px;
+        transform: translate(4px, -15px);
+      }
+    }
+  }
+  // .coach_info__body
+  &__body {
+    width: calc(100% - 19.83%);
+    display: flex;
+  }
+  // .coach_info__item
+  &__item {
+    width: 33.33%;
+    padding: 32px 10px 10px 32px;
+    & .rly_price {
+    }
+    // .coach_info__item_title
+    &_title {
+      color: var(--text-grey);
+      font-size: 18px;
+      margin-bottom: 8px;
+      // .coach_info__item_title_available_seats
+      &_available_seats {
+        padding-left: 8px;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+    }
+    // .coach_info__item_text
+    &_text {
+      font-size: 24px;
+      color: black;
+      margin-bottom: 4px;
+    }
+  }
+}
+
 .pass_counter {
   display: flex;
 }

@@ -33,7 +33,7 @@ export default function Coaches({ coaches, direction }) {
     );
   });
 
-  function createCoach(type) {
+  function createCoach(type, data) {
     const coach = [];
     let j = 1;
     if (type === 'first') {
