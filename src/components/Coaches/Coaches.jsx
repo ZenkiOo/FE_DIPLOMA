@@ -4,25 +4,31 @@ import Coach from './Coach';
 import CoachesType from './CoachesType';
 
 export default function Coaches({ coaches, direction }) {
-  const dataArray = Object.entries(coaches);
-  const [activeTab, setActiveTab] = useState('0');
   const isActive = useSelector((state) => state.passengers[direction].active);
+  const [activeTab, setActiveTab] = useState('0');
+  const dataArray = Object.entries(coaches);
 
   const handleTriggerClick = (name) => {
     setActiveTab(name);
   };
 
   const tabTriggers = dataArray.map((coach) => {
-    const name = coach[0];
+    const index = coach[0];
     const currCoach = coach[1];
+    // console.log(currCoach);
     return (
       <button
-        key={name}
-        className="tab_trigger_btn"
+        key={index}
+        className={`tab_trigger_btn ${
+          +index === +activeTab
+            ? 'tab_trigger_btn--active'
+            : 'tab_trigger_btn--default'
+        }`}
         type="button"
-        onClick={() => handleTriggerClick(name)}
+        onClick={() => handleTriggerClick(index)}
       >
-        {currCoach.coach.name}
+        {`0${+index + 1}`}
+        {/* {currCoach.coach.name} */}
       </button>
     );
   });
@@ -98,9 +104,17 @@ export default function Coaches({ coaches, direction }) {
       />
       {isActive && dataArray.length > 0 && (
         <>
-          <div>{tabTriggers}</div>
+          <div className="coaches__list">
+            <div className="coaches__list_coaches">
+              <span className="coaches__list_text">Вагоны</span>
+              {tabTriggers}
+            </div>
+            <span className="coaches__list_text coaches__list_text--num">
+              Нумерация вагонов начинается с головы поезда
+            </span>
+          </div>
           <div className="coaches__coach">
-            <Coach coach={coaches[activeTab]} map={coachMap} />
+            <Coach coach={coaches[activeTab]} map={coachMap} id={activeTab} />
           </div>
         </>
       )}
