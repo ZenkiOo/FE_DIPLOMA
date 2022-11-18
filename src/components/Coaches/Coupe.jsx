@@ -1,9 +1,9 @@
 import Seat from './Seat';
 
-export default function Coupe({ seats, type }) {
+export default function Coupe({ seats, type, coachId, direction }) {
   const firstSeatsList = seats.map((seat, i) => {
 
-    return <Seat key={i} index={seat.index} />;
+    return <Seat key={i} seat={seat} coachId={coachId} direction={direction}/>;
   });
   return (
     <>

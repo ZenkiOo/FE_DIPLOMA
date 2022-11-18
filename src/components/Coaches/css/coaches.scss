@@ -57,19 +57,55 @@
   display: flex;
   // .coach_options__btn
   &__btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-    background: white;
-    border: 1px solid var(--text-primary);
-    border-radius: 5px;
-    width: 36px;
-    height: 34px;
-    cursor: pointer;
+    // .coach_options__btn_body
     &:not(:last-child) {
-      margin-right: 13px;
+      .coach_options__btn_body {
+        margin-right: 13px;
+      }
+    }
+    &--in_stock {
+      .coach_options__btn_body {
+        background: var(--bg-orange-100);
+        border: 1px solid var(--bg-orange-100);
+      }
+    }
+    &--included {
+      .coach_options__btn_body {
+      }
+    }
+    &_body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+      background: white;
+      border: 1px solid var(--text-primary);
+      border-radius: 5px;
+      width: 36px;
+      height: 34px;
+      cursor: pointer;
+    }
+  }
+  & input {
+    @include hiddenInput;
+    &:checked ~ .coach_options__btn_body {
+      border: 1px solid var(--bg-orange-600);
+      background: var(--bg-orange-600);
+      & svg {
+        & path {
+          fill: white;
+        }
+      }
+    }
+    &:disabled ~ .coach_options__btn_body {
+      opacity: 0.5;
+      cursor: default;
+    }
+    &.checkbox_air_conditioning {
+      &:disabled ~ .coach_options__btn_body {
+        opacity: 1;
+      }
     }
   }
 }
@@ -154,8 +190,8 @@
     color: inherit;
     font-family: inherit;
     border-radius: none;
-    border: 2px solid #d8d8d8;
-    background-color: #d8d8d8;
+    border: 2px solid #f2f2f2;
+    background-color: #f2f2f2;
     transition: border 0.2s;
     cursor: pointer;
     &:hover {
@@ -163,6 +199,17 @@
     }
     &:nth-child(odd) {
       margin-right: 33.33%;
+    }
+    &--occupied {
+      border: 2px solid var(--text-orange);
+    }
+    &--child {
+      border: 2px solid #a3e045;
+    }
+    &:disabled {
+      border: 2px solid #cccccc;
+      background-color: #cccccc;
+      cursor: default;
     }
   }
 }

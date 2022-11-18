@@ -1,46 +1,58 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCoaches } from '../../store/slices/passengers';
 import Coach from './Coach';
 import CoachesType from './CoachesType';
 
 export default function Coaches({ coaches, direction }) {
   const isActive = useSelector((state) => state.passengers[direction].active);
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState('0');
-  const dataArray = Object.entries(coaches);
+  // console.log('coaches: ',coaches);
+  // console.log(dataArray);
+  useEffect(() => {
+    dispatch(
+      setCoaches({
+        route: direction,
+        coaches: [...coaches.map((coach) => ({ ...coach.coach }))],
+      })
+    );
+  }, [coaches]);
 
-  const handleTriggerClick = (name) => {
-    setActiveTab(name);
+  const handleTriggerClick = (i) => {
+    setActiveTab(i);
   };
 
+  const dataArray = Object.entries(coaches);
   const tabTriggers = dataArray.map((coach) => {
-    const index = coach[0];
-    const currCoach = coach[1];
-    // console.log(currCoach);
+    const i = coach[0];
     return (
       <button
-        key={index}
+        key={i}
         className={`tab_trigger_btn ${
-          +index === +activeTab
+          +i === +activeTab
             ? 'tab_trigger_btn--active'
             : 'tab_trigger_btn--default'
         }`}
         type="button"
-        onClick={() => handleTriggerClick(index)}
+        onClick={() => handleTriggerClick(i)}
       >
-        {`0${+index + 1}`}
-        {/* {currCoach.coach.name} */}
+        {`0${+i + 1}`}
       </button>
     );
   });
 
-  function createCoach(type, data) {
+  function createCoach(type, index, data) {
+    const available = (z) =>
+      data[index].seats[z - 1] ? data[index].seats[z - 1].available : false;
+
     const coach = [];
     let j = 1;
     if (type === 'first') {
       for (let i = 1; i <= 8; i++) {
         coach.push([
-          { index: j, avaliable: true },
-          { index: j + 1, avaliable: true },
+          { index: j, available: available(j), top: false },
+          { index: j + 1, available: available(j + 1), top: false },
         ]);
         j = j + 2;
       }
@@ -48,10 +60,10 @@ export default function Coaches({ coaches, direction }) {
     if (type === 'second') {
       for (let i = 1; i <= 8; i++) {
         coach.push([
-          { index: j, avaliable: true },
-          { index: j + 2, avaliable: true },
-          { index: j + 1, avaliable: true },
-          { index: j + 3, avaliable: true },
+          { index: j + 1, available: available(j + 1), top: true },
+          { index: j + 3, available: available(j + 3), top: true },
+          { index: j, available: available(j), top: false },
+          { index: j + 2, available: available(j + 2), top: false },
         ]);
         j = j + 4;
       }
@@ -60,16 +72,16 @@ export default function Coaches({ coaches, direction }) {
       for (let i = 1; i <= 16; i++) {
         if (i < 9) {
           coach.push([
-            { index: j, avaliable: true },
-            { index: j + 2, avaliable: true },
-            { index: j + 1, avaliable: true },
-            { index: j + 3, avaliable: true },
+            { index: j + 1, available: available(j + 1), top: true },
+            { index: j + 3, available: available(j + 3), top: true },
+            { index: j, available: available(j), top: false },
+            { index: j + 2, available: available(j + 2), top: false },
           ]);
           j = j + 4;
         } else {
           coach.push([
-            { index: j, avaliable: true },
-            { index: j + 1, avaliable: true },
+            { index: j, available: available(j), top: false },
+            { index: j + 1, available: available(j + 1), top: true },
           ]);
           j = j + 2;
         }
@@ -78,14 +90,14 @@ export default function Coaches({ coaches, direction }) {
     if (type === 'fourth') {
       for (let i = 1; i <= 8; i++) {
         coach.push([
-          { index: j, avaliable: true },
-          { index: j + 2, avaliable: true },
-          { index: j + 1, avaliable: true },
-          { index: j + 3, avaliable: true },
-          { index: j + 4, avaliable: true },
-          { index: j + 5, avaliable: true },
-          { index: j + 6, avaliable: true },
-          { index: j + 7, avaliable: true },
+          { index: j + 3, available: available(j + 3), top: false },
+          { index: j + 7, available: available(j + 7), top: false },
+          { index: j + 2, available: available(j + 2), top: false },
+          { index: j + 6, available: available(j + 6), top: false },
+          { index: j + 1, available: available(j + 1), top: false },
+          { index: j + 5, available: available(j + 5), top: false },
+          { index: j, available: available(j), top: false },
+          { index: j + 4, available: available(j + 4), top: false },
         ]);
         j = j + 8;
       }
@@ -94,7 +106,11 @@ export default function Coaches({ coaches, direction }) {
     return coach;
   }
 
-  const coachMap = createCoach(coaches[activeTab]?.coach.class_type);
+  const coachMap = createCoach(
+    coaches[activeTab]?.coach.class_type,
+    activeTab,
+    coaches
+  );
 
   return (
     <div className="coaches">
@@ -102,7 +118,7 @@ export default function Coaches({ coaches, direction }) {
         activeType={coaches[activeTab]?.coach.class_type}
         active={isActive}
       />
-      {isActive && dataArray.length > 0 && (
+      {isActive && coaches.length > 0 && (
         <>
           <div className="coaches__list">
             <div className="coaches__list_coaches">
@@ -114,7 +130,12 @@ export default function Coaches({ coaches, direction }) {
             </span>
           </div>
           <div className="coaches__coach">
-            <Coach coach={coaches[activeTab]} map={coachMap} id={activeTab} />
+            <Coach
+              coach={coaches[activeTab]}
+              map={coachMap}
+              id={activeTab}
+              direction={direction}
+            />
           </div>
         </>
       )}

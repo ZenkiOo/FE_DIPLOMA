@@ -3,8 +3,14 @@ import { act } from 'react-dom/test-utils';
 const globalParams = {
   active: false,
   adultStatus: null,
-  route_direction_id: '',
+  route_direction_id: null,
   seats: [],
+  coaches: [],
+  coachOptions: {
+    air_conditioning: false,
+    wifi: false,
+    linens: false,
+  },
 };
 const initialState = {
   departure: { ...globalParams },
@@ -52,17 +58,41 @@ const passengers = createSlice({
         [action.payload.route]: {
           active: action.payload.active,
           adultStatus: action.payload.adultStatus,
-          route_direction_id: action.payload.route_direction_id,
           seats: action.payload.seats,
         },
       };
     },
+    setCoachOption: (state, action) => ({
+      ...state,
+      [action.payload.route]: {
+        ...state[action.payload.route],
+        coachOptions: {
+          ...state[action.payload.route].coachOptions,
+          [action.payload.name]: action.payload.value,
+        },
+      },
+    }),
+    setCoachOptionsDefault: (state, action) => ({
+      ...state,
+      [action.payload.route]: {
+        ...state[action.payload.route],
+        coachOptions: {...globalParams.coachOptions},
+      },
+    }),
+    setCoaches: (state, action) => ({
+      ...state,
+      [action.payload.route]: {
+        ...state[action.payload.route],
+        coaches: action.payload.coaches,
+      },
+    }),
     setAdultStatus: (state, action) => ({
       ...state,
       [action.payload.route]: {
         ...state[action.payload.route],
         adultStatus: action.payload.adultStatus,
-        active: action.payload.active
+        active: action.payload.active,
+        route_direction_id: action.payload.id,
       },
     }),
     setDepartureActive: (state, action) => ({
@@ -73,9 +103,33 @@ const passengers = createSlice({
       ...state,
       arrival: { ...state.arrival, active: action.payload },
     }),
+    addPassenger: (state, action) => ({
+      ...state,
+      [action.payload.route]: {
+        ...state[action.payload.route],
+        seats: [...state[action.payload.route].seats, action.payload.seat],
+      },
+    }),
+    deletePassenger: (state, action) => ({
+      ...state,
+      [action.payload.route]: {
+        ...state[action.payload.route],
+        seats: state[action.payload.route].seats.filter(
+          (seat) => seat.seat_number !== action.payload.index
+        ),
+      },
+    }),
   },
 });
 
 const { actions, reducer } = passengers;
-export const { setRouteParam, setAdultStatus } = actions;
+export const {
+  setRouteParam,
+  setCoaches,
+  setAdultStatus,
+  addPassenger,
+  deletePassenger,
+  setCoachOption,
+  setCoachOptionsDefault
+} = actions;
 export default reducer;
