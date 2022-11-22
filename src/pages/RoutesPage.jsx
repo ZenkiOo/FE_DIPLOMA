@@ -20,7 +20,7 @@ export default function RoutesPage() {
   } = useGetRoutesQuery(
     queryString.stringify(state.routes.params, { skipNull: true })
   );
-  console.log(data, isLoading, isFetching, isError);
+  // console.log(data, isLoading, isFetching, isError);
 
   const allRoutes = isLoading
     ? 'Loading'

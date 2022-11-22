@@ -84,9 +84,6 @@ export default function PassengersCounter(props) {
         id: props.id,
       })
     );
-  }
-
-  function removeValue(event) {
     const nextRoute = props.direction === 'departure' ? 'arrival' : 'departure';
     if (passengers[nextRoute].active) {
       dispatch(
@@ -107,6 +104,10 @@ export default function PassengersCounter(props) {
         id: props.id,
       })
     );
+  }
+
+  function removeValue(event) {
+    
   }
 
   const labels = [
@@ -133,7 +134,7 @@ export default function PassengersCounter(props) {
 
   const labelsList = labels.map((label) => {
     return (
-      <label key={label.id} onClick={removeValue} className="count_label">
+      <label key={label.id} className="count_label">
         {label.id !== 2 && (
           <input
             type="radio"

@@ -9,6 +9,7 @@ export default function RouteSeatsInfoPopover({ prices }) {
     side_price: 'боковые',
   };
   const pricesList = prices.map((price) => {
+    console.log(price);
     const name = names[price[0]];
     const currPrice = price[1];
     return (

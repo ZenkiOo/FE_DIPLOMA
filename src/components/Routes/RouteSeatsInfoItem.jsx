@@ -3,13 +3,9 @@ import RouteSeatsInfoPopover from './RouteSeatsInfoPopover';
 import Price from '../Price/Price';
 import { useState } from 'react';
 
-export default function RouteSeatsInfoItem({
-  name,
-  avaliable,
-  lowestPrice,
-  prices,
-}) {
+export default function RouteSeatsInfoItem(props) {
   const [active, setActive] = useState(false);
+  const { name, available, lowestPrice, prices } = props;
   return (
     <div className="seats_info__item">
       <span className="seats_info__item_name">{name}</span>
@@ -19,9 +15,9 @@ export default function RouteSeatsInfoItem({
           onMouseOver={() => setActive(true)}
           onMouseLeave={() => setActive(false)}
         >
-          {avaliable}
+          {available}
         </span>
-        <Price name='default' value={lowestPrice}/>
+        <Price name="default" value={lowestPrice} />
       </div>
       {active && (
         <div className="seats_info__popover">
@@ -33,7 +29,7 @@ export default function RouteSeatsInfoItem({
 }
 RouteSeatsInfoItem.propTypes = {
   name: PropTypes.string,
-  avaliable: PropTypes.number,
+  available: PropTypes.number,
   lowestPrice: PropTypes.number,
   prices: PropTypes.array,
 };

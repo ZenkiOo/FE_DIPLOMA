@@ -38,11 +38,8 @@ const initialState = {
     },
   },
   coaches: {
-    activeCoachId: 0,
-    params: {
-      0: { ...globalParams },
-      1: { ...globalParams },
-    },
+    departure: { ...globalParams },
+    arrival: { ...globalParams },
   },
 };
 
@@ -59,6 +56,36 @@ const routesParams = createSlice({
         arrival: action.payload.arrival ? action.payload.arrival : {},
       },
     }),
+    setCoachesParams: (state, action) => ({
+      ...state,
+      coaches: {
+        departure: {
+          ...state.coaches.departure,
+          [action.payload.param]: action.payload.value,
+        },
+        arrival: {
+          ...state.coaches.arrival,
+          [action.payload.param]: action.payload.value,
+        },
+      },
+    }),
+    setCoachParam: (state, action) => ({
+      ...state,
+      coaches: {
+        ...state.coaches,
+        [action.payload.name]: {
+          ...state.coaches[action.payload.name],
+          [action.payload.param]: action.payload.value,
+        },
+      },
+    }),
+    setGlobalCoachesParams: (state) => ({
+      ...state,
+      coaches: {
+        departure: { ...state.routes.params },
+        arrival: { ...state.routes.params },
+      },
+    }),
     setRoutesParam: (state, action) => ({
       routes: {
         ...state.routes,
@@ -68,21 +95,18 @@ const routesParams = createSlice({
         },
       },
       coaches: {
-        ...state.coaches,
-        params: {
-          0: globalParams.hasOwnProperty(action.payload.param)
-            ? {
-                ...state.coaches.params[0],
-                [action.payload.param]: action.payload.value,
-              }
-            : { ...state.coaches.params[0] },
-          1: globalParams.hasOwnProperty(action.payload.param)
-            ? {
-                ...state.coaches.params[1],
-                [action.payload.param]: action.payload.value,
-              }
-            : { ...state.coaches.params[1] },
-        },
+        departure: globalParams.hasOwnProperty(action.payload.param)
+          ? {
+              ...state.coaches.departure,
+              [action.payload.param]: action.payload.value,
+            }
+          : { ...state.coaches.departure },
+        arrival: globalParams.hasOwnProperty(action.payload.param)
+          ? {
+              ...state.coaches.arrival,
+              [action.payload.param]: action.payload.value,
+            }
+          : { ...state.coaches.arrival },
       },
     }),
     setForm: (state, action) => {
@@ -106,5 +130,12 @@ const routesParams = createSlice({
 });
 
 const { actions, reducer } = routesParams;
-export const { setRoutesParam, setForm, setCoachesActive } = actions;
+export const {
+  setRoutesParam,
+  setForm,
+  setCoachesActive,
+  setCoachParam,
+  setCoachesParams,
+  setGlobalCoachesParams
+} = actions;
 export default reducer;

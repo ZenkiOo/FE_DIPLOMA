@@ -14,7 +14,7 @@ export default function RouteSeatsInfo({ seatsInfo }) {
     if (seatsInfo[item.id]) {
       data.push({
         prices: { ...seatsInfo[item.id] },
-        avaliable: seatsInfo.avaliable[item.id],
+        available: seatsInfo.available[item.id],
         name: item.name,
       });
     }
@@ -41,7 +41,7 @@ export default function RouteSeatsInfo({ seatsInfo }) {
         prices={prices}
         lowestPrice={lowestPrice}
         name={item.name}
-        avaliable={item.avaliable}
+        available={item.available}
       />
     );
   });

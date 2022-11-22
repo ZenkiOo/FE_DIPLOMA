@@ -15,11 +15,8 @@ export const rlyApi = createApi({
     getRoutes: builder.query({
       query: (params) => `routes?${params}`,
     }),
-    // getRoute: builder.query({
-    //   query: (id) => `routes/${ id }/seats?${params}`,
-    // }),
     getRoute: builder.query({
-      query: (id) => `routes/${id}/seats`,
+      query: (params) => `routes/${params.id}/seats?${params.params}`,
     }),
   }),
 });
@@ -29,5 +26,5 @@ export const {
   useGetLastRoutesQuery,
   useGetRoutesQuery,
   useLazyGetRouteQuery,
-  useGetRouteQuery
+  useGetRouteQuery,
 } = rlyApi;

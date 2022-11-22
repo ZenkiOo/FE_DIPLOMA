@@ -171,10 +171,24 @@
 }
 .route__options_item {
   margin-right: 16px;
+  & svg {
+    & path {
+      fill: var(--text-grey-100);
+    }
+  }
+  &--active {
+    & svg {
+      & path {
+        fill: var(--text-orange);
+      }
+    }
+  }
 }
-.route__options_item:nth-child(1) svg,
-.route__options_item:nth-child(3) svg {
+.route__options_item:nth-child(1) svg {
   transform: translate(0, 1px);
+}
+.route__options_item:nth-child(3) svg {
+  transform: translate(0, -1px);
 }
 .route__order {
   position: relative;

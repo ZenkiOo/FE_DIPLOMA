@@ -14,9 +14,9 @@ export default function CoachOptions({ coach, direction }) {
     (state) => state.passengers[direction].coachOptions
   );
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setCoachOptionsDefault({ route: direction }));
-  }, [coach]);
+  // useEffect(() => {
+  //   dispatch(setCoachOptionsDefault({ route: direction }));
+  // }, [coach]);
 
   function onCoachOptionChange(e) {
     dispatch(
@@ -68,8 +68,11 @@ export default function CoachOptions({ coach, direction }) {
         key={option.id}
         className={[
           'coach_options__btn',
-          `${(option.in_stock && option.included) ? 'coach_options__btn--in_stock' : ''}`,
-          // `${(option.in_stock && option.included) && 'coach_options__btn--included'}`,
+          `${
+            option.in_stock && option.included
+              ? 'coach_options__btn--in_stock'
+              : ''
+          }`,
         ]
           .join(' ')
           .trim()}

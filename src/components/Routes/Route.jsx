@@ -40,15 +40,16 @@ export default function Route(props) {
                   <RouteSeatsInfo
                     seatsInfo={{
                       ...departure.price_info,
-                      avaliable: departure.available_seats_info,
+                      available: departure.available_seats_info,
                     }}
                   />
                   <RouteOptions
-                    options={[props.route.have_wifi, props.route.is_express]}
+                    options={[
+                      departure.have_wifi,
+                      departure.is_express,
+                      departure.have_air_conditioning,
+                    ]}
                   />
-                  {/* <div>{route.have_wifi}</div>
-                      <div>{route.is_express}</div>
-                      <div>{route.have_air_conditioning}</div> */}
                   <div className="route__order">
                     <button
                       className="route__order_btn"
