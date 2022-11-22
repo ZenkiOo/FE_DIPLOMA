@@ -3,9 +3,17 @@ import Coupe from './Coupe';
 import CoachSeatsInfo from './CoachSeatsInfo';
 
 export default function Coach({ direction, coach, map, id }) {
-  // console.log(coach);
   const coupesList = map.map((coupe, i) => {
-    return <Coupe key={i} seats={coupe} type={coach.coach.class_type} coachId={coach.coach._id} direction={direction}/>;
+    return (
+      <Coupe
+        key={i}
+        seats={coupe}
+        type={coach.coach.class_type}
+        coachId={coach.coach._id}
+        direction={direction}
+        number={`0${+id + 1}`}
+      />
+    );
   });
   return (
     <>

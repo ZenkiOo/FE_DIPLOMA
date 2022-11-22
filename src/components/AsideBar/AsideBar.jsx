@@ -1,6 +1,8 @@
+import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ReactComponent as DateSvg } from '../../images/icons/svg/date.svg';
 import Options from './Options';
+import DirectionBtns from './DirectionBtns';
 
 import 'react-input-range/lib/css/index.css';
 import InputRange from 'react-input-range';
@@ -17,6 +19,7 @@ export default function AsideBar() {
   const { routes, coaches } = useSelector((state) => state.routesParams);
   const { departure, arrival } = useSelector((state) => state.passengers);
   const [priceValue, setPriceValue] = useState({ min: 2500, max: 5000 });
+  const location = useLocation();
 
   const handlePickerChange = (value, { name }) => {
     console.log(value, name);
@@ -76,6 +79,10 @@ export default function AsideBar() {
             onChangeComplete={(value) => console.log('hoba', value)}
           />
         </div>
+      </div>
+      <div>
+      {location.pathname === '/passengers' && <DirectionBtns />}
+        
       </div>
     </div>
   );

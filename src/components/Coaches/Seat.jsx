@@ -1,7 +1,7 @@
 import { addPassenger, deletePassenger } from '../../store/slices/passengers';
 import { useDispatch, useSelector } from 'react-redux';
 
-export default function Seat({ seat, coachId, direction }) {
+export default function Seat({ seat, coachId, coachNumber, direction }) {
   const dispatch = useDispatch();
   const { seats, adultStatus, coachOptions } = useSelector(
     (state) => state.passengers[direction]
@@ -29,7 +29,8 @@ export default function Seat({ seat, coachId, direction }) {
             include_children_seat: false,
             top: seat.top,
             wifi: coachOptions.wifi,
-            linens: coachOptions.linens
+            linens: coachOptions.linens,
+            coachNumber,
           },
         })
       );

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { act } from 'react-dom/test-utils';
 const globalParams = {
   active: false,
+  onFocus: false,
   adultStatus: null,
   route_direction_id: null,
   seats: [],
@@ -13,8 +14,9 @@ const globalParams = {
   },
 };
 const initialState = {
-  departure: { ...globalParams },
+  departure: { ...globalParams, onFocus: true },
   arrival: { ...globalParams },
+  activeTab: 'departure',
 };
 const fakePassenger = {
   user: {
@@ -62,6 +64,10 @@ const passengers = createSlice({
         },
       };
     },
+    setActiveTab: (state, action) => ({
+      ...state,
+      activeTab: action.payload.route,
+    }),
     setCoachOption: (state, action) => ({
       ...state,
       [action.payload.route]: {
@@ -76,7 +82,7 @@ const passengers = createSlice({
       ...state,
       [action.payload.route]: {
         ...state[action.payload.route],
-        coachOptions: {...globalParams.coachOptions},
+        coachOptions: { ...globalParams.coachOptions },
       },
     }),
     setCoaches: (state, action) => ({
@@ -130,6 +136,7 @@ export const {
   addPassenger,
   deletePassenger,
   setCoachOption,
-  setCoachOptionsDefault
+  setCoachOptionsDefault,
+  setActiveTab
 } = actions;
 export default reducer;
