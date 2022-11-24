@@ -1,0 +1,21 @@
+.pass {
+  // .pass__title
+  &__title {
+    font-size: 30px;
+    margin-bottom: 30px;
+    padding: 40px 20px 30px 69px;
+    background: rgba(172, 255, 47, 0.322);
+  }
+  // .pass__age_select
+  &__age_select {
+    padding: 10px 35px 10px 33px;
+  }
+  // .pass__names
+  &__names {
+    margin-bottom: 20px;
+  }
+  // .pass__age
+  &__age {
+    margin-bottom: 20px;
+  }
+}
