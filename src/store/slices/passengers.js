@@ -64,6 +64,20 @@ const passengers = createSlice({
         },
       };
     },
+    setPassengerAge: (state, action) => ({
+      ...state,
+      [action.payload.route]: {
+        ...state[action.payload.route],
+        seats: state[action.payload.route].seats.map((seat) =>
+          seat.id === action.payload.id
+            ? {
+                ...seat,
+                is_child: action.payload.value,
+              }
+            : seat
+        ),
+      },
+    }),
     setActiveTab: (state, action) => ({
       ...state,
       activeTab: action.payload.route,
@@ -137,6 +151,7 @@ export const {
   deletePassenger,
   setCoachOption,
   setCoachOptionsDefault,
-  setActiveTab
+  setActiveTab,
+  setPassengerAge
 } = actions;
 export default reducer;

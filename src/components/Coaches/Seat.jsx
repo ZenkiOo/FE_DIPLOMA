@@ -1,5 +1,6 @@
 import { addPassenger, deletePassenger } from '../../store/slices/passengers';
 import { useDispatch, useSelector } from 'react-redux';
+import { nanoid } from 'nanoid';
 
 export default function Seat({ seat, coachId, coachNumber, direction }) {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function Seat({ seat, coachId, coachNumber, direction }) {
         addPassenger({
           route: direction,
           seat: {
+            id: nanoid(),
             coach_id: coachId,
             seat_number: seat.index,
             is_child: adultStatus === 'child' && true,

@@ -1,6 +1,8 @@
 import Select from '../CustomSelect/Select';
-import { useForm, Controller } from 'react-hook-form';
 import PassengerInput from './PassengerInput';
+import GenderSelect from '../CustomSelect/GenderSelect';
+import { useForm, Controller } from 'react-hook-form';
+import { useSelector, useDispatch } from 'react-redux';
 
 import DatePicker from 'react-datepicker';
 import { setDefaultLocale } from 'react-datepicker';
@@ -9,21 +11,22 @@ setDefaultLocale('ru', ru);
 
 export default function Passenger({ seat, index }) {
   // console.log(seat);
+  // const seats = useSelector((state) => state.passengers[state.passengers.activeTab].seats)
   const inputs = {
     last_name: {
       name: 'last_name',
       label: 'Фамилия',
-      pattern : {}
+      pattern: {},
     },
     first_name: {
       name: 'first_name',
       label: 'Имя',
-      pattern : {}
+      pattern: {},
     },
     patronymic: {
       name: 'patronymic',
       label: 'Отчество',
-      pattern : {}
+      pattern: {},
     },
     gender: {
       name: 'gender',
@@ -32,26 +35,26 @@ export default function Passenger({ seat, index }) {
     birthday: {
       name: 'birthday',
       label: 'Дата рождения',
-      pattern : {}
+      pattern: {},
     },
     document_type: {
       name: 'document_type',
       label: 'Тип документа',
-      pattern : {}
+      pattern: {},
     },
     document_series: {
       name: 'document_series',
       label: 'Серия',
-      pattern : {}
+      pattern: {},
     },
     document_data: {
       name: 'document_data',
       label: 'Номер',
-      pattern : {}
+      pattern: {},
     },
   };
   const defaultValues = {
-    age: 0,
+    age: seat.is_child,
     last_name: '',
     first_name: '',
     patronymic: '',
@@ -84,7 +87,7 @@ export default function Passenger({ seat, index }) {
     <form className="pass" onSubmit={handleSubmit((data) => console.log(data))}>
       <h2 className="pass__title">Пассажир {index + 1}</h2>
       <div className="pass__age_select">
-        <Select register={register} />
+        <Select register={register} seat={seat} index={index}/>
       </div>
       <div className="pass__names">
         <PassengerInput
@@ -104,20 +107,25 @@ export default function Passenger({ seat, index }) {
         />
       </div>
       <div className="pass__age">
-        <Controller
-          name={'birthday'}
-          control={control}
-          render={({ field }) => (
-            <DatePicker
-              selected={field.value}
-              locale={ru}
-              onChange={(date) => field.onChange(date)}
-              dateFormat="dd/MM/yyyy"
-              placeholderText="ДД/ММ/ГГ"
-            />
-          )}
-        />
-        <label>Дата Рождения</label>
+        <div className="pass__age__select">
+          <GenderSelect register={register} />
+        </div>
+        <div className="pass__age__datepicker">
+          <h4 className="passenger_input__label_text">Дата рождения</h4>
+          <Controller
+            name={'birthday'}
+            control={control}
+            render={({ field }) => (
+              <DatePicker
+                selected={field.value}
+                locale={ru}
+                onChange={(date) => field.onChange(date)}
+                dateFormat="dd/MM/yyyy"
+                placeholderText="ДД/ММ/ГГ"
+              />
+            )}
+          />
+        </div>
       </div>
       <div className="pass__docs">
         <PassengerInput
