@@ -20,7 +20,7 @@ export default function Select({ register, seat, index }) {
   }, [seat]);
 
   function handleAgeSet(value) {
-    dispatch(setPassengerAge({ route, id: seat?.id, value }));
+    dispatch(setPassengerAge({ route, id: seat.id, value }));
   }
 
   return (

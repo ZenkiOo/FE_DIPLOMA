@@ -1,16 +1,37 @@
+@import '../../../css/mixins.scss';
 .pass {
-  padding: 0 36px 28px 36px;
+  margin-bottom: 44px;
   border: 1px solid #c4c4c4;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  // .pass__container
+  &__container {
+    border-top: 1px dashed #928f94;
+    padding: 30px 36px 28px 36px;
+  }
   // .pass__title
   &__title {
+    padding: 40px 20px 30px 36px;
+    background: #f9f9f9;
     font-size: 30px;
-    margin-bottom: 30px;
-    padding: 40px 20px 30px 0;
   }
   // .pass__age_select
   &__age_select {
+    display: flex;
     padding: 10px 35px 10px 0;
+    margin-bottom: 34px;
+  }
+  // .pass__seat_info
+  &__seat_info {
+    padding: 5px 0 0 24px;
+    align-self: center;
+    font-size: 18px;
+    color: #928f94;
+    // .pass__seat_info_value
+    &_value {
+      padding-left: 6px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
   }
   // .pass__names
   &__names {
@@ -19,28 +40,71 @@
   // .pass__age
   &__age {
     margin-bottom: 20px;
+    // .pass__age_gender_select
+    &_gender_select {
+      margin-right: 23px;
+    }
+    // .pass__age_datepicker
+    &_datepicker {
+      & input {
+        width: 204px;
+        padding: 11px 12px 9px 15px;
+        font-size: 24px;
+        color: inherit;
+        background: #ffffff;
+        border: 1px solid #928f94;
+        border-radius: 5px;
+      }
+    }
+  }
+  // .pass__doctype
+  &__doctype {
+    width: 31.6%;
+    // .pass__doctype_label
+    &_label {
+      display: block;
+      margin-bottom: 32px;
+      color: #928f94;
+    }
+    // .pass__doctype_value
+    &_value {
+      font-weight: 700;
+      font-size: 19px;
+    }
+  }
+  // .pass__submit_btn
+  &__submit_btn {
+    display: block;
+    margin-left: auto;
+    @include rly_btn_white;
   }
 }
+
 .pass__names {
   display: flex;
+  margin-bottom: 50px;
   justify-content: space-between;
 }
 .pass__age,
 .pass__docs {
   display: flex;
 }
+.pass__docs {
+  justify-content: space-between;
+}
 .passenger_input {
   width: 31.6%;
   position: relative;
   // .passenger_input__label_text
   &__label_text {
+    margin-bottom: 12px;
     color: #928f94;
   }
   // .passenger_input__curr
   &__curr {
     display: block;
     width: 100%;
-    padding: 12px 12px 12px 15px;
+    padding: 11px 12px 9px 15px;
     font-size: 24px;
     color: inherit;
     background: #ffffff;

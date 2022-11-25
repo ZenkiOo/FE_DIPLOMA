@@ -1,7 +1,6 @@
 import './select.scss';
 import { useState } from 'react';
 
-
 export default function GenderSelect({ register }) {
   const [isActive, setActive] = useState(0);
   function handleOptionChange(i) {
@@ -45,27 +44,29 @@ export default function GenderSelect({ register }) {
         />
         <span className="rhf_gender_select__btn">Ж</span>
       </label> */}
-      <label className="rhf_gender_select__label">
-        <input
-          className="rhf_gender_select__input"
-          {...register('gender')}
-          type="radio"
-          value={0}
-          onChange={() => handleOptionChange(0)}
-          defaultChecked={true}
-        />
-        <span className="rhf_gender_select__btn">М</span>
-      </label>
-      <label className="rhf_gender_select__label">
-        <input
-          className="rhf_gender_select__input"
-          {...register('gender')}
-          type="radio"
-          value={1}
-          onChange={() => handleOptionChange(1)}
-        />
-        <span className="rhf_gender_select__btn">Ж</span>
-      </label>
+      <div className="rhf_gender_select__body">
+        <label className="rhf_gender_select__label">
+          <input
+            className="rhf_gender_select__input"
+            {...register('gender')}
+            type="radio"
+            value={0}
+            onChange={() => handleOptionChange(0)}
+            defaultChecked={true}
+          />
+          <span className="rhf_gender_select__btn">М</span>
+        </label>
+        <label className="rhf_gender_select__label">
+          <input
+            className="rhf_gender_select__input"
+            {...register('gender')}
+            type="radio"
+            value={1}
+            onChange={() => handleOptionChange(1)}
+          />
+          <span className="rhf_gender_select__btn">Ж</span>
+        </label>
+      </div>
     </div>
   );
 }
