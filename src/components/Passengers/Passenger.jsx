@@ -1,6 +1,7 @@
 import Select from '../CustomSelect/Select';
 import PassengerInput from './PassengerInput';
 import GenderSelect from '../CustomSelect/GenderSelect';
+import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -12,21 +13,54 @@ setDefaultLocale('ru', ru);
 export default function Passenger({ seat, index }) {
   // console.log(seat);
   // const seats = useSelector((state) => state.passengers[state.passengers.activeTab].seats)
+  const [confirmed, setConfirmed] = useState(false);
+  const defaultValues = {
+    age: 0,
+    last_name: '',
+    first_name: '',
+    patronymic: '',
+    gender: true,
+    birthday: new Date(),
+    document_series: '',
+    document_data: '',
+  };
+
+  const {
+    handleSubmit,
+    register,
+    reset,
+    watch,
+    control,
+    formState: { errors, isValid },
+  } = useForm({ defaultValues });
+
   const inputs = {
     last_name: {
       name: 'last_name',
       label: 'Фамилия',
-      pattern: {},
+      error: errors?.last_name,
+      pattern: {
+        value: /^[a-zа-яё]+$/i,
+        message: 'Неверный формат',
+      },
     },
     first_name: {
       name: 'first_name',
       label: 'Имя',
-      pattern: {},
+      error: errors?.first_name,
+      pattern: {
+        value: /^[a-zа-яё]+$/i,
+        message: 'Неверный формат',
+      },
     },
     patronymic: {
       name: 'patronymic',
       label: 'Отчество',
-      pattern: {},
+      error: errors?.patronymic,
+      pattern: {
+        value: /^[a-zа-яё]+$/i,
+        message: 'Неверный формат',
+      },
     },
     gender: {
       name: 'gender',
@@ -40,51 +74,40 @@ export default function Passenger({ seat, index }) {
     document_series: {
       name: 'document_series',
       label: 'Серия',
-      pattern: {},
+      pattern: {
+        value: /^([0-9]{4})?$/,
+        message: 'Неверный формат',
+      },
+      error: errors?.document_series,
     },
     document_data: {
       name: 'document_data',
       label: 'Номер',
-      pattern: {},
+      error: errors?.document_data,
+      pattern: {
+        value: /^([0-9]{6})?$/,
+        message: 'Неверный формат',
+      },
     },
   };
-  const defaultValues = {
-    age: 0,
-    last_name: '',
-    first_name: '',
-    patronymic: '',
-    gender: true,
-    birthday: new Date(),
-    document_series: '',
-    document_data: '',
-  };
-  const {
-    handleSubmit,
-    register,
-    reset,
-    control,
-    formState: { errors, isValid },
-  } = useForm({ defaultValues });
-  console.log('isValid: ', index, isValid);
-  // console.log(errors);
-  // const person_info = {
-  //   is_adult: true,
-  //   first_name: 'Ivan',
-  //   last_name: 'Popov',
-  //   patronymic: 'Popovich',
-  //   gender: true,
-  //   birthday: '1980-01-01',
-  //   document_type: 'паспорт',
-  //   document_data: '45 6790195',
-  // };
-  // React.useEffect(() => {
-  //   const subscription = watch((value, { name, type }) =>
-  //     console.log(value, name, type)
-  //   );
-  // }, [watch]);
+
+  const watchForm = watch();
+  useEffect(() => {
+    watch(() => {
+      if (confirmed) setConfirmed(false);
+    });
+  }, [watchForm]);
+
+  function handleFormSubmtit(data) {
+    setConfirmed(true);
+    console.log(data);
+  }
 
   return (
-    <form className="pass" onSubmit={handleSubmit((data) => console.log(data))}>
+    <form
+      className="pass"
+      onSubmit={handleSubmit((data) => handleFormSubmtit(data))}
+    >
       <h2 className="pass__title">Пассажир {index + 1}</h2>
 
       <div className="pass__container">
@@ -101,17 +124,21 @@ export default function Passenger({ seat, index }) {
           <PassengerInput
             register={register}
             name="last_name"
-            label={inputs['last_name'].label}
+            label={inputs.last_name.label}
+            pattern={inputs.last_name.pattern}
+            error={inputs.last_name.error}
           />
           <PassengerInput
             register={register}
             name="first_name"
-            label={inputs['first_name'].label}
+            label={inputs.first_name.label}
+            error={inputs.first_name.error}
           />
           <PassengerInput
             register={register}
             name="patronymic"
-            label={inputs['patronymic'].label}
+            label={inputs.patronymic.label}
+            error={inputs.patronymic.error}
           />
         </div>
         <div className="pass__age">
@@ -148,20 +175,24 @@ export default function Passenger({ seat, index }) {
             <PassengerInput
               register={register}
               name="document_series"
-              label={inputs['document_series'].label}
+              label={inputs.document_series.label}
+              error={inputs.document_series.error}
+              pattern={inputs.document_series.pattern}
             />
           )}
 
           <PassengerInput
             register={register}
             name="document_data"
-            label={inputs['document_data'].label}
+            label={inputs.document_data.label}
+            error={inputs.document_data.error}
+            pattern={inputs.document_data.pattern}
           />
         </div>
       </div>
       <div className="pass__container">
         <button type="submit" className="pass__submit_btn">
-          Подтвердить
+          {!confirmed ? 'Подтвердить' : 'Подтвержден'}
         </button>
       </div>
       {errors?.last_name && <p>{errors.last_name.message}</p>}

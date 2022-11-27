@@ -46,7 +46,7 @@ export default function Select({ register, seat, index }) {
             type="radio"
             value={0}
             onChange={() => handleAgeSet(false)}
-            defaultChecked={+!seat.is_child}
+            defaultChecked={!seat.is_child}
           />
           <span className="rhf_select__btn">{names[0]}</span>
         </label>
@@ -57,7 +57,7 @@ export default function Select({ register, seat, index }) {
             type="radio"
             value={1}
             onChange={() => handleAgeSet(true)}
-            defaultChecked={+seat.is_child}
+            defaultChecked={seat.is_child}
           />
           <span className="rhf_select__btn">{names[1]}</span>
         </label>

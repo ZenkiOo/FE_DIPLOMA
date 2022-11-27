@@ -111,4 +111,12 @@
     border: 1px solid #928f94;
     border-radius: 5px;
   }
+  &--error {
+    & .passenger_input__label_text {
+      color: var(--error-red);
+    }
+    & .passenger_input__curr {
+      border: 1px solid var(--error-red);
+    }
+  }
 }
