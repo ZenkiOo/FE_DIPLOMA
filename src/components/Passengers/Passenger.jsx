@@ -1,3 +1,4 @@
+import { addPersonInfo } from '../../store/slices/passengers';
 import Select from '../CustomSelect/Select';
 import PassengerInput from './PassengerInput';
 import GenderSelect from '../CustomSelect/GenderSelect';
@@ -11,18 +12,50 @@ import ru from 'date-fns/locale/ru';
 setDefaultLocale('ru', ru);
 
 export default function Passenger({ seat, index }) {
-  // console.log(seat);
-  // const seats = useSelector((state) => state.passengers[state.passengers.activeTab].seats)
+  // const fakePassenger = {
+  //   user: {
+  //     first_name: 'Иван',
+  //     last_name: 'Смирнов',
+  //     patronymic: 'Олегович',
+  //     phone: '8900123123',
+  //     email: 'string@string.ru',
+  //     payment_method: 'cash',
+  //   },
+  //   departure: {
+  //     route_direction_id: '123431',
+  //     seats: [
+  //       {
+  //         coach_id: '12341',
+  //         person_info: {
+  //           is_adult: true,
+  //           first_name: 'Ivan',
+  //           last_name: 'Popov',
+  //           patronymic: 'Popovich',
+  //           gender: true,
+  //           birthday: '1980-01-01',
+  //           document_type: 'паспорт',
+  //           document_data: '45 6790195',
+  //         },
+  //         seat_number: 10,
+  //         is_child: true,
+  //         include_children_seat: true,
+  //       },
+  //     ],
+  //   },
+  // };
+  const { activeTab } = useSelector((state) => state.passengers);
   const [confirmed, setConfirmed] = useState(false);
+  const dispatch = useDispatch();
+
   const defaultValues = {
-    age: 0,
-    last_name: '',
-    first_name: '',
-    patronymic: '',
-    gender: true,
-    birthday: new Date(),
-    document_series: '',
-    document_data: '',
+    age: seat.is_child,
+    last_name: seat.person_info?.last_name,
+    first_name: seat.person_info?.first_name,
+    patronymic: seat.person_info?.patronymic,
+    gender: +seat.person_info?.gender,
+    birthday: seat.person_info?.birthday,
+    document_series: seat.person_info?.document_series || '',
+    document_data: seat.person_info?.document_data,
   };
 
   const {
@@ -91,17 +124,38 @@ export default function Passenger({ seat, index }) {
     },
   };
 
+  function handleFormSubmtit(data) {
+    dispatch(
+      addPersonInfo({
+        route: activeTab,
+        id: seat.id,
+        person_info: {
+          first_name: data.first_name,
+          last_name: data.last_name,
+          patronymic: data.patronymic,
+          gender: data.gender,
+          birthday: data.birthday,
+          document_series: data.document_series,
+          document_type: data.age === 0 ? 'паспорт' : 'свидетельство',
+          document_data:
+            data.age === 0
+              ? `${data.document_series}${data.document_data}`
+              : data.document_data,
+        },
+      })
+    );
+  }
+
+  useEffect(() => {
+    if (seat.person_info) setConfirmed(true);
+  }, []);
+
   const watchForm = watch();
   useEffect(() => {
     watch(() => {
       if (confirmed) setConfirmed(false);
     });
   }, [watchForm]);
-
-  function handleFormSubmtit(data) {
-    setConfirmed(true);
-    console.log(data);
-  }
 
   return (
     <form
