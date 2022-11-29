@@ -45,12 +45,27 @@
   right: -8px;
 }
 .rly_price--total {
-  padding-right: 37px;
+  padding-right: 29px;
   font-size: 48px;
   color: var(--text-orange);
+  transform: translate(0, -17px);
 }
 .rly_price--total svg {
   width: 26px;
   height: 32px;
-  /* --text-white */
+  right: -10px;
+  top: 13px;
+}
+.rly_price--pass_info {
+  padding-right: 24px;
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  transform: translate(0, -6px);
+}
+.rly_price--pass_info svg {
+  width: 14px;
+  height: 17px;
+  top: 6px;
+  right: 0;
 }

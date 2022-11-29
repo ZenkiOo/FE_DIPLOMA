@@ -30,9 +30,9 @@ export default function Route(props) {
             </div>
             <div className="route__body">
               <div className="route__body_time">
-                <RouteTimeInfo route={departure} />
+                <RouteTimeInfo route={departure} reversed={false}/>
                 {props.route.arrival && props.name === 'default' && (
-                  <RouteTimeInfo route={props.route.arrival} reversed />
+                  <RouteTimeInfo route={props.route.arrival} reversed={true}/>
                 )}
               </div>
               {props.name === 'default' ? (

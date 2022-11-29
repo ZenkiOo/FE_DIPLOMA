@@ -1,6 +1,6 @@
 import { ReactComponent as RouteArrowSvg } from '../../images/icons/svg/route_arrow.svg';
 
-export default function RouteTimeInfo({ route, reversed }) {
+export default function RouteTimeInfo({ route, reversed, selected_date }) {
   const timeHandler = (time) => {
     const date = new Date(time);
     // console.log(date);
@@ -15,6 +15,12 @@ export default function RouteTimeInfo({ route, reversed }) {
         <span className="route_time__time">
           {timeHandler(reversed ? route.to.datetime : route.from.datetime)}
         </span>
+        {selected_date?.date_start && (
+          <span className="route_time__date">{selected_date.date_start}</span>
+        )}
+        {selected_date?.date_end && (
+          <span className="route_time__date">{selected_date.date_end}</span>
+        )}
         <span className="route_time__city">
           {reversed ? route.to.city.name : route.from.city.name}
         </span>
@@ -29,13 +35,19 @@ export default function RouteTimeInfo({ route, reversed }) {
         <span className="route_time__duration_time">
           {timeHandler(route.duration)}
         </span>
-        <RouteArrowSvg className={reversed && 'reversed'} />
+        <RouteArrowSvg className={reversed ? 'reversed' : ''} />
       </div>
 
       <div className="route_time__item">
         <span className="route_time__time">
           {timeHandler(reversed ? route.from.datetime : route.to.datetime)}
         </span>
+        {selected_date?.date_start && (
+          <span className="route_time__date">{selected_date.date_start}</span>
+        )}
+        {selected_date?.date_end && (
+          <span className="route_time__date">{selected_date.date_end}</span>
+        )}
         <span className="route_time__city">
           {reversed ? route.from.city.name : route.to.city.name}
         </span>

@@ -1,13 +1,27 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { setActiveTab } from '../../store/slices/passengers';
+import { useSelector } from 'react-redux';
+import DirectionBtn from './DirectionBtn';
+import DirectionInfo from './DirectionInfo';
 
 export default function DirectionBtns() {
   const state = useSelector((state) => state.passengers);
-  const dispatch = useDispatch();
+  const { activeTab, departure, arrival } = state;
+
   return (
-    <div>
-      {state.departure.seats.length > 0 && <button onClick={() => dispatch(setActiveTab({route: 'departure'}))}>туда</button>}
-      {state.arrival.seats.length > 0 && <button onClick={() => dispatch(setActiveTab({route: 'arrival'}))}>обратно</button>}
+    <div className="routes_details__direction_btns">
+      {departure.seats.length > 0 && (
+        <>
+          <DirectionBtn direction={'departure'} />
+          <DirectionInfo route={'departure'} />
+          {/* {activeTab === 'departure' && <DirectionInfo route={'departure'} />} */}
+        </>
+      )}
+      {arrival.seats.length > 0 && (
+        <>
+          <DirectionBtn direction={'arrival'} />
+          <DirectionInfo route={'arrival'} />
+          {/* {activeTab === 'arrival' && <DirectionInfo route={'arrival'} />} */}
+        </>
+      )}
     </div>
   );
 }

@@ -1,0 +1,155 @@
+.passengers_title {
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 500;
+  font-size: 30px;
+  color: var(--text-white);
+  padding: 0px 10px 30px 10px;
+}
+.dir_btn {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    width: calc(100% + 64px);
+    height: 1px;
+    top: 0;
+    left: -28px;
+    background-color: white;
+  }
+  // .dir_btn__button
+  &__button {
+    padding: 28px 0;
+    display: flex;
+    width: 100%;
+    font-family: inherit;
+    margin: 0;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    align-items: center;
+    .dir_icon {
+      width: 32px;
+      height: 26px;
+      margin-right: 16px;
+    }
+    // .dir_btn__button_text
+    &_text {
+      font-weight: 700;
+      font-size: 30px;
+      color: white;
+    }
+    // .dir_btn__button_date
+    &_date {
+      display: inline-block;
+      margin-left: auto;
+      padding-top: 4px;
+      // padding-right: 25px;
+      font-size: 18px;
+      color: white;
+    }
+    // .dir_btn__button_icon
+    &_icon {
+    }
+  }
+}
+.rly_info {
+  // .rly_info__names
+  &__names {
+    padding-top: 20px;
+    // .rly_info__names_item
+    &_item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      // .rly_info__names_item_label
+      &_label {
+        font-size: 18px;
+        color: var(--text-white);
+      }
+      // .rly_info__names_item_value
+      &_value {
+        font-weight: 700;
+        font-size: 24px;
+        color: white;
+        transform: translate(0, -6px);
+        &--name {
+          font-weight: 400;
+          font-size: 18px;
+          transform: translate(0);
+        }
+      }
+    }
+  }
+}
+.rly_info__times {
+  .route_time {
+    padding: 43px 0px 24px 0px;
+  }
+  .route_time__item {
+    width: 46%;
+    padding-left: 0;
+    padding-top: 26px;
+    text-align: right;
+  }
+  .route_time__item--from {
+    width: 46%;
+    text-align: left;
+  }
+  .route_time__time {
+    color: white;
+  }
+  .route_time__city {
+    color: white;
+  }
+}
+.pass_info {
+  padding-top: 36px;
+  border-top: 1px dashed #928f94;
+  padding-bottom: 32px;
+  // .pass_info__icon
+  &__icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  // .pass_info__item
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    // .pass_info__item_label
+    &_label {
+      font-size: 18px;
+      color: var(--text-white);
+    }
+    // .pass_info__item_value
+    &_value {
+    }
+  }
+}
+.total_sum {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 47px;
+  &::before {
+    content: '';
+    position: absolute;
+    width: calc(100% + 64px);
+    height: 1px;
+    top: 0;
+    left: -28px;
+    background-color: white;
+  }
+  // .total_sum__text
+  &__text {
+    font-weight: 700;
+    font-size: 30px;
+    color: white;
+    text-transform: uppercase;
+  }
+  // .total_sum__value
+  &__value {
+  }
+}
