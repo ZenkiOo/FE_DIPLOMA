@@ -6,6 +6,7 @@ import { useGetLastRoutesQuery } from './store/api';
 import HomePage from './pages/HomePage';
 import RoutesPage from './pages/RoutesPage';
 import PassengersPage from './pages/PassengersPage';
+import PaymentPage from './pages/PaymentPage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/routes" element={<RoutesPage />} />
         <Route path="/passengers" element={<PassengersPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
       </Routes>
       <Footer />
     </div>

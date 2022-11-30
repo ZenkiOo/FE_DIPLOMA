@@ -644,3 +644,11 @@
     padding: 22px 10px 24px 10px;
   }
 }
+.next_btn_container {
+  padding: 70px 0 10px 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+.routes_next_btn {
+  @include rly_btn_orange();
+}

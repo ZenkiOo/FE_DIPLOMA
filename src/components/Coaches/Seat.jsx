@@ -25,6 +25,7 @@ export default function Seat({ seat, coachId, coachNumber, direction }) {
           route: direction,
           seat: {
             id: nanoid(),
+            confirmed: false,
             coach_id: coachId,
             seat_number: seat.index,
             is_child: adultStatus === 'child' && true,

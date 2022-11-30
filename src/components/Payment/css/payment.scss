@@ -1,0 +1,13 @@
+@import '../../../css/mixins.scss';
+.payment {
+  // .payment__action
+  &__action {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 140px;
+    // .payment__action_btn
+    &_btn {
+      @include rly_btn_orange();
+    }
+  }
+}

@@ -17,7 +17,7 @@ export default function WithCoach(Component, name) {
     isFetching,
     isError,
   } = useGetRouteQuery({ id, params });
-  console.log(data);
+  // console.log(data);
 
   // fetch(
   //   `https://netology-trainbooking.netoservices.ru/routes/${id}/seats?${params}`

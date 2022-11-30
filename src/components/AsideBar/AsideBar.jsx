@@ -37,7 +37,7 @@ export default function AsideBar() {
 
   return (
     <div className="routes_details">
-      {location.pathname === '/passengers' ? (
+      {['/passengers', '/payment'].includes(location.pathname) ? (
         <>
           <h3 className="passengers_title">Детали поездки</h3>
           <DirectionBtns />

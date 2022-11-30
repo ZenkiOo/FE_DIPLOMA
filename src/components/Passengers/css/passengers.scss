@@ -1,4 +1,16 @@
 @import '../../../css/mixins.scss';
+.passengers {
+  // .passengers__action
+  &__action {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 140px;
+    // .passengers__action_btn
+    &_btn {
+      @include rly_btn_orange();
+    }
+  }
+}
 .pass {
   margin-bottom: 44px;
   border: 1px solid #c4c4c4;
@@ -7,6 +19,21 @@
   &__container {
     border-top: 1px dashed #928f94;
     padding: 30px 36px 28px 36px;
+    &--contacts {
+      padding: 30px 36px 0px 36px;
+    }
+    &--phone {
+      border-top: none;
+      padding: 0 36px 0px 36px;
+    }
+    &--email {
+      border-top: none;
+      border-bottom: 1px dashed #928f94;
+      padding: 39px 36px 90px 36px;
+    }
+    &--payment {
+      padding: 50px 36px 90px 36px;
+    }
   }
   // .pass__title
   &__title {

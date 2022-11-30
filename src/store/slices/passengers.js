@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { act } from 'react-dom/test-utils';
 const globalParams = {
   active: false,
   onFocus: false,
@@ -17,6 +16,14 @@ const initialState = {
   departure: { ...globalParams, onFocus: true },
   arrival: { ...globalParams },
   activeTab: 'departure',
+  user: {
+    first_name: '',
+    last_name: '',
+    patronymic: '',
+    phone: '',
+    email: '',
+    payment_method: 'online',
+  },
 };
 
 const passengers = createSlice({
@@ -108,7 +115,7 @@ const passengers = createSlice({
         ),
       },
     }),
-    addPersonInfo:(state, action) => ({
+    addPersonInfo: (state, action) => ({
       ...state,
       [action.payload.route]: {
         ...state[action.payload.route],
@@ -116,7 +123,21 @@ const passengers = createSlice({
           seat.id === action.payload.id
             ? {
                 ...seat,
-                person_info: action.payload.person_info
+                person_info: action.payload.person_info,
+              }
+            : seat
+        ),
+      },
+    }),
+    setConfirmed: (state, action) => ({
+      ...state,
+      [action.payload.route]: {
+        ...state[action.payload.route],
+        seats: state[action.payload.route].seats.map((seat) =>
+          seat.id === action.payload.id
+            ? {
+                ...seat,
+                confirmed: action.payload.confirmed,
               }
             : seat
         ),
@@ -136,6 +157,7 @@ export const {
   setCoachOptionsDefault,
   setActiveTab,
   setPassengerAge,
-  addPersonInfo
+  addPersonInfo,
+  setConfirmed,
 } = actions;
 export default reducer;

@@ -1,4 +1,4 @@
-import { addPersonInfo } from '../../store/slices/passengers';
+import { addPersonInfo, setConfirmed } from '../../store/slices/passengers';
 import Select from '../CustomSelect/Select';
 import PassengerInput from './PassengerInput';
 import GenderSelect from '../CustomSelect/GenderSelect';
@@ -12,39 +12,9 @@ import ru from 'date-fns/locale/ru';
 setDefaultLocale('ru', ru);
 
 export default function Passenger({ seat, index }) {
-  // const fakePassenger = {
-  //   user: {
-  //     first_name: 'Иван',
-  //     last_name: 'Смирнов',
-  //     patronymic: 'Олегович',
-  //     phone: '8900123123',
-  //     email: 'string@string.ru',
-  //     payment_method: 'cash',
-  //   },
-  //   departure: {
-  //     route_direction_id: '123431',
-  //     seats: [
-  //       {
-  //         coach_id: '12341',
-  //         person_info: {
-  //           is_adult: true,
-  //           first_name: 'Ivan',
-  //           last_name: 'Popov',
-  //           patronymic: 'Popovich',
-  //           gender: true,
-  //           birthday: '1980-01-01',
-  //           document_type: 'паспорт',
-  //           document_data: '45 6790195',
-  //         },
-  //         seat_number: 10,
-  //         is_child: true,
-  //         include_children_seat: true,
-  //       },
-  //     ],
-  //   },
-  // };
+
   const { activeTab } = useSelector((state) => state.passengers);
-  const [confirmed, setConfirmed] = useState(false);
+  // const [confirmed, setConfirmed] = useState(false);
   const dispatch = useDispatch();
 
   const defaultValues = {
@@ -124,7 +94,7 @@ export default function Passenger({ seat, index }) {
     },
   };
 
-  function handleFormSubmtit(data) {
+  function handleFormSubmit(data) {
     dispatch(
       addPersonInfo({
         route: activeTab,
@@ -144,23 +114,34 @@ export default function Passenger({ seat, index }) {
         },
       })
     );
+    dispatch(
+      setConfirmed({
+        route: activeTab,
+        id: seat.id,
+        confirmed: true,
+      })
+    );
   }
-
-  useEffect(() => {
-    if (seat.person_info) setConfirmed(true);
-  }, []);
 
   const watchForm = watch();
   useEffect(() => {
     watch(() => {
-      if (confirmed) setConfirmed(false);
+      if (seat.confirmed) {
+        dispatch(
+          setConfirmed({
+            route: activeTab,
+            id: seat.id,
+            confirmed: false,
+          })
+        );
+      }
     });
   }, [watchForm]);
 
   return (
     <form
       className="pass"
-      onSubmit={handleSubmit((data) => handleFormSubmtit(data))}
+      onSubmit={handleSubmit((data) => handleFormSubmit(data))}
     >
       <h2 className="pass__title">Пассажир {index + 1}</h2>
 
@@ -246,7 +227,7 @@ export default function Passenger({ seat, index }) {
       </div>
       <div className="pass__container">
         <button type="submit" className="pass__submit_btn">
-          {!confirmed ? 'Подтвердить' : 'Подтвержден'}
+          {!seat.confirmed ? 'Подтвердить' : 'Подтвержден'}
         </button>
       </div>
       {errors?.last_name && <p>{errors.last_name.message}</p>}
