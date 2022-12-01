@@ -43,9 +43,9 @@ export default function TotalSum({ name }) {
   const totalSum = getTotalCount(passengers);
   return (
     <div className={`total_sum total_sum--${name}`}>
-      <span className="total_sum__text">итог</span>
+      {name !== 'checking' && <span className="total_sum__text">итог</span>}
       <span className="total_sum__value">
-        <Price name="total" value={totalSum} />
+        <Price name={name} value={totalSum} />
       </span>
     </div>
   );

@@ -37,11 +37,11 @@ export default function AsideBar() {
 
   return (
     <div className="routes_details">
-      {['/passengers', '/payment'].includes(location.pathname) ? (
+      {['/passengers', '/payment', '/checking'].includes(location.pathname) ? (
         <>
           <h3 className="passengers_title">Детали поездки</h3>
           <DirectionBtns />
-          <TotalSum name="aside" />
+          <TotalSum name="total" />
         </>
       ) : (
         <>

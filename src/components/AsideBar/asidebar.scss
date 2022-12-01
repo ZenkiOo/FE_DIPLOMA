@@ -32,6 +32,10 @@
       width: 32px;
       height: 26px;
       margin-right: 16px;
+      & svg {
+        width: 10px;
+        height: 6px;
+      }
     }
     // .dir_btn__button_text
     &_text {
@@ -133,6 +137,12 @@
   display: flex;
   justify-content: space-between;
   padding-top: 47px;
+  &--checking {
+    padding-top: 0;
+    &::before {
+      display: none;
+    }
+  }
   &::before {
     content: '';
     position: absolute;

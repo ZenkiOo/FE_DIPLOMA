@@ -25,11 +25,19 @@
     &--phone {
       border-top: none;
       padding: 0 36px 0px 36px;
+      .passenger_input {
+        display: block;
+        width: 360px;
+      }
     }
     &--email {
       border-top: none;
       border-bottom: 1px dashed #928f94;
       padding: 39px 36px 90px 36px;
+      .passenger_input {
+        display: block;
+        width: 360px;
+      }
     }
     &--payment {
       padding: 50px 36px 90px 36px;

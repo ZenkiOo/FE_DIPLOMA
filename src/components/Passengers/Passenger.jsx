@@ -24,8 +24,8 @@ export default function Passenger({ seat, index }) {
     patronymic: seat.person_info?.patronymic,
     gender: +seat.person_info?.gender,
     birthday: seat.person_info?.birthday,
-    document_series: seat.person_info?.document_series || '',
-    document_data: seat.person_info?.document_data,
+    document_series: seat.person_info?.document_series,
+    document_number: seat.person_info?.document_number
   };
 
   const {
@@ -92,9 +92,19 @@ export default function Passenger({ seat, index }) {
         message: 'Неверный формат',
       },
     },
+    document_number: {
+      name: 'document_number',
+      label: 'Номер',
+      error: errors?.document_number,
+      pattern: {
+        value: /^([0-9]{6})?$/,
+        message: 'Неверный формат',
+      },
+    },
   };
 
   function handleFormSubmit(data) {
+    console.log(data);
     dispatch(
       addPersonInfo({
         route: activeTab,
@@ -106,10 +116,11 @@ export default function Passenger({ seat, index }) {
           gender: data.gender,
           birthday: data.birthday,
           document_series: data.document_series,
-          document_type: data.age === 0 ? 'паспорт' : 'свидетельство',
+          document_number: data.document_number,
+          document_type: +data.age === 0 ? 'паспорт' : 'свидетельство',
           document_data:
-            data.age === 0
-              ? `${data.document_series}${data.document_data}`
+            +data.age === 0
+              ? `${data.document_series}${data.document_number}`
               : data.document_data,
         },
       })
@@ -218,10 +229,10 @@ export default function Passenger({ seat, index }) {
 
           <PassengerInput
             register={register}
-            name="document_data"
-            label={inputs.document_data.label}
-            error={inputs.document_data.error}
-            pattern={inputs.document_data.pattern}
+            name="document_number"
+            label={inputs.document_number.label}
+            error={inputs.document_number.error}
+            pattern={inputs.document_number.pattern}
           />
         </div>
       </div>

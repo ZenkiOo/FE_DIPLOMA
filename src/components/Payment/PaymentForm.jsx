@@ -1,5 +1,7 @@
-import { useForm, Controller } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../../store/slices/passengers';
+import { useNavigate } from 'react-router-dom';
 import PassengerInput from '../Passengers/PassengerInput';
 import PaymentSelect from '../CustomSelect/PaymentSelect';
 
@@ -36,6 +38,9 @@ export default function PaymentForm() {
   //   },
   // };
   const { user } = useSelector((state) => state.passengers);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const defaultValues = {
     last_name: user?.last_name,
     first_name: user?.first_name,
@@ -85,34 +90,54 @@ export default function PaymentForm() {
     phone: {
       name: 'phone',
       label: 'Контактный телефон',
-      error: errors?.patronymic,
+      error: errors?.phone,
       pattern: {
-        value: /^[0-9]+$/i,
+        value: /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/,
         message: 'Неверный формат',
       },
     },
     email: {
       name: 'email',
       label: 'E-mail',
-      error: errors?.patronymic,
+      error: errors?.email,
       pattern: {
-        value: /^[0-9]+$/i,
+        value:
+          /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu,
         message: 'Неверный формат',
       },
     },
     payment_method: {
       name: 'payment_method',
       label: 'payment_method',
-      error: errors?.patronymic,
+      error: errors?.payment_method,
       pattern: {
         value: /^[0-9]+$/i,
         message: 'Неверный формат',
       },
     },
   };
+
   function handleFormSubmit(data) {
-    console.log(data);
+    if (data) {
+      dispatch(setUser({ user: data }));
+      navigate('/checking');
+    }
   }
+
+  const formValues = watch();
+  function isFormValid() {
+    return (
+      formValues.last_name.length > 0 &&
+      formValues.first_name.length > 0 &&
+      formValues.patronymic.length > 0 &&
+      formValues.phone.length > 0 &&
+      formValues.email.length > 0 &&
+      formValues.email.length > 0 &&
+      formValues.payment_method.length > 0
+    );
+  }
+  const valid = isFormValid();
+
   return (
     <div className="payment">
       <form className="pass">
@@ -167,6 +192,7 @@ export default function PaymentForm() {
         <button
           className="payment__action_btn"
           onClick={handleSubmit((data) => handleFormSubmit(data))}
+          disabled={!valid}
         >
           Купить билеты
         </button>

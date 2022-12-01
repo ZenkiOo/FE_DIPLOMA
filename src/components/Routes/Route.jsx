@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCoachesActive } from '../../store/slices/routesParams';
 
 export default function Route(props) {
-  // const state = useSelector((state) => state.routesParams);
   const dispatch = useDispatch();
   const { departure } = props.route;
   return (
@@ -30,9 +29,9 @@ export default function Route(props) {
             </div>
             <div className="route__body">
               <div className="route__body_time">
-                <RouteTimeInfo route={departure} reversed={false}/>
+                <RouteTimeInfo route={departure} reversed={false} />
                 {props.route.arrival && props.name === 'default' && (
-                  <RouteTimeInfo route={props.route.arrival} reversed={true}/>
+                  <RouteTimeInfo route={props.route.arrival} reversed={true} />
                 )}
               </div>
               {props.name === 'default' ? (

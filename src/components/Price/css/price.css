@@ -69,3 +69,14 @@
   top: 6px;
   right: 0;
 }
+.rly_price--checking {
+  font-size: 30px;
+  font-weight: 700;
+  padding-right: 35px;
+}
+.rly_price--checking svg {
+  width: 20px;
+  height: 24px;
+  top: 5px;
+  right: 5px;
+}

@@ -45,22 +45,26 @@ export default function PassengersInfo({ seats, route }) {
       <div className="pass_info__icon">
         <PersonSvg />
       </div>
-      <div className="pass_info__item">
-        <span className="pass_info__item_label">
-          Взрослый: {adultPassengers.length}
-        </span>
-        <span className="pass_info__item_value">
-          <Price name="pass_info" value={adultTotalCount} />
-        </span>
-      </div>
-      <div className="pass_info__item">
-        <span className="pass_info__item_label">
-          Детский: {childPassengers.length}
-        </span>
-        <span className="pass_info__item_value">
-          <Price name="pass_info" value={childTotalCount} />
-        </span>
-      </div>
+      {adultPassengers.length > 0 && (
+        <div className="pass_info__item">
+          <span className="pass_info__item_label">
+            Взрослый: {adultPassengers.length}
+          </span>
+          <span className="pass_info__item_value">
+            <Price name="pass_info" value={adultTotalCount} />
+          </span>
+        </div>
+      )}
+      {childPassengers.length > 0 && (
+        <div className="pass_info__item">
+          <span className="pass_info__item_label">
+            Детский: {childPassengers.length}
+          </span>
+          <span className="pass_info__item_value">
+            <Price name="pass_info" value={childTotalCount} />
+          </span>
+        </div>
+      )}
     </div>
   );
 }

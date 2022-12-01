@@ -25,6 +25,12 @@
   font-weight: 400;
   font-size: 16px;
 }
+@mixin rly_btn_white--small() {
+  @include rly_btn_white;
+  padding: 5px 24px 4px 24px;
+  font-weight: 700;
+  font-size: 24px;
+}
 @mixin rly_btn_orange() {
   @include rly_btn;
   font-weight: 700;
