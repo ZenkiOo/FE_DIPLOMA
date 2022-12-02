@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLazyGetCitiesByNameQuery } from '../../store/api';
-
+import { clearSeats } from '../../store/slices/passengers';
 import { setForm } from '../../store/slices/routesParams';
 import { useDispatch } from 'react-redux';
 
@@ -119,9 +119,9 @@ export default function BookingForm() {
     };
 
     dispatch(setForm({ ...params }));
+    dispatch(clearSeats());
     // setSearchRoutesForm({ ...initialFormState });
     // setCitiesList({ ...initialListState });
-
     navigate('routes');
   }
 

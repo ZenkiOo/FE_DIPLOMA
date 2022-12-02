@@ -18,6 +18,14 @@ export const rlyApi = createApi({
     getRoute: builder.query({
       query: (params) => `routes/${params.id}/seats?${params.params}`,
     }),
+    postOrder: builder.mutation({
+      query: (payload) => ({
+        url: '/order',
+        method: 'POST',
+        body: payload,
+      }),
+      invalidatesTags: ['Post'],
+    }),
   }),
 });
 
@@ -27,4 +35,5 @@ export const {
   useGetRoutesQuery,
   useLazyGetRouteQuery,
   useGetRouteQuery,
+  usePostOrderMutation,
 } = rlyApi;
