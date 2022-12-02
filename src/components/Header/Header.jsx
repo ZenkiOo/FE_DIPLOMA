@@ -1,21 +1,20 @@
 import './css/header.css';
 import NavList from './NavList';
 import BookingForm from './BookingForm';
-import Preloader from './Preloader';
 import { useLocation } from 'react-router-dom';
 
 export default function Header() {
   const location = useLocation();
   const createHeaderClass = () => {
-    if (location.pathname !== '/')
-      return 'header header--collapsed';
+    if (location.pathname === '/order') return 'header header--order';
+    if (location.pathname !== '/') return 'header header--collapsed';
     return 'header';
   };
+  const headerClass = createHeaderClass();
   return (
-    <header className={createHeaderClass()}>
+    <header className={headerClass}>
       <NavList />
-      <BookingForm />
-      <Preloader />
+      {location.pathname !== '/order' && <BookingForm />}
     </header>
   );
 }

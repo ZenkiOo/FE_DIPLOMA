@@ -1,9 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import CheckingItem from './CheckingItem';
 import AllPassengers from './AllPassengers';
 import Route from '../Routes/Route';
 
 export default function Checking() {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.passengers.user);
   const route = useSelector((state) => state.routesParams.routes.departure);
   const allSeats = useSelector((state) => [
@@ -38,17 +40,32 @@ export default function Checking() {
         <AllPassengers {...{ passengers }} />
       </CheckingItem>
       <CheckingItem title="Способ оплаты">
-        <div className="payment">
+        <div className="payment payment--checking">
           <div className="payment__method">
             <span className="payment__method_text">
               {user.payment_method === 'online' ? 'Онлайн' : 'Наличными'}
             </span>
           </div>
           <div className="payment__fix">
-            <button className="payment__fix_btn">Изменить</button>
+            <button
+              type="button"
+              className="payment__fix_btn"
+              onClick={() => navigate('/payment')}
+            >
+              Изменить
+            </button>
           </div>
         </div>
       </CheckingItem>
+      <div className="checking__action">
+        <button
+          type="button"
+          className="checking__action_btn"
+          onClick={() => navigate('/order')}
+        >
+          Подтвердить
+        </button>
+      </div>
     </div>
   );
 }

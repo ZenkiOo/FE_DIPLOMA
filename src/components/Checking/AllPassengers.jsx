@@ -1,8 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import TotalSum from '../AsideBar/TotalSum';
 import { ReactComponent as PersonSvg } from '../../images/icons/svg/person.svg';
 
 export default function AllPassengers({ passengers }) {
+  const navigate = useNavigate();
   const allPassengers = passengers.map((passenger) => (
     <div className="check_pass" key={nanoid()}>
       <div className="check_pass__icon">
@@ -45,7 +47,13 @@ export default function AllPassengers({ passengers }) {
           <TotalSum name="checking" />
         </div>
         <div className="all_pass__action">
-          <button className="all_pass__action_btn">Изменить</button>
+          <button
+            type="button"
+            className="all_pass__action_btn"
+            onClick={() => navigate('/passengers')}
+          >
+            Изменить
+          </button>
         </div>
       </div>
     </div>

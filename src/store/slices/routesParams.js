@@ -13,7 +13,6 @@ const initialState = {
     active: true,
     departure: {},
     arrival: { departure: {} },
-    activeRouteId: 0,
     params: {
       from_city_id: null,
       to_city_id: null,
@@ -54,6 +53,15 @@ const routesParams = createSlice({
         active: false,
         departure: action.payload.departure,
         arrival: action.payload.arrival ? action.payload.arrival : {},
+      },
+    }),
+    setRoutesActive: (state) => ({
+      ...state,
+      routes: {
+        ...state.routes,
+        active: true,
+        departure: { departure: {} },
+        arrival: { departure: {} },
       },
     }),
     setCoachesParams: (state, action) => ({
@@ -134,8 +142,9 @@ export const {
   setRoutesParam,
   setForm,
   setCoachesActive,
+  setRoutesActive,
   setCoachParam,
   setCoachesParams,
-  setGlobalCoachesParams
+  setGlobalCoachesParams,
 } = actions;
 export default reducer;

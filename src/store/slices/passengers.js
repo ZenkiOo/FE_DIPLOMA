@@ -147,6 +147,9 @@ const passengers = createSlice({
       ...state,
       user: action.payload.user,
     }),
+    clearSeats: (state, action) => ({
+      ...initialState
+    })
   },
 });
 
@@ -164,5 +167,6 @@ export const {
   addPersonInfo,
   setConfirmed,
   setUser,
+  clearSeats
 } = actions;
 export default reducer;

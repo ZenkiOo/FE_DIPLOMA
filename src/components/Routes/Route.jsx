@@ -1,15 +1,41 @@
+import { useLocation, useNavigate } from 'react-router-dom';
 import RouteTimeInfo from './RouteTimeInfo';
 import RouteSeatsInfo from './RouteSeatsInfo';
 import RouteOptions from './RouteOptions';
 import Time from '../Time/Time';
 import { ReactComponent as TrainSvg } from '../../images/icons/svg/train.svg';
 import { ReactComponent as ArrowSvg } from '../../images/icons/svg/arrow.svg';
-import { useSelector, useDispatch } from 'react-redux';
-import { setCoachesActive } from '../../store/slices/routesParams';
+import { useDispatch } from 'react-redux';
+import {
+  setCoachesActive,
+  setRoutesActive,
+} from '../../store/slices/routesParams';
+import { clearSeats } from '../../store/slices/passengers';
 
 export default function Route(props) {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
   const { departure } = props.route;
+
+  function changeTrain() {
+    navigate('/routes');
+    dispatch(setRoutesActive());
+    dispatch(clearSeats());
+  }
+
+  function handleOrderBtn() {
+    location.pathname === '/checking'
+      ? changeTrain()
+      : dispatch(
+          setCoachesActive({
+            departure: props.route,
+            arrival: {
+              departure: props.route.arrival ? props.route.arrival : {},
+            },
+          })
+        );
+  }
   return (
     <>
       {departure._id && (
@@ -51,21 +77,19 @@ export default function Route(props) {
                   />
                   <div className="route__order">
                     <button
-                      className="route__order_btn"
-                      onClick={() =>
-                        dispatch(
-                          setCoachesActive({
-                            departure: props.route,
-                            arrival: {
-                              departure: props.route.arrival
-                                ? props.route.arrival
-                                : {},
-                            },
-                          })
-                        )
-                      }
+                      className={[
+                        'route__order_btn',
+                        location.pathname === '/checking'
+                          ? 'route__order_btn--white'
+                          : '',
+                      ]
+                        .join(' ')
+                        .trim()}
+                      onClick={handleOrderBtn}
                     >
-                      Выбрать места
+                      {location.pathname === '/checking'
+                        ? 'Изменить'
+                        : 'Выбрать места'}
                     </button>
                   </div>
                 </div>

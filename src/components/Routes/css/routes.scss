@@ -210,6 +210,9 @@
   color: white;
   font-weight: 700;
   font-size: 24px;
+  &--white {
+    @include rly_btn_white--small();
+  }
 }
 .routes_header {
   display: flex;

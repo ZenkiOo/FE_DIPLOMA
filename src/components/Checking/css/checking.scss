@@ -113,8 +113,10 @@
   }
 }
 .payment {
-  display: flex;
-  justify-content: space-between;
+  &--checking {
+    display: flex;
+    justify-content: space-between;
+  }
   // .payment__method
   &__method {
     padding: 44px 22px 73px 32px;
@@ -134,5 +136,16 @@
       @include rly_btn_white--small();
       width: 100%;
     }
+  }
+}
+.checking {
+  // .checking__action
+  &__action {
+    display: flex;
+    justify-content: flex-end;
+  }
+  // .checking__action_btn
+  &__action_btn {
+    @include rly_btn_orange();
   }
 }

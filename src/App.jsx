@@ -8,6 +8,7 @@ import RoutesPage from './pages/RoutesPage';
 import PassengersPage from './pages/PassengersPage';
 import PaymentPage from './pages/PaymentPage';
 import CheckingPage from './pages/CheckingPage';
+import OrderPage from './pages/OrderPage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/passengers" element={<PassengersPage />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/checking" element={<CheckingPage />} />
+        <Route path="/order" element={<OrderPage />} />
       </Routes>
       <Footer />
     </div>
