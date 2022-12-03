@@ -1,77 +1,7 @@
-import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAdultStatus } from '../../store/slices/passengers';
 
 export default function PassengersCounter(props) {
-  // fetch('https://netology-trainbooking.netoservices.ru/order', {
-  //   method: 'POST',
-  //   body: JSON.stringify({
-  //     user: {
-  //       first_name: 'Иван',
-  //       last_name: 'Смирнов',
-  //       patronymic: 'Олегович',
-  //       phone: '8900123123',
-  //       email: 'string@string.ru',
-  //       payment_method: 'cash', // или online
-  //     },
-  //     departure: {
-  //       route_direction_id: '123431',
-  //       seats: [
-  //         {
-  //           coach_id: '12341',
-  //           person_info: {
-  //             is_adult: 'false',
-  //             first_name: 'Ivan',
-  //             last_name: 'Popov',
-  //             patronymic: 'Popovich',
-  //             gender: 'true',
-  //             birthday: '1980-01-01',
-  //             document_type: 'паспорт',
-  //             document_data: '45 6790195',
-  //           },
-  //           seat_number: '-1',
-  //           is_child: 'true',
-  //           include_children_seat: 'true',
-  //         },
-  //       ],
-  //     },
-  //   }),
-  // })
-  //   .then((response) => response.json())
-  //   .then((data) => console.log('data', data));
-  // console.log(
-  //   JSON.stringify({
-  //     user: {
-  //       first_name: 'Иван',
-  //       last_name: 'Смирнов',
-  //       patronymic: 'Олегович',
-  //       phone: '8900123123',
-  //       email: 'string@string.ru',
-  //       payment_method: 'cash',
-  //     },
-  //     departure: {
-  //       route_direction_id: '123431',
-  //       seats: [
-  //         {
-  //           coach_id: '12341',
-  //           person_info: {
-  //             is_adult: 'false',
-  //             first_name: 'Ivan',
-  //             last_name: 'Popov',
-  //             patronymic: 'Popovich',
-  //             gender: 'true',
-  //             birthday: '1980-01-01',
-  //             document_type: 'паспорт',
-  //             document_data: '45 6790195',
-  //           },
-  //           seat_number: '-1',
-  //           is_child: 'true',
-  //           include_children_seat: 'true',
-  //         },
-  //       ],
-  //     },
-  //   })
-  // );
   const passengers = useSelector((state) => state.passengers);
   const dispatch = useDispatch();
 
@@ -106,23 +36,24 @@ export default function PassengersCounter(props) {
     );
   }
 
-  function removeValue(event) {
-    
-  }
+  function removeValue(event) {}
 
   const labels = [
     {
       id: 0,
       value: 'adult',
       text: 'Взрослых - ',
-      subtext: `Можно добавить еще ${4 - passengers[props.direction].seats.length} пассажиров `,
+      subtext: `Можно добавить еще ${
+        4 - passengers[props.direction].seats.length
+      } пассажиров `,
     },
     {
       id: 1,
       value: 'child',
       text: 'Дестких - ',
-      subtext:
-        `Можно добавить еще ${4 - passengers[props.direction].seats.length} детей до 10 лет.Свое место в вагоне, как у взрослых, но дешевле в среднем на 50-65%`,
+      subtext: `Можно добавить еще ${
+        4 - passengers[props.direction].seats.length
+      } детей до 10 лет.Свое место в вагоне, как у взрослых, но дешевле в среднем на 50-65%`,
     },
     {
       id: 2,

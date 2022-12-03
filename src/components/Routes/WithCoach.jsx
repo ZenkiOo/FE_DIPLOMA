@@ -11,12 +11,7 @@ export default function WithCoach(Component, name) {
   const params = queryString.stringify(state.coaches[name], {
     skipNull: true,
   });
-  const {
-    data = [],
-    isLoading,
-    isFetching,
-    isError,
-  } = useGetRouteQuery({ id, params });
+  const { data = [] } = useGetRouteQuery({ id, params });
 
   return (props) => {
     return (

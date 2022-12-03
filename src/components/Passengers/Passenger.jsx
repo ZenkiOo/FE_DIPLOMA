@@ -2,7 +2,7 @@ import { addPersonInfo, setConfirmed } from '../../store/slices/passengers';
 import Select from '../CustomSelect/Select';
 import PassengerInput from './PassengerInput';
 import GenderSelect from '../CustomSelect/GenderSelect';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -12,9 +12,7 @@ import ru from 'date-fns/locale/ru';
 setDefaultLocale('ru', ru);
 
 export default function Passenger({ seat, index }) {
-
   const { activeTab } = useSelector((state) => state.passengers);
-  // const [confirmed, setConfirmed] = useState(false);
   const dispatch = useDispatch();
 
   const defaultValues = {
@@ -25,16 +23,15 @@ export default function Passenger({ seat, index }) {
     gender: +seat.person_info?.gender,
     birthday: seat.person_info?.birthday,
     document_series: seat.person_info?.document_series,
-    document_number: seat.person_info?.document_number
+    document_number: seat.person_info?.document_number,
   };
 
   const {
     handleSubmit,
     register,
-    reset,
     watch,
     control,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({ defaultValues });
 
   const inputs = {
@@ -104,7 +101,6 @@ export default function Passenger({ seat, index }) {
   };
 
   function handleFormSubmit(data) {
-    console.log(data);
     dispatch(
       addPersonInfo({
         route: activeTab,

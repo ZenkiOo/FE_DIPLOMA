@@ -8,8 +8,7 @@ export default function Coaches({ coaches, direction }) {
   const isActive = useSelector((state) => state.passengers[direction].active);
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState('0');
-  // console.log('coaches: ',coaches);
-  // console.log(dataArray);
+
   useEffect(() => {
     dispatch(
       setCoaches({

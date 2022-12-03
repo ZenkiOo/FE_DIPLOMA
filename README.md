@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/3ct1bre8s60ow0o8/branch/main?svg=true)](https://ci.appveyor.com/project/ZenkiOo/fe-diploma/branch/main)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

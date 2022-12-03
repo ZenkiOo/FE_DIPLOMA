@@ -3,12 +3,10 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPassengerAge } from '../../store/slices/passengers';
 
-export default function Select({ register, seat, index }) {
+export default function Select({ register, seat }) {
+  const [isActive, setActive] = useState(false);
   const route = useSelector((state) => state.passengers.activeTab);
   const dispatch = useDispatch();
-  const [isActive, setActive] = useState(false);
-  // const current = useSelector((state) => state[state.activeTab]?.seats[index])
-  // const [value, setValue] = useState(0);
 
   const names = {
     0: 'Взрослый',
@@ -62,9 +60,6 @@ export default function Select({ register, seat, index }) {
           <span className="rhf_select__btn">{names[1]}</span>
         </label>
       </div>
-      {/* {isActive && (
-        
-      )} */}
     </div>
   );
 }

@@ -3,7 +3,6 @@ import { ReactComponent as RouteArrowSvg } from '../../images/icons/svg/route_ar
 export default function RouteTimeInfo({ route, reversed, selected_date }) {
   const timeHandler = (time) => {
     const date = new Date(time);
-    // console.log(date);
     const hours = `0${date.getHours()}`.slice(-2);
     const minutes = `0${date.getMinutes()}`.slice(-2);
     const timeParsed = `${hours}:${minutes}`;

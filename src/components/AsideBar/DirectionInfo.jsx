@@ -15,8 +15,6 @@ export default function DirectionInfo(props) {
       ? { date_start: params.date_start }
       : { date_end: params.date_end };
 
-  // console.log(seats);
-
   return (
     <div className="rly_info">
       <div className="rly_info__names">

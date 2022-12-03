@@ -3,10 +3,6 @@ import RouteOptions from '../Routes/RouteOptions';
 import Price from '../Price/Price';
 
 export default function LastRoute({ route }) {
-  //   console.log('route', {
-  //     from: new Date(route.departure.from.datetime),
-  //     to: new Date(route.departure.to.datetime),
-  //   });
   return (
     <li className="last_route">
       <ul className="last_route__header">

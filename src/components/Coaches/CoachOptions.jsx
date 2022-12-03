@@ -1,9 +1,5 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  setCoachOption,
-  setCoachOptionsDefault,
-} from '../../store/slices/passengers';
+import { setCoachOption } from '../../store/slices/passengers';
 
 import { ReactComponent as AirSvg } from '../../images/icons/svg/coaches_options/air.svg';
 import { ReactComponent as WifiSvg } from '../../images/icons/svg/coaches_options/wifi.svg';
@@ -14,9 +10,6 @@ export default function CoachOptions({ coach, direction }) {
     (state) => state.passengers[direction].coachOptions
   );
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(setCoachOptionsDefault({ route: direction }));
-  // }, [coach]);
 
   function onCoachOptionChange(e) {
     dispatch(
@@ -27,14 +20,8 @@ export default function CoachOptions({ coach, direction }) {
       })
     );
   }
-  const {
-    have_air_conditioning,
-    have_wifi,
-    wifi_price,
-    is_linens_included,
-    linens_price,
-    class_type,
-  } = coach;
+  const { have_air_conditioning, have_wifi, is_linens_included, class_type } =
+    coach;
 
   const options = [
     {

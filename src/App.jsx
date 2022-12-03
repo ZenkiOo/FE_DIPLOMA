@@ -1,8 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getLastRoutes } from './store/asyncActions/getLastRoutes';
-import { useGetLastRoutesQuery } from './store/api';
 import HomePage from './pages/HomePage';
 import RoutesPage from './pages/RoutesPage';
 import PassengersPage from './pages/PassengersPage';

@@ -16,7 +16,6 @@ export default function Seat({ seat, coachId, coachNumber, direction }) {
   );
 
   function handleSeatClick() {
-    console.log(seat);
     if (occupiedSeats.length > 0 && occupiedSeats.includes(seat.index)) {
       dispatch(deletePassenger({ route: direction, index: seat.index }));
     } else {

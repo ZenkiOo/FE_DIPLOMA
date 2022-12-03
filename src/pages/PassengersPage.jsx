@@ -12,13 +12,6 @@ export default function PassengersPage() {
           </aside>
           <main className="routes_page__main">
             <Passengers />
-            {/* {isLoading
-              ? 'Loading'
-              : data && (
-                  <>
-                    PassengersPage
-                  </>
-                )} */}
           </main>
         </div>
       </section>

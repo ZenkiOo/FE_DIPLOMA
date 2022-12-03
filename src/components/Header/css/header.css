@@ -12,9 +12,14 @@
   margin: 0 auto 7px auto;
 }
 .logo__link {
+  display: block;
+  border: none;
+  background: transparent;
+  font-family: inherit;
   font-weight: 900;
   font-size: 36px;
   color: var(--text-white);
+  cursor: pointer;
 }
 .nav {
   background-color: var(--text-primary);
@@ -29,9 +34,14 @@
   margin-right: 84px;
 }
 .nav_list__item_link {
+  display: block;
+  font-family: inherit;
   color: white;
   font-weight: 300;
   font-size: 30px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 .booking_form {
   max-width: 1440px;
@@ -131,6 +141,9 @@
   text-transform: uppercase;
   color: var(--text-primary);
 }
+.booking_form__form_action_btn:disabled {
+  opacity: 0.5;
+}
 .header--collapsed {
   background-image: url('../../../images/header_order_bg.jpg');
 }
@@ -191,14 +204,4 @@
   text-transform: capitalize;
   background: none;
   padding: 13px 0 16px 19px;
-}
-.preloader {
-  position: relative;
-  background-color: var(--text-primary);
-  height: 8px;
-}
-.preloader__value {
-  width: 30%;
-  height: 100%;
-  background-color: rgba(255, 168, 0, 1);
 }

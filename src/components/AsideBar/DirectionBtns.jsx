@@ -4,7 +4,7 @@ import DirectionInfo from './DirectionInfo';
 
 export default function DirectionBtns() {
   const state = useSelector((state) => state.passengers);
-  const { activeTab, departure, arrival } = state;
+  const { departure, arrival } = state;
 
   return (
     <div className="routes_details__direction_btns">
@@ -12,14 +12,12 @@ export default function DirectionBtns() {
         <>
           <DirectionBtn direction={'departure'} />
           <DirectionInfo route={'departure'} />
-          {/* {activeTab === 'departure' && <DirectionInfo route={'departure'} />} */}
         </>
       )}
       {arrival.seats.length > 0 && (
         <>
           <DirectionBtn direction={'arrival'} />
           <DirectionInfo route={'arrival'} />
-          {/* {activeTab === 'arrival' && <DirectionInfo route={'arrival'} />} */}
         </>
       )}
     </div>

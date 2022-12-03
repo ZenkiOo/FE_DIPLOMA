@@ -18,7 +18,6 @@ export default function OrderPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const departureSeats = passengers.departure.seats;
     const requestBody = {
       user: passengers.user,
       departure: {

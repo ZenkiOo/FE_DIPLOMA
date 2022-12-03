@@ -1,29 +1,49 @@
 import { nanoid } from 'nanoid';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { scroller } from 'react-scroll';
 
 export default function NavList() {
   const location = useLocation();
-  // console.log(location);
+  const navigate = useNavigate();
+
+  const handleNavClick = (anchore) => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        scroller.scrollTo(anchore, { smooth: true });
+      }, 300);
+    } else {
+      scroller.scrollTo(anchore, { smooth: true });
+    }
+  };
   const links = [
     {
       text: 'О нас',
+      to: 'about',
     },
     {
       text: 'Как это работает',
+      to: 'howItWorks',
     },
     {
       text: 'Отзывы',
+      to: 'reviews',
     },
     {
       text: 'Контакты',
+      to: 'contacts',
     },
   ];
   const listItems = links.map((item) => {
     return (
       <li className="nav_list__item" key={nanoid()}>
-        <a className="nav_list__item_link" href="#">
+        <button
+          type="button"
+          className="nav_list__item_link"
+          onClick={() => handleNavClick(item.to)}
+        >
           {item.text}
-        </a>
+        </button>
       </li>
     );
   });
@@ -31,9 +51,13 @@ export default function NavList() {
     <>
       <div className="logo_container">
         <div className="logo">
-          <a className="logo__link" href="/">
+          <button
+            type="button"
+            className="logo__link"
+            onClick={() => navigate('/')}
+          >
             Лого
-          </a>
+          </button>
         </div>
       </div>
       <nav className="nav">

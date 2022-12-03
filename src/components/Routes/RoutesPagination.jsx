@@ -18,7 +18,6 @@ export default function RoutesPagination({ total_count }) {
     if (params.limit !== null) limit = params.limit;
     if (selected !== 0) {
       value = selected * limit;
-      // dispatch(setRoutesParam({ param: 'offset', value: null }));
     }
     dispatch(setRoutesParam({ param: 'offset', value }));
     scroll.scrollToTop();
@@ -30,12 +29,6 @@ export default function RoutesPagination({ total_count }) {
     const pageCount = Math.ceil(total_count / limit);
     setPageCount(pageCount);
   }, [params.limit, total_count]);
-  // useEffect(() => {
-  //   let limit = 5;
-  //   if (params.limit !== null) limit = params.limit;
-  //   const pageCount = Math.ceil(total_count / limit);
-  //   setPageCount(pageCount);
-  // }, []);
 
   return (
     <>

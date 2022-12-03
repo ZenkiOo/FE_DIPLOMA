@@ -12,30 +12,28 @@ const queryString = require('query-string');
 
 export default function RoutesPage() {
   const state = useSelector((state) => state.routesParams);
-  const {
-    data = {},
-    isLoading,
-    isFetching,
-    isError,
-  } = useGetRoutesQuery(
+  const { data = {}, isLoading } = useGetRoutesQuery(
     queryString.stringify(state.routes.params, { skipNull: true })
   );
-  // console.log(data, isLoading, isFetching, isError);
 
   const allRoutes = isLoading
     ? 'Loading'
     : data.items && (
         <>
-          <RoutesHeader
-            count={
-              data.items?.length < 5 ? data.items.length : data.total_count
-            }
-          />
-          <Routes data={data.items} />
-          <RoutesPagination total_count={data.items?.length < 5 ? data.items.length : data.total_count} />
+          {data.items.length > 0 ? (
+            <>
+              <Routes data={data.items} />
+              <RoutesPagination
+                total_count={
+                  data.items?.length < 5 ? data.items.length : data.total_count
+                }
+              />
+            </>
+          ) : (
+            'Таких направлений нет..'
+          )}
         </>
       );
-
   return (
     <section className="routes_page">
       <div className="routes_page__container">
@@ -44,6 +42,12 @@ export default function RoutesPage() {
           <LastRoutes />
         </aside>
         <main className="routes_page__main">
+          <RoutesHeader
+            count={
+              data.items?.length < 5 ? data.items.length : data.total_count
+            }
+          />
+          {data.error && 'Что-то пошло не так...'}
           {state.routes.active ? allRoutes : <RoutesWithCoaches />}
         </main>
       </div>

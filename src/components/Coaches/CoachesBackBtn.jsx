@@ -6,7 +6,6 @@ export default function CoachesBackBtn({ name }) {
   const dispatch = useDispatch();
 
   const handleBack = () => {
-    console.log('fd');
     dispatch(clearSeats());
     dispatch(setRoutesActive());
   };

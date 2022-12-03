@@ -68,13 +68,6 @@ const passengers = createSlice({
         },
       },
     }),
-    setCoachOptionsDefault: (state, action) => ({
-      ...state,
-      [action.payload.route]: {
-        ...state[action.payload.route],
-        coachOptions: { ...globalParams.coachOptions },
-      },
-    }),
     setCoaches: (state, action) => ({
       ...state,
       [action.payload.route]: {
@@ -147,9 +140,9 @@ const passengers = createSlice({
       ...state,
       user: action.payload.user,
     }),
-    clearSeats: (state, action) => ({
-      ...initialState
-    })
+    clearSeats: () => ({
+      ...initialState,
+    }),
   },
 });
 
@@ -161,12 +154,11 @@ export const {
   addPassenger,
   deletePassenger,
   setCoachOption,
-  setCoachOptionsDefault,
   setActiveTab,
   setPassengerAge,
   addPersonInfo,
   setConfirmed,
   setUser,
-  clearSeats
+  clearSeats,
 } = actions;
 export default reducer;

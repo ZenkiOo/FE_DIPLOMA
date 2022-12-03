@@ -26,6 +26,9 @@ export const rlyApi = createApi({
       }),
       invalidatesTags: ['Post'],
     }),
+    getSubscribe: builder.query({
+      query: (mail) => `subscribe?email=${mail}`,
+    }),
   }),
 });
 
@@ -36,4 +39,5 @@ export const {
   useLazyGetRouteQuery,
   useGetRouteQuery,
   usePostOrderMutation,
+  useLazyGetSubscribeQuery,
 } = rlyApi;

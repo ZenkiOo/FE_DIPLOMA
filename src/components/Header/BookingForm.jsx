@@ -32,6 +32,13 @@ export default function BookingForm() {
 
   const [rlyForm, setSearchRoutesForm] = useState({ ...initialFormState });
   const [citiesList, setCitiesList] = useState({ ...initialListState });
+  const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    if (rlyForm.depField.isValid && rlyForm.arrField.isValid)
+      setDisabled(false);
+    else setDisabled(true);
+  }, [rlyForm]);
 
   function useValidity(value, { name }) {
     useEffect(() => {
@@ -67,9 +74,14 @@ export default function BookingForm() {
           setCitiesList((state) => ({ ...state, [name]: [] }));
           return;
         }
-
-        const res = await getCities(value, { preferCacheValue: true }).unwrap();
-        setCitiesList((state) => ({ ...state, [name]: res }));
+        try {
+          const res = await getCities(value, {
+            preferCacheValue: true,
+          }).unwrap();
+          setCitiesList((state) => ({ ...state, [name]: res }));
+        } catch (error) {
+          console.log(error);
+        }
       }, delay);
 
       return () => {
@@ -213,8 +225,11 @@ export default function BookingForm() {
           </div>
         </div>
         <div className="booking_form__form_action">
-          {/* <GetRoutesButton /> */}
-          <button type="submit" className="booking_form__form_action_btn">
+          <button
+            type="submit"
+            className="booking_form__form_action_btn"
+            disabled={disabled}
+          >
             Найти билеты
           </button>
         </div>
