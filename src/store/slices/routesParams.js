@@ -134,6 +134,61 @@ const routesParams = createSlice({
         },
       };
     },
+    setPricePickerValue: (state, action) => ({
+      ...state,
+      routes: {
+        ...state.routes,
+        params: {
+          ...state.routes.params,
+          price_from: action.payload.value.min,
+          price_to: action.payload.value.max,
+        },
+      },
+    }),
+    setStartDepartureHour: (state, action) => ({
+      ...state,
+      routes: {
+        ...state.routes,
+        params: {
+          ...state.routes.params,
+          start_departure_hour_from: action.payload.value.min,
+          start_departure_hour_to: action.payload.value.max,
+        },
+      },
+    }),
+    setEndDepartureHour: (state, action) => ({
+      ...state,
+      routes: {
+        ...state.routes,
+        params: {
+          ...state.routes.params,
+          end_departure_hour_from: action.payload.value.min,
+          end_departure_hour_to: action.payload.value.max,
+        },
+      },
+    }),
+    setStartArrivalHour: (state, action) => ({
+      ...state,
+      routes: {
+        ...state.routes,
+        params: {
+          ...state.routes.params,
+          start_arrival_hour_from: action.payload.value.min,
+          start_arrival_hour_to: action.payload.value.max,
+        },
+      },
+    }),
+    setEndArrivalHour: (state, action) => ({
+      ...state,
+      routes: {
+        ...state.routes,
+        params: {
+          ...state.routes.params,
+          end_arrival_hour_from: action.payload.value.min,
+          end_arrival_hour_to: action.payload.value.max,
+        },
+      },
+    }),
   },
 });
 
@@ -146,5 +201,10 @@ export const {
   setCoachParam,
   setCoachesParams,
   setGlobalCoachesParams,
+  setPricePickerValue,
+  setStartDepartureHour,
+  setEndDepartureHour,
+  setStartArrivalHour,
+  setEndArrivalHour
 } = actions;
 export default reducer;

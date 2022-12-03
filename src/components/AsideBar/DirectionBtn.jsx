@@ -2,7 +2,7 @@ import { setActiveTab } from '../../store/slices/passengers';
 import { useSelector, useDispatch } from 'react-redux';
 import DirectionIcon from '../DirectionIcon/DirectionIcon';
 
-export default function DirectionBtn({ direction }) {
+export default function DirectionBtn({ direction, disabled }) {
   const { params } = useSelector((state) => state.routesParams.routes);
   const dispatch = useDispatch();
   const selected_date =
@@ -12,6 +12,7 @@ export default function DirectionBtn({ direction }) {
     <div className="dir_btn">
       <button
         className="dir_btn__button"
+        disabled={disabled ? true : false}
         onClick={() => dispatch(setActiveTab({ route: direction }))}
       >
         <DirectionIcon {...{ direction }} />

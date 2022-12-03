@@ -28,13 +28,16 @@
     cursor: pointer;
     background: transparent;
     align-items: center;
+    &:disabled {
+      cursor: default;
+    }
     .dir_icon {
       width: 32px;
       height: 26px;
       margin-right: 16px;
       & svg {
-        width: 10px;
-        height: 6px;
+        width: 17px;
+        height: 11px;
       }
     }
     // .dir_btn__button_text

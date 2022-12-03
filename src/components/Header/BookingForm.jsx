@@ -118,10 +118,10 @@ export default function BookingForm() {
         : null,
     };
 
+    setSearchRoutesForm({ ...initialFormState });
+    setCitiesList({ ...initialListState });
     dispatch(setForm({ ...params }));
     dispatch(clearSeats());
-    // setSearchRoutesForm({ ...initialFormState });
-    // setCitiesList({ ...initialListState });
     navigate('routes');
   }
 

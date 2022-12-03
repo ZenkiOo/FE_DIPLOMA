@@ -1,16 +1,19 @@
 import './asidebar.scss';
+import {
+  setRoutesParam,
+  setPricePickerValue,
+} from '../../store/slices/routesParams';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as DateSvg } from '../../images/icons/svg/date.svg';
 import Options from './Options';
 import DirectionBtns from './DirectionBtns';
 import TotalSum from './TotalSum';
+import RoutesTimes from './RoutesTimes';
 
 import 'react-input-range/lib/css/index.css';
 import InputRange from 'react-input-range';
-
-import { useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
 
 import DatePicker from 'react-datepicker';
 import { setDefaultLocale } from 'react-datepicker';
@@ -18,15 +21,11 @@ import ru from 'date-fns/locale/ru';
 setDefaultLocale('ru', ru);
 
 export default function AsideBar() {
-  const { routes, coaches } = useSelector((state) => state.routesParams);
+  const { routes } = useSelector((state) => state.routesParams);
   const { departure, arrival } = useSelector((state) => state.passengers);
-  const [priceValue, setPriceValue] = useState({ min: 2500, max: 5000 });
+  const [priceValue, setPriceValue] = useState({ min: 0, max: 9000 });
   const location = useLocation();
-
-  const handlePickerChange = (value, { name }) => {
-    console.log(value, name);
-  };
-
+  const dispatch = useDispatch();
   const activeOptionsList = routes.active
     ? 'routes'
     : departure.active
@@ -34,6 +33,17 @@ export default function AsideBar() {
     : arrival.active
     ? 'arrival'
     : 'all_coaches';
+  const handlePickerChange = (value, { name }) => {
+    dispatch(
+      setRoutesParam({
+        param: name === 'depDateField' ? 'date_start' : 'date_end',
+        value: new Date(value).toISOString().substring(0, 10),
+      })
+    );
+  };
+  const handlePriceChange = (value) => {
+    dispatch(setPricePickerValue({ value }));
+  };
 
   return (
     <div className="routes_details">
@@ -76,19 +86,24 @@ export default function AsideBar() {
           <div className="routes_details__options">
             <Options active={activeOptionsList} />
           </div>
-          <div className="routes_details__price">
-            <h3 className="routes_details__title routes_details__title--price">
-              Стоимость
-            </h3>
-            <div className="routes_details__price_range">
-              <InputRange
-                maxValue={7000}
-                minValue={1920}
-                value={priceValue}
-                onChange={(value) => setPriceValue(value)}
-                onChangeComplete={(value) => console.log('hoba', value)}
-              />
+          {routes.active && (
+            <div className="routes_details__price">
+              <h3 className="routes_details__title routes_details__title--price">
+                Стоимость
+              </h3>
+              <div className="routes_details__price_range">
+                <InputRange
+                  maxValue={9000}
+                  minValue={0}
+                  value={priceValue}
+                  onChange={(value) => setPriceValue(value)}
+                  onChangeComplete={(value) => handlePriceChange(value)}
+                />
+              </div>
             </div>
+          )}
+          <div className="routes_details__times">
+            <RoutesTimes />
           </div>
         </>
       )}

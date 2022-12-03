@@ -498,7 +498,7 @@
   background: var(--text-orange);
 }
 .routes_details__price {
-  padding: 37px 0 50px 0;
+  padding: 37px 0 40px 0;
   position: relative;
 }
 .routes_details__price::before {
@@ -568,6 +568,27 @@
 }
 .input-range__label--value {
   top: -42px !important;
+}
+.routes_details__times {
+  .input-range__track {
+    height: 10px !important;
+  }
+  .input-range__slider {
+    width: 18px !important;
+    height: 18px !important;
+    margin-top: -15px !important;
+  }
+}
+.routes_times__title {
+  font-size: 24px;
+  color: var(--text-white);
+  &--arrival {
+    text-align: right;
+  }
+}
+.routes_times__input_wrap {
+  padding: 0 11px;
+  margin-bottom: 20px;
 }
 .route__duration {
   width: 37.14%;
