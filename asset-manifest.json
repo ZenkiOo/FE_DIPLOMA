@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/FE_DIPLOMA/static/css/main.bae287b9.css",
-    "main.js": "/FE_DIPLOMA/static/js/main.108b6f28.js",
+    "main.css": "/FE_DIPLOMA/static/css/main.8f0d108f.css",
+    "main.js": "/FE_DIPLOMA/static/js/main.5b17ff4a.js",
     "static/js/787.98ebf6c4.chunk.js": "/FE_DIPLOMA/static/js/787.98ebf6c4.chunk.js",
     "static/media/header_main_bg.jpg": "/FE_DIPLOMA/static/media/header_main_bg.860dd8fffb9c2891a94a.jpg",
     "static/media/header_order_bg.jpg": "/FE_DIPLOMA/static/media/header_order_bg.ecac3e9a6d8e23a003d2.jpg",
@@ -46,12 +46,12 @@
     "static/media/arrow_big.svg": "/FE_DIPLOMA/static/media/arrow_big.9a538b3e439ae3aa001f94d68bae0ef4.svg",
     "static/media/star.svg": "/FE_DIPLOMA/static/media/star.e6f659c0a659e32fa61ad37bdcad665b.svg",
     "static/media/have_first_class.svg": "/FE_DIPLOMA/static/media/have_first_class.331955b821e33f471c9d75058937ca74.svg",
-    "main.bae287b9.css.map": "/FE_DIPLOMA/static/css/main.bae287b9.css.map",
-    "main.108b6f28.js.map": "/FE_DIPLOMA/static/js/main.108b6f28.js.map",
+    "main.8f0d108f.css.map": "/FE_DIPLOMA/static/css/main.8f0d108f.css.map",
+    "main.5b17ff4a.js.map": "/FE_DIPLOMA/static/js/main.5b17ff4a.js.map",
     "787.98ebf6c4.chunk.js.map": "/FE_DIPLOMA/static/js/787.98ebf6c4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bae287b9.css",
-    "static/js/main.108b6f28.js"
+    "static/css/main.8f0d108f.css",
+    "static/js/main.5b17ff4a.js"
   ]
 }
